@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.PageTitle = "Giỏ hàng";
+}
+@section css{
+    <link rel="stylesheet" href="~/css/cart.css" >
+}
+@section scripts{
+    <script src="~/js/cart.js"></script>   
+}
+<!--Banner small-->
+<div class="container-fluid">
+    <div class="banner-sm section">
+        <p class="white m-0">Giỏ hàng</p>
+    </div>
+</div>
+<!--Cart-->
+<div class="container">
+    <div class="cart contents">    
+        <!-- Cart - Shopping -->
+        <div class="section">
+            <!--Cart - Header List-->
+            <div class="d-flex align-items-center">
+                <h3 class="mb-3">Sản phẩm</h3>
+                <p class="ml-auto">
+                    <span id="count-items">0</span>sản phẩm
+                <p>
+            </div>
+            <!--Cart - List Item-->
+            <div id="cart-container">
+                <div class="loader"><div></div><div></div><div></div><div></div></div>
+            </div>
+        </div>            
+        <!-- Bill Info-->
+        <div id="bill" class="section">
+            <div class="row mb-4">
+                <div class="col-12 col-lg-6 order-lg-1 section">
+                    <table>
+                        <tbody  class="table text-4">
+                            <tr>
+                                <td>Tổng đơn hàng</td> 
+                                <td>
+                                    <span order-total>0</span>
+                                    <span>đ</span>
+                                </td> 
+                            </tr>
+                            <tr>
+                                <td>Giảm giá Bill</td> 
+                                <td>
+                                    <span order-discount>0</span>
+                                    <span>%</span>
+                                </td> 
+                            </tr>
+                            <tr>
+                                <td>Vận chuyển</td> 
+                                <td>
+                                    <span order-shipping>30,000</span>
+                                    <span>đ</span>
+                                </td> 
+                            </tr>
+                            <tr class="bold">
+                                <td>Thanh Toán</td> 
+                                <td class="red">
+                                    <span order-pay>0</span>
+                                    <span>đ</span>
+                                </td> 
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-12 col-lg-6 order-lg-0">
+                    <h3>Thông tin giao hàng</h3>
+                    <form id="form">
+                        <div class="control-input validate">
+                            <label>Họ tên người nhận</label>
+                            <input id="full-name" class="mb-3" type="text" required>
+                            <span><span class="error">Không được để trống</span></span>               
+                        </div>
+                        <div class="control-input validate">
+                            <label>Số điện thoại</label>
+                            <input id="phone" class="mb-3" type="tel"  pattern="^0\d+" minlength="9" maxlength="10"  required>
+                            <span><span class="error text-sub">SĐT gồm 10 chữ số và bắt đầu với số 0</span></span>               
+                        </div>
+                        <div class="control-input validate">
+                            <label>Email</label>
+                            <input class="mb-3" type="email" pattern="[\w+|\W+]*[@@]\w+[.]\w+" required >
+                            <span><span class="error text-sub">Email có dạng ' abc@mail.com '</span></span>               
+                        </div>
+                        <div class="control-input validate local" >
+                            <label>Địa chỉ giao hàng</label>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div local-provice class="dropdown dropdown-ouline black bg-white ml-lg-auto mb-3">
+                                        <div class="select">
+                                            <span class="placeholder">Tỉnh/TP</span>
+                                            <i class="black las la-angle-down"></i>
+                                        </div>
+                                        <input type="hidden" name="provice" required>
+                                        <ul class="dropdown-menu bg-white">   
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div local-district class="dropdown dropdown-ouline black bg-white ml-lg-auto mb-3">
+                                        <div class="select">
+                                            <span class="placeholder">Quận/Huyện</span>
+                                            <i class="black las la-angle-down"></i>
+                                        </div>
+                                        <input type="hidden" name="district" required>
+                                        <ul class="dropdown-menu bg-white">
+                                        </ul>
+                                    </div>
+                                </div>   
+                            </div>
+                            <span><span class="error text-sub"></span></span>               
+                        </div>
+                        <div class="control-input validate">
+                            <label>Số nhà, tên đường (hoặc địa chỉ cụ thể)</label>
+                            <input class="mb-3" type="text" required>
+                            <span><span class="error text-sub">Không được để trống</span></span>               
+                        </div>
+                        <div>
+                            <label>Ghi chú</label>
+                            <textarea class="mb-3 d-block w-100" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="d-none" ></button>
+                    </form>
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-lg bg-black white border-none"> Đặt hàng </button>
+            </div>
+        </div>
+    </div> 
+</div>

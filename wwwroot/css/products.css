@@ -1,0 +1,30 @@
+
+/*============= ?filter =============*/
+.filter .nav-item {
+	text-transform: capitalize;
+}
+
+.filter .nav-item.active {
+	font-weight: bold;
+}
+
+/*============= ?page =============*/
+.pagnation {
+	display: flex;
+	justify-content: center;
+}
+
+.pagnation .page-item {
+	cursor: pointer;
+	margin: 0 0.5em;
+	padding: 0.5em 1em;
+	color: var(--color-black);
+	min-width: auto;
+}
+
+.pagnation .page-item.active,
+.pagnation .page-item:hover {
+	color: var(--color-white);
+	background-color: var(--color-black);
+	border-radius: 5px;
+}

@@ -1,0 +1,125 @@
+﻿@{
+    ViewBag.TitlePage= "Trang chủ";
+}
+@section css{
+    <link rel="stylesheet" href="~/css/home.css" >
+    <link rel="stylesheet" href="~/css/product-detail.css" >
+    <link rel="stylesheet" href="~/css/products.css" >
+}
+@section scripts{
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="~/js/home.js"></script>
+}
+<!--Slider-->
+<div class="container-fluid section">
+    <div class="slider">
+        <div class="slider-container">
+            <div class="slider-handle">
+                <div class="img slider-item">
+                    <img src="./img/slider_1.jpg"  >
+                </div>
+                <div class="img slider-item">
+                    <img src="./img/slider_2.jpg"  >
+                </div>
+                <div  class="img slider-item">
+                    <img src="./img/slider_3.jpg" >
+                </div>
+            </div>
+        </div>
+        <a class="arrow-prev white"><i class="las la-angle-left"></i></a>
+        <a class="arrow-next white"><i class="las la-angle-right"></i></a>
+    </div>
+</div>
+<!--Home-->
+<div class="container">
+    <!--Category-->
+    <div class="category contents section">
+        <div class="row">
+            <div class="d-none d-lg-block col-lg-6">
+                <div class="category-item img-content">
+                    <div class="img">
+                        <img src="./img/women.jpg" alt="Women Watchs" loading="lazy">
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="category-item img-content">
+                    <div class="img">
+                        <img src="./img/couple.jpg" alt="Couple Watchs" loading="lazy">
+                    </div>
+                    <a class="btn btn-sm black bg-white bold" asp-action="Couple" asp-controller="Product" title="Đồng hồ đôi" >Đồng hồ đôi</a>
+                </div> 
+                <div class="category-item img-content">
+                    <div class="img">
+                        <img src="./img/cuff.jpg" alt="Assessories" loading="lazy">
+                    </div>
+                    <a class="btn btn-sm black bg-white bold" asp-action="Accessories" asp-controller="Product" title="Phụ kiện">Phụ kiện</a>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="category-item img-content">
+                    <div class="img">
+                        <img src="./img/men.jpg" alt="Men Watchs" loading="lazy">
+                    </div>
+                    <a class="btn btn-sm black bg-white bold"asp-action="Men" asp-controller="Product" title="Đồng hồ nam">Đồng hồ nam</a>
+                </div>
+                <div class="category-item img-content">
+                    <div class="img">
+                        <img src="./img/women.jpg" alt="Women Watchs" loading="lazy">
+                    </div>
+                    <a class="btn btn-sm black bg-white bold" asp-action="Women" asp-controller="Product" title="Đồng hồ nữ">Đồng hồ nữ</a>
+                </div>                    
+            </div>
+        </div>
+    </div>  
+    <!--Best seller-->
+    <div class="seller">
+        <h1 class="text-center mb-4 mb-lg-5">Sản phẩm nổi bật</h1>
+        <!--Product best seller-->
+        <div class="seller-content">
+            <div class="row align-items-center contents mb-5">
+                <div class="col-12 col-md-6 col-lg-5 mb-3">
+                    <div class="img-content">
+                        <div class="img">
+                            <img src="./img/img.jpg" loading="lazy">
+                        </div>
+                        <span class="seller-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.861 511.861"><path d="M304.406 427.878a7.504 7.504 0 01-7.244-5.578 7.5 7.5 0 015.325-9.173c75.388-20.011 128.04-88.527 128.04-166.619 0-30.844-8.248-61.11-23.852-87.526a7.5 7.5 0 0112.915-7.629c16.968 28.725 25.937 61.629 25.937 95.155 0 84.885-57.238 159.363-139.192 181.117a7.512 7.512 0 01-1.929.253z" fill="#ffa035"/><path d="M415.682 103.878c-13.468-22.991-43.163-29.759-44.42-30.036a7.5 7.5 0 00-8.79 5.149c-.374 1.232-8.992 30.444 4.475 53.435 13.468 22.991 43.163 29.759 44.42 30.036a7.504 7.504 0 008.791-5.149c.373-1.232 8.992-30.444-4.476-53.435z" fill="#ffdf65"/><path d="M371.262 73.842a7.48 7.48 0 00-5.403.853l50.901 86.895c1.577-.924 2.829-2.404 3.397-4.278.374-1.232 8.992-30.444-4.475-53.435-13.468-22.99-43.162-29.758-44.42-30.035z" fill="#ffc41f"/><path d="M504.506 165.826c-1.276-.18-31.468-4.183-52.102 12.673-20.635 16.856-22.736 47.241-22.815 48.526a7.5 7.5 0 006.445 7.889c.423.06 4.027.54 9.412.54 10.844 0 28.902-1.95 42.69-13.213 20.635-16.857 22.736-47.241 22.815-48.526a7.5 7.5 0 00-6.445-7.889z" fill="#ffdf65"/><path d="M509.274 168.509l-78.007 63.724a7.477 7.477 0 004.767 2.682c.423.06 4.027.54 9.412.54 10.844 0 28.902-1.95 42.69-13.213 20.635-16.857 22.736-47.241 22.815-48.526a7.481 7.481 0 00-1.677-5.207z" fill="#ffc41f"/><path d="M508.789 302.167c-1.039-.761-25.753-18.563-51.904-13.464-26.152 5.098-42.368 30.879-43.046 31.974a7.501 7.501 0 001.949 9.999c.91.665 19.945 14.382 42.214 14.381 3.178 0 6.424-.28 9.69-.917 26.153-5.099 42.369-30.879 43.046-31.974a7.5 7.5 0 00-1.949-9.999z" fill="#ffdf65"/><path d="M510.738 312.166a7.48 7.48 0 00.983-5.381l-98.866 19.274a7.478 7.478 0 002.933 4.617c.91.665 19.945 14.382 42.214 14.381 3.178 0 6.424-.28 9.69-.917 26.153-5.098 42.369-30.879 43.046-31.974z" fill="#ffc41f"/><path d="M447.906 423.113c-.461-1.202-11.572-29.56-36.31-39.457-24.739-9.897-52.343 2.973-53.506 3.525a7.499 7.499 0 00-3.784 9.458c.461 1.202 11.572 29.56 36.311 39.457 6.831 2.733 13.878 3.729 20.529 3.729 17.436 0 32.135-6.854 32.977-7.254a7.5 7.5 0 003.783-9.458z" fill="#ffdf65"/><path d="M411.146 439.826c17.436 0 32.135-6.854 32.977-7.254a7.481 7.481 0 003.744-3.988l-93.521-37.414a7.475 7.475 0 00-.039 5.47c.461 1.202 11.572 29.56 36.311 39.457 6.829 2.732 13.877 3.729 20.528 3.729z" fill="#ffc41f"/><path d="M295.744 286.461h-.161V103.987a31.847 31.847 0 00-19.703-29.502 31.853 31.853 0 00-34.797 6.897l-47.667 47.579c-12.464 12.441-12.483 32.702-.042 45.167 10.361 10.379 26.147 12.127 38.334 5.235v107.096h-5.001c-17.61 0-31.938 14.327-31.938 31.938 0 17.61 14.327 31.938 31.938 31.938h69.038c17.61 0 31.938-14.327 31.938-31.938-.001-17.609-14.328-31.936-31.939-31.936z" fill="#ffdf65"/><path d="M295.744 286.461h-.161V103.987a31.847 31.847 0 00-19.703-29.502 31.846 31.846 0 00-25.588.492c11.35 5.2 18.632 16.448 18.632 29.01v182.474h.161c17.61 0 31.938 14.327 31.938 31.938 0 17.61-14.327 31.938-31.938 31.938h26.66c17.61 0 31.938-14.327 31.938-31.938-.001-17.611-14.328-31.938-31.939-31.938z" fill="#ffcd2c"/><path d="M207.455 427.878a7.518 7.518 0 01-1.929-.253c-81.954-21.754-139.192-96.232-139.192-181.117 0-33.526 8.969-66.43 25.937-95.155a7.501 7.501 0 0112.915 7.629c-15.604 26.416-23.852 56.682-23.852 87.526 0 78.092 52.652 146.608 128.04 166.619a7.5 7.5 0 01-1.919 14.751z" fill="#ffa035"/><path d="M149.389 78.992a7.499 7.499 0 00-8.791-5.149c-1.257.277-30.952 7.045-44.42 30.036-13.467 22.991-4.849 52.203-4.475 53.435a7.503 7.503 0 008.791 5.149c1.257-.277 30.952-7.045 44.42-30.036 13.467-22.991 4.849-52.203 4.475-53.435zM82.272 227.026c-.08-1.285-2.18-31.67-22.815-48.526S8.63 165.646 7.354 165.826a7.5 7.5 0 00-6.445 7.889c.08 1.285 2.18 31.669 22.815 48.526 13.79 11.265 31.847 13.213 42.69 13.213 5.383 0 8.988-.48 9.412-.54a7.498 7.498 0 006.446-7.888z" fill="#ffdf65"/><path d="M75.827 234.915a7.483 7.483 0 004.767-2.682L2.587 168.509a7.48 7.48 0 00-1.677 5.206c.08 1.285 2.18 31.669 22.815 48.526 13.79 11.265 31.847 13.213 42.69 13.213 5.383.001 8.989-.479 9.412-.539z" fill="#ffc41f"/><path d="M98.021 320.677c-.678-1.095-16.894-26.876-43.046-31.974-26.154-5.1-50.864 12.704-51.904 13.464a7.5 7.5 0 00-1.949 9.999c.677 1.095 16.893 26.876 43.046 31.974 3.268.637 6.511.917 9.69.917 22.267-.001 41.304-13.715 42.214-14.381a7.5 7.5 0 001.949-9.999z" fill="#ffdf65"/><path d="M53.858 345.057c22.267-.001 41.304-13.715 42.214-14.381a7.482 7.482 0 002.933-4.617L.139 306.785a7.48 7.48 0 00.983 5.381c.677 1.095 16.893 26.876 43.046 31.974 3.268.637 6.511.917 9.69.917z" fill="#ffc41f"/><path d="M153.771 387.181c-1.163-.553-28.768-13.422-53.506-3.525-24.739 9.897-35.85 38.254-36.311 39.457a7.499 7.499 0 003.784 9.458c.842.4 15.539 7.254 32.977 7.254 6.65 0 13.7-.997 20.529-3.729 24.739-9.897 35.85-38.254 36.311-39.457a7.5 7.5 0 00-3.784-9.458z" fill="#ffdf65"/><path d="M145.787 74.582l-50.8 86.939a7.465 7.465 0 003.889 1.118c.534 0 1.076-.058 1.618-.177 1.257-.277 30.952-7.045 44.42-30.036 13.467-22.991 4.849-52.203 4.475-53.435a7.476 7.476 0 00-3.602-4.409zM157.555 396.64a7.48 7.48 0 00-.039-5.47l-93.521 37.414a7.481 7.481 0 003.744 3.988c.842.4 15.539 7.254 32.977 7.254 6.65 0 13.7-.997 20.529-3.729 24.738-9.898 35.849-38.255 36.31-39.457z" fill="#ffc41f"/></svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-7">
+                    <div class="product-text">
+                        <h1 class="normal text-center mb-3 text-1">Tisot DEWE</h1>
+                        <div class="mb-4">
+                            <p class="italic bold">Thương hiệu: <span class="pl-2 normal "> Tisot </span></p>
+                            <p class="italic bold">Loại dây: <span class="pl-2 normal "> Dây Da </span></p>
+                            <p class="italic bold">Phân loại: <span class="pl-2 normal"> Đồng hồ nam </span></p>
+                            <p class="italic bold">Bảo hành: <span class="pl-2 normal"> 1 năm </span></p>
+                        </div>
+                        <div class="text-3 text-center mb-4">
+                            <p class="text-4 red bold d-block d-lg-inline-block mb-1 pr-2">1.999.000 đ</p>
+                            <del class="normal text-sub">2.999.000 đ</del>
+                        </div>
+                        <div class="group-btns text-center">
+                            <a class="add-cart btn btn-lg white bg-black ">Thêm vào giỏ hàng</a>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </div>
+        <!--List product best seller-->
+        <div id="product-container-seller" class="contents">
+            <div class="loader"><div></div><div></div><div></div><div></div></div>
+        </div>
+    </div>
+    <!--Products best seller other-->
+    <div class="contents section">
+        <h1 class="text-center mb-4 mb-lg-5">Đang Khuyễn Mãi</h1>
+        <div id="product-container-discount">
+            <div class="loader"><div></div><div></div><div></div><div></div></div>
+        </div>
+        <a asp-action="Discount" asp-controller="Product" class="text-center link  d-block"> Xem thêm </a>
+    </div> 
+</div>
+

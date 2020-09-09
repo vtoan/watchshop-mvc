@@ -1,0 +1,60 @@
+﻿@{
+    var pageCode = ViewBag.PageCode;
+    var banner = ViewBag.PageCode < 0 ? "banner-sm" : "banner-lg"; 
+    var total = ViewBag.Search;
+}
+@section css{
+    <link rel="stylesheet" href="~/css/products.css" >
+}
+@section scripts{
+    <script src="~/js/product.js"></script>   
+}
+<span id="page" data-pageCode="@pageCode"></span>
+<!--Banner lager-->
+<div class="container-fluid">
+    <div class="@banner section">
+        <p class="white mb-0">@ViewBag.PageTitle</p>
+    </div>
+</div>
+<!--List product-->
+<div class="container">
+    <!--Filter-->
+    @if (pageCode == -1)
+    {
+        <p style="padding-left: 1.45em" >Có @ViewBag.SearchResult sản phẩm phù hợp</p>
+    }
+    <div class="filter contents mb-4">
+        <div class="row align-content-center">
+            <div id="orderby" class="d-flex">
+                <a class="nav-item active" data-index="0" title="Phổ biến" >phổ biển</a>
+                <a class="nav-item" data-index="1" title="Giá cao">giá cao</a>
+                <a class="nav-item" data-index="2" title="Giá thấp">giá thấp</a>
+            </div>
+            <div class="dropdown ml-lg-auto pl-2 pl-lg-0">
+                <div class="select">
+                    <span>Loại dây</span>
+                    <i class="las la-angle-down"></i>
+                </div>
+                <input id="filter" type="hidden" name="filter">
+                <ul class="dropdown-menu bg-white">
+                    <li data-code="0">Tất cả</li>
+                    <li data-code="1">Dây Da</li>
+                    <li data-code="2">Dây Kim Loại</li>
+                    <li data-code="3">Dây Vải</li>
+                    <li data-code="4">Dây V</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--Products-->
+    <div class="contents">
+        <div id="product-container">
+            <div class="loader"><div></div><div></div><div></div><div></div></div>
+        </div>
+    </div>
+    <!--Pagnation-->
+    <div class="pagnation contents section">
+    </div> 
+</div>
+
+

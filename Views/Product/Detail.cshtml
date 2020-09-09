@@ -1,0 +1,177 @@
+﻿@{
+    ViewBag.PageTitle="Chi tiết";
+}
+@section css{
+    <link rel="stylesheet" href="~/css/product-detail.css" >
+}
+@section scripts{
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+}
+<!--Banner small-->
+<div class="container-fluid">
+    <div class="banner-sm section">
+        <p class="white m-0">Chi tiết sản phẩm</p>
+    </div>
+</div>
+<!--Prodcut Detail-->
+<div class="container">
+    <div class="product-detail contents">
+        <!--Product info -->
+        <div class="section">
+            <div class="row">
+                <div class=" col-12 col-md-6 col-lg-5 mb-3">
+                    <div class="gallery">
+                        <div class="product-img mb-4 gallery-for">
+                            <div class="img">
+                                <img src="./img/img.jpg">
+                            </div>
+                            <div class="img">
+                                <img src="./img/img3.jpg">
+                            </div>
+                            <div class="img">
+                                <img src="./img/img2.jpg">
+                            </div>
+                            <div class="img">
+                                <img src="./img/img3.jpg">
+                            </div>
+                        </div>
+                        <a class="arrow-prev white"><i class="las la-angle-left"></i></a>
+                        <a class="arrow-next white"><i class="las la-angle-right"></i></a>
+                    </div>                 
+                    <div class="gallery-nav d-flex">
+                        <div class="img">
+                            <img src="./img/img.jpg">
+                        </div>
+                        <div class="img">
+                            <img src="./img/img3.jpg">
+                        </div>
+                        <div class="img">
+                            <img src="./img/img2.jpg">
+                        </div>
+                        <div class="img">
+                            <img src="./img/img3.jpg">
+                        </div>
+                    </div>                           
+                </div>
+                <div class="col-12 col-md-6 col-lg-7">
+                    <div class="product-text">
+                        <h1 class="normal mb-3 text-2">Tisot DEWE</h1>
+                        <div class="mb-4">
+                            <p class="italic bold">Thương hiệu: <span class="pl-2 normal "> Tisot </span></p>
+                            <p class="italic bold">Loại dây: <span class="pl-2 normal "> Dây Da </span></p>
+                            <p class="italic bold">Phân loại: <span class="pl-2 normal"> Đồng hồ nam </span></p>
+                        </div>
+                        <div class="text-3  mb-4">
+                            <p class="text-4 red bold d-block d-lg-inline-block mb-1 pr-2">1.999.000 đ</p>
+                            <del class="normal text-sub">2.999.000 đ</del>
+                        </div>
+                        <div class="product-policy mb-4">
+                            <p class="italic bold mb-0">Ưu đãi</p>
+                            <div class="policy-container border-black">
+                                <div class="policy-item">
+                                    <span class="policy-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M309 390H27c-15 0-27-12-27-27V95c0-15 12-27 27-27h256c15 0 26 12 26 27v295z" fill="#ffd15c"/><path d="M505 218l-69-69c-4-4-10-7-17-7H309v248h175c15 0 28-12 28-27V235c0-8-2-13-7-17z" fill="#f3705a"/><path d="M0 343v20c0 15 12 26 27 26h457c15 0 28-12 28-27v-20H0v1z" fill="#344a5e"/><g fill="#415a6b"><path d="M476 272v-33l-61-62h-69v95z"/><circle cx="130.1" cy="377.6" r="66.1"/></g><circle cx="130.1" cy="377.6" r="32" fill="#e8eae9"/><circle cx="398.9" cy="377.6" r="66.1" fill="#415a6b"/><circle cx="398.9" cy="377.6" r="32" fill="#e8eae9"/><g fill="#f7b64c"><path d="M67 113c-13 0-23 11-23 24v137c0 13 10 24 23 24s24-11 24-24V137c-1-13-11-24-24-24zM154 113c-13 0-24 11-24 24v137c0 13 11 24 24 24 12 0 23-11 23-24V137c-1-13-11-24-23-24zM240 113c-13 0-23 11-23 24v137c0 13 10 24 23 24s23-11 23-24V137c-1-13-10-24-23-24z"/></g></svg>
+                                    </span>
+                                    <div class="policy-text">
+                                        <p class="mb-0" >khi  mua từ 2 sản phẩm</p>
+                                    </div>
+                                </div>
+                                <div class="policy-item">
+                                    <span class="policy-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M309 390H27c-15 0-27-12-27-27V95c0-15 12-27 27-27h256c15 0 26 12 26 27v295z" fill="#ffd15c"/><path d="M505 218l-69-69c-4-4-10-7-17-7H309v248h175c15 0 28-12 28-27V235c0-8-2-13-7-17z" fill="#f3705a"/><path d="M0 343v20c0 15 12 26 27 26h457c15 0 28-12 28-27v-20H0v1z" fill="#344a5e"/><g fill="#415a6b"><path d="M476 272v-33l-61-62h-69v95z"/><circle cx="130.1" cy="377.6" r="66.1"/></g><circle cx="130.1" cy="377.6" r="32" fill="#e8eae9"/><circle cx="398.9" cy="377.6" r="66.1" fill="#415a6b"/><circle cx="398.9" cy="377.6" r="32" fill="#e8eae9"/><g fill="#f7b64c"><path d="M67 113c-13 0-23 11-23 24v137c0 13 10 24 23 24s24-11 24-24V137c-1-13-11-24-24-24zM154 113c-13 0-24 11-24 24v137c0 13 11 24 24 24 12 0 23-11 23-24V137c-1-13-11-24-23-24zM240 113c-13 0-23 11-23 24v137c0 13 10 24 23 24s23-11 23-24V137c-1-13-10-24-23-24z"/></g></svg>
+                                    </span>
+                                    <div class="policy-text">
+                                        <p class="mb-0" >khi  mua từ 2 sản phẩm</p>
+                                    </div>
+                                </div>
+                                <div class="policy-item">
+                                    <span class="policy-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M309 390H27c-15 0-27-12-27-27V95c0-15 12-27 27-27h256c15 0 26 12 26 27v295z" fill="#ffd15c"/><path d="M505 218l-69-69c-4-4-10-7-17-7H309v248h175c15 0 28-12 28-27V235c0-8-2-13-7-17z" fill="#f3705a"/><path d="M0 343v20c0 15 12 26 27 26h457c15 0 28-12 28-27v-20H0v1z" fill="#344a5e"/><g fill="#415a6b"><path d="M476 272v-33l-61-62h-69v95z"/><circle cx="130.1" cy="377.6" r="66.1"/></g><circle cx="130.1" cy="377.6" r="32" fill="#e8eae9"/><circle cx="398.9" cy="377.6" r="66.1" fill="#415a6b"/><circle cx="398.9" cy="377.6" r="32" fill="#e8eae9"/><g fill="#f7b64c"><path d="M67 113c-13 0-23 11-23 24v137c0 13 10 24 23 24s24-11 24-24V137c-1-13-11-24-24-24zM154 113c-13 0-24 11-24 24v137c0 13 11 24 24 24 12 0 23-11 23-24V137c-1-13-11-24-23-24zM240 113c-13 0-23 11-23 24v137c0 13 10 24 23 24s23-11 23-24V137c-1-13-10-24-23-24z"/></g></svg>
+                                    </span>
+                                    <div class="policy-text">
+                                        <p class="mb-0" >khi  mua từ 2 sản phẩm</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>         
+                        <div class="group-btns text-center mb-3">
+                            <a class="add-cart btn btn-lg white bg-red mb-3">Mua ngay</a>
+                            <a class="add-cart btn btn-lg white bg-black ">Thêm vào giỏ hàng</a>
+                        </div>
+                        <span class="text-sub text-center d-block">Hoặc đặt mua qua facebook tại <a class="link bule" href="#" style="color: blue;">đây</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Product description-->
+        <div class="section">
+            <div class="row">
+                <div class="col-12 col-lg-5 mb-5">
+                    <h3 class="mb-3">Thông số kỹ thuật</h3>
+                    <table class="table table-color">
+                    <tbody>
+                            <tr>
+                            <td scope="row">thương hiệu</td>
+                            <td>daniel wellington</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">xuất xứ</td>
+                                <td>daniel wellington</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">phân loại</td>
+                                <td>Tissot</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">kính</td>
+                                <td>Tissot</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">đường kính mặt số</td>
+                                <td>Tissot</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">bề dày mặt số</td>
+                                <td>Tissot</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">máy</td>
+                                <td>Tissot</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">niềng</td>
+                                <td>Tissot</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">dây đeo</td>
+                                <td>Tissot</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">chống nước</td>
+                                <td>Tissot</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">chức năng</td>
+                                <td>Tissot</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">nơi sản xuất</td>
+                                <td>Tissot</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">bảo hành</td>
+                                <td>Tissot</td>
+                            </tr>
+                    </tbody>
+                    </table>
+                </div>
+                <div class="col-12 col-lg-7">
+                    <h3 class="mb-3">Giới thiệu</h3>
+                    <div id="posts">
+                
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
