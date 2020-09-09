@@ -3,9 +3,11 @@
 }
 @section css{
     <link rel="stylesheet" href="~/css/product-detail.css" >
+    <link rel="stylesheet" href="~/css/products.css" >
+    <link rel="stylesheet" href="~/css/main.css" >
 }
 @section scripts{
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="~/js/detail.js"></script>
 }
 <!--Banner small-->
 <div class="container-fluid">
@@ -20,38 +22,37 @@
         <div class="section">
             <div class="row">
                 <div class=" col-12 col-md-6 col-lg-5 mb-3">
-                    <div class="gallery">
-                        <div class="product-img mb-4 gallery-for">
+                    <div id="gallery"> 
+                        <div class="img-content mb-4">
                             <div class="img">
-                                <img src="./img/img.jpg">
                             </div>
-                            <div class="img">
-                                <img src="./img/img3.jpg">
-                            </div>
-                            <div class="img">
-                                <img src="./img/img2.jpg">
-                            </div>
-                            <div class="img">
-                                <img src="./img/img3.jpg">
-                            </div>
-                        </div>
+                        </div> 
                         <a class="arrow-prev white"><i class="las la-angle-left"></i></a>
                         <a class="arrow-next white"><i class="las la-angle-right"></i></a>
-                    </div>                 
-                    <div class="gallery-nav d-flex">
+                    </div>                  
+                    <div id="gallery-nav">
                         <div class="img">
-                            <img src="./img/img.jpg">
+                            <img src="~/img/img.jpg">
                         </div>
                         <div class="img">
-                            <img src="./img/img3.jpg">
+                            <img src="~/img/img3.jpg">
                         </div>
                         <div class="img">
-                            <img src="./img/img2.jpg">
+                            <img src="~/img/img2.jpg">
                         </div>
                         <div class="img">
-                            <img src="./img/img3.jpg">
+                            <img src="~/img/img3.jpg">
                         </div>
-                    </div>                           
+                        <div class="img">
+                            <img src="~/img/img3.jpg">
+                        </div>
+                        <div class="img">
+                            <img src="~/img/img3.jpg">
+                        </div>
+                        <div class="img">
+                            <img src="~/img/img3.jpg">
+                        </div>
+                    </div>                            
                 </div>
                 <div class="col-12 col-md-6 col-lg-7">
                     <div class="product-text">

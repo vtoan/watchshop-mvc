@@ -1,22 +1,13 @@
 $(function () {
     /*=======?gallery======= */
-    $('.gallery-for').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        fade: true,
-        asNavFor: '.gallery-nav',
-    });
-    $('.gallery-nav').slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        asNavFor: '.gallery-for',
-        centerMode: true,
-        focusOnSelect: true,
-        prevArrow: $('.gallery .arrow-prev'),
-        nextArrow: $('.gallery .arrow-next'),
-    });
+    // initSlider('.slider-container', '.arrow-prev', '.arrow-next');
 
+    let grallry = $('#gallery .img');
+    $("#gallery-nav .img").on('mouseenter', function (e) {
+        $('#gallery-nav .img.active').removeClass('active');
+        let s = $(this).addClass('active').children().attr('src');
+        grallry.css("background-image", `url(${s})`);
+    })
     // function editor() {
     //     let quill = new Quill('#editor', {
     //         theme: 'snow',
