@@ -6,16 +6,16 @@
         </div>
         <!--Title-->
         <div class="col-6 col-lg-2 text-center text-lg-left">
-            <h1 class="py-3 text-3"><a asp-action="Index" asp-controller="Home" title="Trang chủ">hommer house</a></h1>
+            <h1 class="py-3 text-3"><a  href="/" title="Trang chủ">hommer house</a></h1>
         </div>
         <!--Nav Desktop-->
         <div class="col-6 d-none col-lg-8 d-lg-block">
             <nav class="nav-container">
-                <a class="nav-item" asp-action="Discount" asp-controller="Product" title="Khuyến mãi" >khuyến mãi</a>
-                <a class="nav-item" asp-action="Men" asp-controller="Product" title="Đồng hồ nam" >nam</a>
-                <a class="nav-item" asp-action="Women" asp-controller="Product" title="Đồng hồ nữ" >nữ</a>
-                <a class="nav-item" asp-action="Couple" asp-controller="Product" title="Đồng hồ đôi" >cặp đôi</a>
-                <a class="nav-item" asp-action="Accessories" asp-controller="Product" title="Phụ kiện" >phụ kiện</a>
+                <a class="nav-item" href="/khuyen-mai" title="Khuyến mãi" >khuyến mãi</a>
+                <a class="nav-item" href="/dong-ho-nam" title="Đồng hồ nam" >nam</a>
+                <a class="nav-item" href="/dong-ho-nu" title="Đồng hồ nữ" >nữ</a>
+                <a class="nav-item" href="/dong-ho-doi" title="Đồng hồ đôi" >cặp đôi</a>
+                <a class="nav-item" href="/phu-kien" title="Phụ kiện" >phụ kiện</a>
             </nav>
         </div>
         <!--Nav Icon-->
@@ -24,10 +24,10 @@
                 <a class="nav-item nav-icon d-none d-lg-block" title="Search Icon">
                     <i id="search" class="icon las la-search"></i>
                 </a>
-                <a class="nav-item nav-icon" asp-action="Index" asp-controller="Cart" title="Cart Icon">
+                <a class="nav-item nav-icon" href="/gio-hang" title="Cart Icon">
                     <div class="cart-shopping">
                         <i class="icon las la-shopping-cart"></i>
-                        <span id="cart-items" class="white bg-red">1</span>
+                        <span id="cart-items" class="white bg-red"></span>
                     </div>
                 </a>
             </div>
@@ -36,19 +36,19 @@
     <!--Side Menu mobile-->
     <div class="nav-mobile d-lg-none">
         <nav  class="nav-container flex-column bg-white">
-            <a class="nav-item-sm" asp-action="Index" asp-controller="Home" title="Trang chủ">trang chủ</a>
+            <a class="nav-item-sm" href="/" title="Trang chủ">trang chủ</a>
             <a id="search-sm"  class="nav-item-sm" href="#!" title="Tìm kiếm">tìm kiếm</a>
-            <a class="nav-item-sm" asp-action="Discount" asp-controller="Product" title="Khuyến mãi">khuyến mãi</a>
-            <a class="nav-item-sm" asp-action="Men" asp-controller="Product" title="Đồng hồ nam">nam</a>
-            <a class="nav-item-sm" asp-action="Women" asp-controller="Product" title="Đồng hồ nữ">nữ</a>
-            <a class="nav-item-sm" asp-action="Couple" asp-controller="Product" title="Đồng hồ đôi">cặp đôi</a>
-            <a class="nav-item-sm" asp-action="Accessories" asp-controller="Product" title="Phụ kiện">phụ kiện</a>
+            <a class="nav-item-sm" href="/khuyen-mai" title="Khuyến mãi">khuyến mãi</a>
+            <a class="nav-item-sm" href="/dong-ho-nam" title="Đồng hồ nam">nam</a>
+            <a class="nav-item-sm" href="/dong-ho-nu" title="Đồng hồ nữ">nữ</a>
+            <a class="nav-item-sm" href="/dong-ho-doi" title="Đồng hồ đôi">cặp đôi</a>
+            <a class="nav-item-sm" href="/phu-kien" title="Phụ kiện">phụ kiện</a>
             <i class="btn-classic red big-icon icon las la-times"></i>
         </nav>
         <span class="overlay bg-black"></span>
     </div>
     <!--Search Bar-->
-    <form asp-action="FindProductByChar" asp-controller="Product" method="post">
+    <form action="/tim-kiem" method="post">
         <div class="searchbar d-block bg-white">
             <div class="search-input">
                 <input type="text" name="search" placeholder="Tìm kiếm sản phẩm ...">   

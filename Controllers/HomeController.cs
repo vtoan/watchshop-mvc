@@ -23,10 +23,17 @@ namespace aspcore_watchshop.Controllers
             return View();
         }
 
+        public IActionResult Done()
+        {
+            ViewBag.PageTitle = "Đặt hàng thành công";
+            return View("Error");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            ViewBag.StatusCode = Response.StatusCode;
+            return View();
         }
     }
 }

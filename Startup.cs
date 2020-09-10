@@ -39,7 +39,18 @@ namespace aspcore_watchshop
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.Use(async (context, next) =>
+            {
+                await next();
+                if (context.Response.StatusCode == 404)
+                {
+                    context.Request.Path = "/Home/Error";
+                    await next();
+                }
+            });
+
             app.UseHttpsRedirection();
+            
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -49,9 +60,35 @@ namespace aspcore_watchshop
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    name: "trang-chu",
+                    pattern: "/",
+                    defaults: new { controller = "Home", action = "Index" });
+                endpoints.MapControllerRoute(
+                    name: "error",
+                    pattern: "/error",
+                    defaults: new { controller = "Home", action = "Error" });
+                endpoints.MapControllerRoute(
+                    name: "gio-hang",
+                    pattern: "/gio-hang",
+                    defaults: new { controller = "Cart", action = "Index" });
+                endpoints.MapControllerRoute(
+                    name: "san-pham",
+                    pattern: "/san-pham",
+                    defaults: new { controller = "Product", action = "Detail" });
+                endpoints.MapControllerRoute(
+                    name: "san-pham",
+                    pattern: "/{action}",
+                    defaults: new { controller = "Product", action = "Discount" });
+                endpoints.MapControllerRoute(
+                    name: "product",
+                    pattern: "/{controller}/{action}");
+                endpoints.MapControllerRoute(
+                    name: "not-found",
+                    pattern: "/{controller}/{action}",
+                    defaults: new { controller = "Home", action = "Error" });
             });
+
+
         }
     }
 }

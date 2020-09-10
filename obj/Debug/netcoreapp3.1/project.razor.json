@@ -14437,6 +14437,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\TOAN\\Srouce\\aspcore-watchshop\\Views\\Cart\\OrderStatus.cshtml",
+      "TargetPath": "Views\\Cart\\OrderStatus.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\TOAN\\Srouce\\aspcore-watchshop\\Views\\Shared\\_PartialFooter.cshtml",
       "TargetPath": "Views\\Shared\\_PartialFooter.cshtml",
       "FileKind": "mvc"

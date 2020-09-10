@@ -28,7 +28,12 @@ namespace aspcore_watchshop.Controllers
             return View();
         }
 
-        
+        public IActionResult OrderStatus()
+        {
+            ViewBag.PageTitle = "Đặt hàng thành công";
+            return View();
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

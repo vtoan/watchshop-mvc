@@ -1,4 +1,5 @@
 $(function () {
+    "use strict";
     /*=======?cart client======= */
     order = getCookie();
     //Cookie handler
@@ -14,6 +15,7 @@ $(function () {
             items: []
         };
     }
+    /*=======?exce======= */
     window.addEventListener('beforeunload', saveCookie);
     updateViewItemCart();
 })

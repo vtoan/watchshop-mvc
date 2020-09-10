@@ -1,15 +1,12 @@
 ﻿@{
+    ViewData["Title"]=ViewBag.PageTitle;
     var pageCode = ViewBag.PageCode;
     var banner = ViewBag.PageCode < 0 ? "banner-sm" : "banner-lg"; 
-    var total = ViewBag.Search;
-}
-@section css{
-    <link rel="stylesheet" href="~/css/products.css" >
 }
 @section scripts{
     <script src="~/js/product.js"></script>   
 }
-<span id="page" data-pageCode="@pageCode"></span>
+<span id="page" data-code=@pageCode></span>
 <!--Banner lager-->
 <div class="container-fluid">
     <div class="@banner section">

@@ -1,14 +1,18 @@
-﻿@model ErrorViewModel
-@{
-    ViewData["Title"] = "Error";
+﻿@{
+    ViewBag.TitlePage= "Lỗi" + ViewBag.StatusCode;
 }
-
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
-
-@if (Model.ShowRequestId)
-{
-    <p>
-        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+<!--Banner lager-->
+<div class="container-fluid">
+    <div class="banner-sm section">
+        <p class="white mb-0">Lỗi @ViewBag.StatusCode</p>
+    </div>
+</div>
+<div class="section">
+    <div class="img text-center mb-5">
+        <img src="~/images/error.png" width="150">
+    </div>
+    <p class="text-center">
+        <a onclick=" window.history.back();" class="link blue" href="#!" title="To Home">Quay lại trang trước</a>
     </p>
-}
+</div>
+

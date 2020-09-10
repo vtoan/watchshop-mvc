@@ -38,3 +38,4 @@ C:\Users\TOAN\Srouce\aspcore-watchshop\obj\Debug\netcoreapp3.1\aspcore-watchshop
 C:\Users\TOAN\Srouce\aspcore-watchshop\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Index.cshtml.g.cs
 C:\Users\TOAN\Srouce\aspcore-watchshop\obj\Debug\netcoreapp3.1\Razor\Views\Product\Detail.cshtml.g.cs
 C:\Users\TOAN\Srouce\aspcore-watchshop\obj\Debug\netcoreapp3.1\Razor\Views\Product\Index.cshtml.g.cs
+C:\Users\TOAN\Srouce\aspcore-watchshop\obj\Debug\netcoreapp3.1\Razor\Views\Cart\OrderStatus.cshtml.g.cs

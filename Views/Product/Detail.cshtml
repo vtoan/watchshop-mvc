@@ -1,27 +1,25 @@
 ﻿@{
-    ViewBag.PageTitle="Chi tiết";
+    ViewData["Title"]="Chi tiết sản phẩm";
 }
 @section css{
     <link rel="stylesheet" href="~/css/product-detail.css" >
-    <link rel="stylesheet" href="~/css/products.css" >
-    <link rel="stylesheet" href="~/css/main.css" >
 }
 @section scripts{
-    <script src="~/js/detail.js"></script>
+    <script src="~/js/product-detail.js"></script>
 }
 <!--Banner small-->
 <div class="container-fluid">
     <div class="banner-sm section">
-        <p class="white m-0">Chi tiết sản phẩm</p>
+        <p class="white m-0">@ViewData["Title"]</p>
     </div>
 </div>
 <!--Prodcut Detail-->
 <div class="container">
-    <div class="product-detail contents">
+    <div class="product-detail contents" >
         <!--Product info -->
         <div class="section">
             <div class="row">
-                <div class=" col-12 col-md-6 col-lg-5 mb-3">
+                <div class=" col-12 col-md-6 col-lg-5">
                     <div id="gallery"> 
                         <div class="img-content mb-4">
                             <div class="img">
@@ -32,30 +30,24 @@
                     </div>                  
                     <div id="gallery-nav">
                         <div class="img">
-                            <img src="~/img/img.jpg">
+                            <img src="~/products/img.jpg">
                         </div>
                         <div class="img">
-                            <img src="~/img/img3.jpg">
+                            <img src="~/products/img3.jpg">
                         </div>
                         <div class="img">
-                            <img src="~/img/img2.jpg">
+                            <img src="~/products/img2.jpg">
                         </div>
                         <div class="img">
-                            <img src="~/img/img3.jpg">
+                            <img src="~/products/img3.jpg">
                         </div>
                         <div class="img">
-                            <img src="~/img/img3.jpg">
-                        </div>
-                        <div class="img">
-                            <img src="~/img/img3.jpg">
-                        </div>
-                        <div class="img">
-                            <img src="~/img/img3.jpg">
+                            <img src="~/products/img3.jpg">
                         </div>
                     </div>                            
                 </div>
                 <div class="col-12 col-md-6 col-lg-7">
-                    <div class="product-text">
+                    <div class="product-text" data-itemid=1>
                         <h1 class="normal mb-3 text-2">Tisot DEWE</h1>
                         <div class="mb-4">
                             <p class="italic bold">Thương hiệu: <span class="pl-2 normal "> Tisot </span></p>
@@ -96,10 +88,10 @@
                             </div>
                         </div>         
                         <div class="group-btns text-center mb-3">
-                            <a class="add-cart btn btn-lg white bg-red mb-3">Mua ngay</a>
-                            <a class="add-cart btn btn-lg white bg-black ">Thêm vào giỏ hàng</a>
+                            <a class="buy-now btn btn-lg white bg-red mb-3" href="/gio-hang" >Mua ngay</a>
+                            <a class="to-cart btn btn-lg white bg-black ">Thêm vào giỏ hàng</a>
                         </div>
-                        <span class="text-sub text-center d-block">Hoặc đặt mua qua facebook tại <a class="link bule" href="#" style="color: blue;">đây</a></span>
+                        <span class="text-sub text-center d-block">Hoặc đặt mua qua facebook tại <a class="link blue" href="#" style="color: blue;">đây</a></span>
                     </div>
                 </div>
             </div>
@@ -107,8 +99,8 @@
         <!--Product description-->
         <div class="section">
             <div class="row">
-                <div class="col-12 col-lg-5 mb-5">
-                    <h3 class="mb-3">Thông số kỹ thuật</h3>
+                <div class="col-12 col-lg-5">
+                    <h3 class="mb-4">Thông số kỹ thuật</h3>
                     <table class="table table-color">
                     <tbody>
                             <tr>
@@ -167,12 +159,19 @@
                     </table>
                 </div>
                 <div class="col-12 col-lg-7">
-                    <h3 class="mb-3">Giới thiệu</h3>
+                    <h3 class="mb-4">Giới thiệu</h3>
                     <div id="posts">
-                
                     </div>
                 </div>
             </div> 
         </div>
+        <!--Product Other-->
+        <div class="section">
+            <h3 class="text-center mb-4 mb-lg-5">Sản phẩm khác</h3>
+            <div id="product-container-other">
+                <div class="loader"><div></div><div></div><div></div><div></div></div>
+            </div>
+            <a class="text-center link  d-block"> Xem thêm </a>
+        </div> 
     </div>
 </div>

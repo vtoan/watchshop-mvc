@@ -20,7 +20,6 @@
 .product-detail .group-btns .btn {
 	width: 100%;
 }
-
 /*============= ?result-editor =============*/
 #posts h1,
 #posts h2,
@@ -34,7 +33,6 @@
 	overflow: auto;
 	flex-wrap: nowrap;
 }
-
 #gallery-nav .img {
 	margin: 0 2px !important;
 	width: 25%;
@@ -42,13 +40,11 @@
 	flex-shrink: 0;
 	transition: all 0.3s;
 }
-
 #gallery-nav .img:hover,
 #gallery-nav .img.active {
 	transform: scale(0.9);
 	box-shadow: 0 0 5px 1px #333333;
 }
-
 
 #gallery {
 	position: relative;

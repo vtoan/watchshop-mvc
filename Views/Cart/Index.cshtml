@@ -1,8 +1,5 @@
 ﻿@{
-    ViewBag.PageTitle = "Giỏ hàng";
-}
-@section css{
-    <link rel="stylesheet" href="~/css/cart.css" >
+   ViewData["Title"] = "Giỏ hàng";
 }
 @section scripts{
     <script src="~/js/cart.js"></script>   
@@ -10,7 +7,7 @@
 <!--Banner small-->
 <div class="container-fluid">
     <div class="banner-sm section">
-        <p class="white m-0">Giỏ hàng</p>
+        <p class="white m-0">@ViewData["Title"]</p>
     </div>
 </div>
 <!--Cart-->
@@ -22,7 +19,7 @@
             <div class="d-flex align-items-center">
                 <h3 class="mb-3">Sản phẩm</h3>
                 <p class="ml-auto">
-                    <span id="count-items">0</span>sản phẩm
+                    <span id="count-items">0</span> sản phẩm
                 <p>
             </div>
             <!--Cart - List Item-->
@@ -32,6 +29,7 @@
         </div>            
         <!-- Bill Info-->
         <div id="bill" class="section">
+            <h3 class="mb-4">Thông tin đơn hàng</h3>
             <div class="row mb-4">
                 <div class="col-12 col-lg-6 order-lg-1 section">
                     <table>
@@ -68,7 +66,6 @@
                     </table>
                 </div>
                 <div class="col-12 col-lg-6 order-lg-0">
-                    <h3>Thông tin giao hàng</h3>
                     <form id="form">
                         <div class="control-input validate">
                             <label>Họ tên người nhận</label>

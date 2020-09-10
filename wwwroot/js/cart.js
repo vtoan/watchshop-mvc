@@ -1,4 +1,5 @@
 $(function () {
+    "use strict";
     /*=======?request======= */
     function reqGetCartItems() {
         //Get all id of product in cart
@@ -36,23 +37,6 @@ $(function () {
         }).done(resp => showDistrict(resp))
     }
     /*=======?list-cart items======= */
-    function attachEventItem() {
-        $('.cart-item .btn.add').on('click', function () {
-            updateAmountItem(this, true);
-        });
-
-        $('.cart-item .btn.subtract').on('click', function () {
-            updateAmountItem(this, false);
-        });
-
-        $('.cart-item .btn.remove').on('click', function () {
-            let item = $(this).parents('.cart-item');
-            removeOrderItem(item.data('itemid'));
-            item.remove();
-            updateAmountPay();
-        });
-    }
-
     function updateAmountItem(trigger, operation) {
         let item = $(trigger).parents('.cart-item');
         let countElm = item.find('span[item-count]');
@@ -93,7 +77,32 @@ $(function () {
         if (count == 0)
             $('#cart-container').append('<p class="text-center my-5">Chưa có sản phẩm nào</p>');
     }
-    // Treat to Order object
+    // defien-event
+    function attachEventItem() {
+        $('.cart-item .btn.add').on('click', function () {
+            updateAmountItem(this, true);
+        });
+
+        $('.cart-item .btn.subtract').on('click', function () {
+            updateAmountItem(this, false);
+        });
+
+        $('.cart-item .btn.remove').on('click', function () {
+            let item = $(this).parents('.cart-item');
+            removeOrderItem(item.data('itemid'));
+            item.remove();
+            updateAmountPay();
+        });
+    }
+    // treat to Order object
+    function isExistOrders() {
+        if (!order || order.length == 0) {
+            console.log("Order not exsist");
+            return false;
+        }
+        return true;
+    }
+
     function changeQuantityOrderItem(id, operation) {
         if (!isExistOrders()) return;
         let indx = order.items.findIndex(i => i.id == id);
@@ -108,13 +117,6 @@ $(function () {
         order.items.splice(indx, 1);
     }
 
-    function isExistOrders() {
-        if (!order || order.length == 0) {
-            console.log("Order not exsist");
-            return false;
-        }
-        return true;
-    }
     // Render View
     function showData(data) {
         setTimeout(() => {
@@ -140,7 +142,7 @@ $(function () {
                     <div class="row align-items-lg-center">
                         <div class="col-4 col-lg-2">
                             <div class="img">
-                                <img src="./img/${p.image}">
+                                <img src="/products/${p.image}">
                             </div>
                         </div>
                         <div class="col-6 col-lg-8">
@@ -171,21 +173,6 @@ $(function () {
                     </div>
                 </div>`
     }
-    /*=======?from======= */
-    $('#bill .btn').on('click', () => $('#form button').trigger('click'));
-    //begin validate
-    $('#form input').on('click', () => {
-        $('#form').find('.validate > input').addClass('input-invalid')
-        validateLocal();
-    });
-    //begin validate for dropdown
-    $('#form .local').on('mouseout', function () {
-        validateLocal();
-        $(this).find('.error').parent().hide();
-    });
-    $('#form .local').on('mouseover', function () {
-        $(this).find('.error').parent().show();
-    });
     /*=======?validate local======= */
     function validateLocal() {
         if (
@@ -216,7 +203,6 @@ $(function () {
             return true;
         }
     }
-
     /*=======?local data======= */
     function showProvince(province) {
         renderLocal('#bill .local div[local-provice] .dropdown-menu', province);
@@ -230,15 +216,30 @@ $(function () {
         onSelectedItemDropdown()
         validateLocal();
     }
-    //render view
+    //render local
     function renderLocal(target, data) {
         if (typeof target == 'string') target = $(target);
         Object.values(data).forEach(item =>
             target.append(`<li data-code="${item.code}">${item.name_with_type}</li>`)
         );
     }
+    /*=======?attach event from======= */
+    $('#bill .btn').on('click', () => $('#form button').trigger('click'));
+    //begin validate
+    $('#form input').on('click', () => {
+        $('#form').find('.validate > input').addClass('input-invalid')
+        validateLocal();
+    });
+    //begin validate for dropdown
+    $('#form .local').on('mouseout', function () {
+        validateLocal();
+        $(this).find('.error').parent().hide();
+    });
+    $('#form .local').on('mouseover', function () {
+        $(this).find('.error').parent().show();
+    });
     /*=======?exec======= */
-    initDropDown();
+    UIDropDown();
     reqProvince();
     reqGetCartItems();
 });
