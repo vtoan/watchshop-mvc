@@ -1,21 +1,18 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\TOAN\\Srouce\\aspcore-watchshop\\aspcore-watchshop.csproj": {}
+    "C:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\aspcore-watchshop.csproj": {}
   },
   "projects": {
-    "C:\\Users\\TOAN\\Srouce\\aspcore-watchshop\\aspcore-watchshop.csproj": {
+    "C:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\aspcore-watchshop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\TOAN\\Srouce\\aspcore-watchshop\\aspcore-watchshop.csproj",
+        "projectUniqueName": "C:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\aspcore-watchshop.csproj",
         "projectName": "aspcore-watchshop",
-        "projectPath": "C:\\Users\\TOAN\\Srouce\\aspcore-watchshop\\aspcore-watchshop.csproj",
+        "projectPath": "C:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\aspcore-watchshop.csproj",
         "packagesPath": "C:\\Users\\TOAN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\TOAN\\Srouce\\aspcore-watchshop\\obj\\",
+        "outputPath": "C:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
           "C:\\Users\\TOAN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -40,6 +37,18 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -58,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
