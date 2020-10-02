@@ -1,10 +1,6 @@
 <footer>
-    @{
-        var polies = ViewData["Polies"];
-        var infoStore = ViewData["InfoStore"];
-    }
     <!--Policy-->
-    <div class="container policy mb-4">
+    <div class="container policy mb-2">
         <div class="row">
             <div class="col-12 col-lg-6 pb-4">
                 <div class="policy-item border-black">
@@ -13,7 +9,7 @@
                     </span>
                     <div class="bold">
                         <h5> Vận chuyển miễn phí toàn quốc </h5>
-                        <p class="text-sub mb-0">khi  mua từ 2 sản phẩm</p>
+                        <p class="text-sub mb-0">khi mua từ 2 sản phẩm</p>
                     </div>
                 </div>
             </div>
@@ -23,8 +19,8 @@
                         <svg height="30" width="30" viewBox="0 0 512 512"  xmlns="http://www.w3.org/2000/svg"><path d="M256 0c-66 0-120 55-120 121l30 30h180l30-30C376 55 322 0 256 0z" fill="#5b5555"/><path d="M376 121C376 55 322 0 256 0v151h90z" fill="#463f3f"/><path d="M196 211h-90v-90h60l30 26z" fill="#f73"/><path d="M406 211h-90v-69l30-21h60z" fill="#e64d2e"/><path d="M484 512h-93l-30-30H151l-30 30H28l26-158c6-30 29-55 60-61l49-10 93 87 93-87 49 10c31 6 54 31 60 61z" fill="#f73"/><path d="M484 512h-93l-30-30H256V370l93-87 49 10c31 6 54 31 60 61z" fill="#e64d2e"/><path d="M316 277l-60 45-60-45-33 6 93 117 93-117z" fill="#5b5555"/><path d="M316 277l-60 45v78l93-117z" fill="#463f3f"/><path d="M313 276c-7-1-12-7-12-15v-13h-90v13c0 8-5 14-12 15l-3 1 60 75 60-75z" fill="#ffbfab"/><path d="M313 276c-7-1-12-7-12-15v-13h-45v104l60-75z" fill="#f89580"/><path d="M346 121h-45a76 76 0 01-60-30 75 75 0 01-60 30h-15v60a90 90 0 00175 30l-25-15 30-15z" fill="#ffe1ba"/><path d="M341 211l-25-15 30-15v-60h-45c-17 0-32-6-45-15v165c39 0 72-25 85-60z" fill="#ffbfab"/><path d="M256 181v30h85c3-9 5-19 5-30z" fill="#463f3f"/><path d="M256 361H121v151h270V361z" fill="#f0f7ff"/><path d="M256 361h135v151H256z" fill="#dfe7f4"/><path d="M256 421h-15v30h30v-30z" fill="#766e6e"/><path d="M256 421h15v30h-15z" fill="#5b5555"/></svg>
                     </span>
                     <div class="policy-text bold">
-                        <h5> Hỗ Trợ (9:00 - 21:00) </h5>
-                        <p class="text-sub mb-0">087.456.1237</p>
+                        <h5> Hỗ Trợ (@LayoutData.WorkTime) </h5>
+                        <p class="text-sub mb-0">@LayoutData.Phone</p>
                     </div>
                 </div>  
             </div>
@@ -35,9 +31,7 @@
         <div class="row">
             <div class="col-12 col-lg-4 mb-3">
                 <h4 class="mb-3">Thông tin cửa hàng</h4>
-                <p class="pr-5">
-                    WathchShop cung cấp sản phẩm với chất lượng đảm bảo, giá cạnh tranh, uy tín. Các sản phẩm chủ đạo : áo khoác, áo sơ mi, áo thun, đồ bộ, quần, .. Luôn đặt khách hàng là trung tâm, để lắng nghe, chia sẻ và liên tục đổi mới.
-                </p>
+                <p class="pr-5">@LayoutData.StoreDescription</p>
             </div>
             <div class="col-12 col-lg-2 mb-3">
                 <h4 class="mb-3">Liên kế Website</h4>
@@ -51,30 +45,30 @@
                 <h4 class="mb-3">Thông tin liên hệ</h4>
                 <p class="middle-inline">
                     <i class="big-icon las la-envelope pr-1"></i>
-                    <span id="email">dangtoan030@gmail.com</span>                
+                    <span id="email">@LayoutData.Email</span>                
                 </p>
                 <p class="middle-inline">
                     <i class="big-icon las la-phone-volume pr-1"></i>
-                    <span id="phone">0978.456.121</span>                
+                    <span id="phone">@LayoutData.Phone</span>                
                 </p>
                 <p class="middle-inline">
                     <i class="big-icon lab la-facebook-square pr-1"></i>
-                    <a id="fb" href="#" title="Facebook">fb.com/dangviettoan99</a>                
+                    <a id="fb" href="#" title="Facebook">@LayoutData.Facebook</a>                
                 </p>
                 <p class="middle-inline">
                     <i class="big-icon lab la-instagram pr-1"></i>
-                    <a id="location" href="#" title="Instargram">instargram.com/qưuehqwjeo</a>                
+                    <a id="location" href="#" title="Instargram">@LayoutData.Instargram</a>                
                 </p>
                 <p class="middle-inline">
                     <i class="big-icon las la-map-marked"></i>
-                    <span id="location">123 Nguyễn Tri Phương, P8, Quận 10, TP.HCM</span>                
+                    <span id="location">@LayoutData.Address</span>                
                 </p>
             </div>
             <div class="col-12 col-lg-3 mb-3">
                 <h4 class="mb-3">Fanpage</h4>
-                <div class="fb-page" data-href="https://www.facebook.com/hmh0908.19" data-tabs="timeline" data-width="" data-height="280" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/hmh0908.19" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/hmh0908.19">Homer House</a></blockquote></div>
+                <div class="fb-page" data-href="@LayoutData.Facebook" data-tabs="timeline" data-width="" data-height="280" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="@LayoutData.Facebook" class="fb-xfbml-parse-ignore"><a href="@LayoutData.Facebook">Homer House</a></blockquote></div>
             </div>
         </div>
-        <p class="text-center text-sub mb-0">&copy; Copyright, Watch Shop by vtoandev, 2020</p>    
+        <p class="text-center text-sub mb-0">&copy; Copyright, Watch Shop by vtoandev, @DateTime.Now.Year</p>    
     </div>
 </footer>

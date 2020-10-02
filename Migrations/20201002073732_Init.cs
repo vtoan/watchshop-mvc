@@ -43,7 +43,7 @@ namespace aspcore_watchshop.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 30, nullable: true),
-                    Cost = table.Column<string>(maxLength: 50, nullable: true)
+                    Cost = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,16 +54,18 @@ namespace aspcore_watchshop.Migrations
                 name: "Infos",
                 columns: table => new
                 {
+                    NameStore = table.Column<string>(maxLength: 50, nullable: true),
                     Logo = table.Column<string>(maxLength: 50, nullable: true),
                     Email = table.Column<string>(maxLength: 100, nullable: true),
                     Facebook = table.Column<string>(maxLength: 100, nullable: true),
+                    Messenger = table.Column<string>(maxLength: 100, nullable: true),
                     Instargram = table.Column<string>(maxLength: 100, nullable: true),
                     Phone = table.Column<string>(maxLength: 100, nullable: true),
                     Address = table.Column<string>(maxLength: 150, nullable: true),
                     WorkTime = table.Column<string>(maxLength: 50, nullable: true),
                     SeoImage = table.Column<string>(maxLength: 50, nullable: true),
                     SeoTitle = table.Column<string>(maxLength: 250, nullable: true),
-                    SeoDescritption = table.Column<string>(maxLength: 350, nullable: true)
+                    SeoDescription = table.Column<string>(maxLength: 350, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -81,9 +83,9 @@ namespace aspcore_watchshop.Migrations
                     CustomerProvince = table.Column<string>(maxLength: 25, nullable: true),
                     CustomerAddress = table.Column<string>(maxLength: 250, nullable: true),
                     CustomerNote = table.Column<string>(maxLength: 250, nullable: true),
-                    Promotion = table.Column<string>(maxLength: 50, nullable: true),
-                    Fee = table.Column<string>(maxLength: 50, nullable: true),
-                    Status = table.Column<int>(nullable: false, defaultValue: 1)
+                    Promtion = table.Column<string>(maxLength: 50, nullable: true),
+                    Fees = table.Column<string>(maxLength: 50, nullable: true),
+                    Status = table.Column<byte>(nullable: false, defaultValue: (byte)1)
                 },
                 constraints: table =>
                 {
@@ -94,29 +96,14 @@ namespace aspcore_watchshop.Migrations
                 name: "Policies",
                 columns: table => new
                 {
-                    ID = table.Column<string>(nullable: false),
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     PolicyContent = table.Column<string>(maxLength: 150, nullable: true),
                     Icon = table.Column<string>(maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Policies", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Posts",
-                columns: table => new
-                {
-                    ProductID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PostContent = table.Column<string>(nullable: true),
-                    SeoImage = table.Column<string>(maxLength: 50, nullable: true),
-                    SeoTitle = table.Column<string>(maxLength: 250, nullable: true),
-                    SeoDescritption = table.Column<string>(maxLength: 350, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Posts", x => x.ProductID);
                 });
 
             migrationBuilder.CreateTable(
@@ -129,7 +116,7 @@ namespace aspcore_watchshop.Migrations
                     FromDate = table.Column<DateTime>(type: "smalldatetime", nullable: true),
                     ToDate = table.Column<DateTime>(type: "smalldatetime", nullable: true),
                     Status = table.Column<bool>(nullable: true, defaultValue: true),
-                    Type = table.Column<int>(nullable: false)
+                    Type = table.Column<byte>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -153,15 +140,17 @@ namespace aspcore_watchshop.Migrations
                 name: "PromBills",
                 columns: table => new
                 {
-                    PromotionID = table.Column<int>(nullable: false),
-                    Discount = table.Column<string>(maxLength: 50, nullable: true),
-                    isFeeShip = table.Column<bool>(nullable: false, defaultValue: false),
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Discount = table.Column<double>(nullable: false),
+                    ItemFree = table.Column<string>(nullable: true),
                     ConditionItem = table.Column<byte>(nullable: false),
-                    ConditionAmount = table.Column<int>(nullable: false)
+                    ConditionAmount = table.Column<int>(nullable: false),
+                    PromotionID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PromBills", x => x.PromotionID);
+                    table.PrimaryKey("PK_PromBills", x => x.ID);
                     table.ForeignKey(
                         name: "FK_PromBills_Promotions_PromotionID",
                         column: x => x.PromotionID,
@@ -174,15 +163,17 @@ namespace aspcore_watchshop.Migrations
                 name: "PromProducts",
                 columns: table => new
                 {
-                    PromotionID = table.Column<int>(nullable: false),
-                    Discount = table.Column<string>(maxLength: 50, nullable: true),
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Discount = table.Column<double>(nullable: false),
                     ProductIDs = table.Column<string>(maxLength: 250, nullable: true),
                     CategoryID = table.Column<int>(nullable: true),
-                    BandID = table.Column<int>(nullable: true)
+                    BandID = table.Column<int>(nullable: true),
+                    PromotionID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PromProducts", x => x.PromotionID);
+                    table.PrimaryKey("PK_PromProducts", x => x.ID);
                     table.ForeignKey(
                         name: "FK_PromProducts_Promotions_PromotionID",
                         column: x => x.PromotionID,
@@ -205,8 +196,7 @@ namespace aspcore_watchshop.Migrations
                     Image = table.Column<string>(maxLength: 50, nullable: true),
                     CategoryID = table.Column<int>(nullable: false),
                     TypeWireID = table.Column<int>(nullable: false),
-                    BandID = table.Column<int>(nullable: false),
-                    PostProductID = table.Column<int>(nullable: true)
+                    BandID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -224,12 +214,6 @@ namespace aspcore_watchshop.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Products_Posts_PostProductID",
-                        column: x => x.PostProductID,
-                        principalTable: "Posts",
-                        principalColumn: "ProductID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Products_TypeWires_TypeWireID",
                         column: x => x.TypeWireID,
                         principalTable: "TypeWires",
@@ -245,7 +229,7 @@ namespace aspcore_watchshop.Migrations
                     ProductID = table.Column<int>(nullable: false),
                     Quantity = table.Column<byte>(nullable: false),
                     Price = table.Column<int>(nullable: false),
-                    Discount = table.Column<string>(maxLength: 50, nullable: true)
+                    Discount = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -265,6 +249,26 @@ namespace aspcore_watchshop.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Posts",
+                columns: table => new
+                {
+                    ProductID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PostContent = table.Column<string>(nullable: true),
+                    ProductsID = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Posts", x => x.ProductID);
+                    table.ForeignKey(
+                        name: "FK_Posts_Products_ProductsID",
+                        column: x => x.ProductsID,
+                        principalTable: "Products",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProductDetails",
                 columns: table => new
                 {
@@ -279,10 +283,9 @@ namespace aspcore_watchshop.Migrations
                     Origin = table.Column<string>(maxLength: 30, nullable: true),
                     Color = table.Column<string>(maxLength: 30, nullable: true),
                     Func = table.Column<string>(maxLength: 30, nullable: true),
-                    DescriptionProduct = table.Column<string>(maxLength: 1500, nullable: true),
                     SeoImage = table.Column<string>(maxLength: 50, nullable: true),
                     SeoTitle = table.Column<string>(maxLength: 250, nullable: true),
-                    SeoDescritption = table.Column<string>(maxLength: 350, nullable: true)
+                    SeoDescription = table.Column<string>(maxLength: 350, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -301,6 +304,11 @@ namespace aspcore_watchshop.Migrations
                 column: "ProductID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Posts_ProductsID",
+                table: "Posts",
+                column: "ProductsID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_BandID",
                 table: "Products",
                 column: "BandID");
@@ -311,14 +319,19 @@ namespace aspcore_watchshop.Migrations
                 column: "CategoryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_PostProductID",
-                table: "Products",
-                column: "PostProductID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Products_TypeWireID",
                 table: "Products",
                 column: "TypeWireID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PromBills_PromotionID",
+                table: "PromBills",
+                column: "PromotionID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PromProducts_PromotionID",
+                table: "PromProducts",
+                column: "PromotionID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -334,6 +347,9 @@ namespace aspcore_watchshop.Migrations
 
             migrationBuilder.DropTable(
                 name: "Policies");
+
+            migrationBuilder.DropTable(
+                name: "Posts");
 
             migrationBuilder.DropTable(
                 name: "ProductDetails");
@@ -358,9 +374,6 @@ namespace aspcore_watchshop.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
-
-            migrationBuilder.DropTable(
-                name: "Posts");
 
             migrationBuilder.DropTable(
                 name: "TypeWires");

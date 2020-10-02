@@ -1,148 +1,190 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using aspcore_watchshop.Models;
+using Microsoft.AspNetCore.Mvc;
+using aspcore_watchshop.EF;
+using Microsoft.Extensions.Caching.Memory;
+using aspcore_watchshop.Hepler;
+using System.Text.Json;
 
 namespace aspcore_watchshop.Controllers
 {
     public class ProductController : Controller
     {
-        public static List<Product> data = new List<Product>()
-            {
-                new Product(){ID=1,Name="TISSOT DASD - ĐỒ HỒ NAM", Price=1900000,Discount=100000, CateID=1, WireID=1, SaleCount=100,Image="img.jpg"},
-                new Product(){ID=2,Name="TISSOT DASD - ĐỒ HỒ NAM", Price=900000,Discount=0, CateID=1, WireID=2, SaleCount=99,Image="img2.jpg"},
-                new Product(){ID=3,Name="TISSOT DASD - ĐỒ HỒ NAM", Price=19023000,Discount=0, CateID=1, WireID=3, SaleCount=120,Image="img.jpg"},
-                new Product(){ID=4,Name="TISSOT DASD - ĐỒ HỒ NAM", Price=19000,Discount=100000, CateID=1, WireID=1, SaleCount=10,Image="img2.jpg"},
-                new Product(){ID=5,Name="TISSOT DASD - ĐỒ HỒ NAM", Price=820000,Discount=100000, CateID=1, WireID=1, SaleCount=0,Image="img3.jpg"},
-                new Product(){ID=6,Name="TISSOT DASD - ĐỒ HỒ NAM", Price=100000,Discount=100000, CateID=2, WireID=2, SaleCount=12,Image="img3.jpg"},
-                new Product(){ID=7,Name="TISSOT DASD - ĐỒ HỒ NAM", Price=900000,Discount=100000, CateID=2, WireID=3, SaleCount=85,Image="img3.jpg"},
-                new Product(){ID=8,Name="TISSOT DASD - ĐỒ HỒ NAM", Price=10000,Discount=0, CateID=2, WireID=1, SaleCount=160,Image="img2.jpg"},
-                new Product(){ID=9,Name="TISSOT DASD - ĐỒ HỒ NAM", Price=782000,Discount=0, CateID=2, WireID=1, SaleCount=85,Image="img2.jpg"},
-                new Product(){ID=10,Name="TISSOT DASD - ĐỒ HỒ NAM", Price=199000,Discount=100000, CateID=2, WireID=3, SaleCount=45,Image="img.jpg"},
-                new Product(){ID=11,Name="TISSOT DASD - ĐỒ HỒ NAM", Price=197000,Discount=100000, CateID=2, WireID=1, SaleCount=58,Image="img.jpg"},
-                new Product(){ID=12,Name="TISSOT DASD - ĐỒ HỒ NAM", Price=196000,Discount=100000, CateID=3, WireID=2, SaleCount=65,Image="img.jpg"},
-                new Product(){ID=13,Name="TISSOT DASD - ĐỒ HỒ NAM", Price=1980000,Discount=100000, CateID=3, WireID=2, SaleCount=78,Image="img.jpg"},
-                new Product(){ID=14,Name="TISSOT DASD - ĐỒ HỒ NAM", Price=1980000,Discount=0, CateID=3, WireID=1, SaleCount=23,Image="img2.jpg"},
-                new Product(){ID=15,Name="TISSOT DASD - ĐỒ HỒ NAM", Price=1900000,Discount=0, CateID=3, WireID=2, SaleCount=85,Image="img2.jpg"},
-                new Product(){ID=16,Name="TISSOT DASD - ĐỒ HỒ NAM", Price=1903000,Discount=100000, CateID=3, WireID=3, SaleCount=89,Image="img.jpg"},
-                new Product(){ID=17,Name="TISSOT DASD - ĐỒ HỒ NAM", Price=19000,Discount=100000, CateID=3, WireID=3, SaleCount=15,Image="img.jpg"},
-                new Product(){ID=18,Name="TISSOT DASD - ĐỒ HỒ NAM", Price=1910000,Discount=100000, CateID=3, WireID=3, SaleCount=14,Image="img2.jpg"}
-            };
+        private IProductModel _modelProduct = null;
+        private IPromModel _modelProm = null;
+        private IMemoryCache _cache = null;
+        private watchContext _context = null;
 
-        private readonly ILogger<HomeController> _logger;
-
-        public ProductController(ILogger<HomeController> logger)
+        public ProductController(IMemoryCache cache, IProductModel product, IPromModel prom, watchContext ctext)
         {
-            _logger = logger;
+            _modelProduct = product;
+            _modelProm = prom;
+            _context = ctext;
+            _cache = cache;
         }
 
+        #region Request            
         [ActionName("khuyen-mai")]
         public IActionResult Discount()
         {
-            ViewBag.PageTitle = "Khuyến Mãi";
             ViewBag.PageCode = 0;
+            LayoutData.SetForCategory(GetCategory(0));
+            ViewBag.Wires = GetWires();
             return View("Index");
         }
 
         [ActionName("dong-ho-nam")]
         public IActionResult Men()
         {
-            ViewBag.PageTitle = "Đồng hồ nam";
             ViewBag.PageCode = 1;
+            LayoutData.SetForCategory(GetCategory(1));
+            ViewBag.Wires = GetWires();
             return View("Index");
         }
 
         [ActionName("dong-ho-nu")]
         public IActionResult Women()
         {
-            ViewBag.PageTitle = "Đồng hồ nữ";
             ViewBag.PageCode = 2;
+            LayoutData.SetForCategory(GetCategory(2));
+            ViewBag.Wires = GetWires();
             return View("Index");
         }
 
         [ActionName("dong-ho-doi")]
         public IActionResult Couple()
         {
-            ViewBag.PageTitle = "Đồng hồ đôi";
             ViewBag.PageCode = 3;
+            LayoutData.SetForCategory(GetCategory(3));
+            ViewBag.Wires = GetWires();
             return View("Index");
         }
 
         [ActionName("phu-kien")]
         public IActionResult Accessories()
         {
-            ViewBag.PageTitle = "Phụ kiện";
             ViewBag.PageCode = 4;
+            LayoutData.SetForCategory(GetCategory(4));
+            ViewBag.Wires = GetWires();
             return View("Index");
         }
 
         [ActionName("tim-kiem")]
         public IActionResult FindProductByChart(string text)
         {
-            ViewBag.PageTitle = "Kết quả tìm kiếm";
-            ViewBag.PageCode = -1;
-            ViewBag.SearchResult = 50;
-            string result = "";
-            data.ForEach(item =>
+            ViewBag.PageCode = -2;
+            ViewBag.Wires = GetWires();
+            ViewBag.TextSearch = text;
+            if (text != "" && text != null)
             {
-                if (item.Name.Contains(text)) result += item.ID + ",";
-            });
-            TempData["result"] = result;
+                var response = _modelProduct.GetProductVMsByChar(GetProducts(), text);
+                if (response.Count == 0) return View("Index");
+                ViewBag.ResultCount = response.Count;
+                var json = JsonSerializer.Serialize(response);
+                TempData["result"] = json;
+            }
             return View("Index");
         }
 
-        public IActionResult Detail(int id)
+        public IActionResult Detail([FromServices] IPolicyModel policy, [FromServices] IPostModel post, int id)
         {
-            return View();
+            if (id <= 0) return RedirectToAction("Home/Error");
+            PropDetailVM detail = _modelProduct.GetProdDetailVM(_context, id);
+            LayoutData.SetForProduct(detail);
+            //
+            ViewBag.Detail = detail != null ? detail : new PropDetailVM();
+            ViewBag.Post = post.GetPostVM(_context, id);
+            ViewBag.Policies = policy.GetPolices(_context);
+            var product = GetProducts().Find(item => item.ID == id);
+            return View(product);
         }
-
-        //AJAX
-        public JsonResult ProductByCate(int pageCode, int number)
+        #endregion
+        //====================== AJAX ======================//
+        #region AJAX
+        public JsonResult ProductByCate(int pageCode, int numberItem)
         {
-            if (number != 0) return Json(data.Take(number));
-            if (pageCode == -1) return Json(GetProductsByID(TempData["result"] as string)); // get products form list search result
-            if (pageCode == -2) return Json(data.Take(number)); // get products best seller
-            return Json(data);
-        }
-
-        public JsonResult ProductInCart(string orderItemID)
-        {
-            string[] itemIDs = orderItemID.Split(',');
-            List<Product> reponse = new List<Product>();
-            foreach (var id in itemIDs)
+            string keyCache = "";
+            switch (pageCode)
             {
-                if (id == "") break;
-                Product obj = data.Find(p => p.ID == Int32.Parse(id));
-                if (obj == null) break;
-                reponse.Add(obj);
+                case -1: keyCache = CacheKey.SELLER; break;
+                case 0: keyCache = CacheKey.DISCOUNT; break;
+                case 1: keyCache = CacheKey.MEN; break;
+                case 2: keyCache = CacheKey.WOMEN; break;
+                case 3: keyCache = CacheKey.COUPLE; break;
+                case 4: keyCache = CacheKey.ACCESSORIES; break;
+                default: break;
             }
-            return Json(reponse);
-        }
-
-
-        public List<Product> GetProductsByID(string str)
-        {
-            List<Product> ls = new List<Product>();
-            string[] arr = str.Split(',');
-            foreach (string id in arr)
+            if (keyCache == "") return Json(null);
+            //Get in Cache
+            List<ProductVM> resqonse = Cache.Get<List<ProductVM>>(_cache, keyCache);
+            if (resqonse == null || resqonse.Count == 0)
             {
-                if (id != "")
-                {
-                    int i = Int32.Parse(id);
-                    ls.Add(data.Find(item => item.ID == i));
-                }
+                //Get Product in List Product (Db or Cache)
+                if (pageCode == 0)
+                    resqonse = _modelProduct.GetPromProductVMs(GetProducts());
+                else if (pageCode < 0)
+                    resqonse = _modelProduct.GetTopProductVMs(GetProducts());
+                else
+                    resqonse = _modelProduct.GetProductVMs(_context, _modelProm.GetPromProductVMs(_context), pageCode);
+                if (resqonse == null) return Json(null);
+                // Save in Cache
+                Cache.Set(_cache, resqonse, keyCache);
             }
-            return ls;
+            return Json(numberItem != 0 ? resqonse.Take(numberItem) : resqonse);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public JsonResult FindProduct()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (!TempData.ContainsKey("result")) return Json(null);
+            return Json(JsonSerializer.Deserialize<List<ProductVM>>(TempData["result"].ToString()));
         }
+
+        public JsonResult GetProductsByIDs(string idString)
+        {
+            return Json(_modelProduct.GetProductVMsByIDs(GetProducts(), idString));
+        }
+        #endregion
+        //==================== GET DATA ===================//
+        private List<ProductVM> GetProducts()
+        {
+            return DataHelper.Products(_context, _cache, _modelProduct, _modelProm);
+        }
+
+        private CategoryVM GetCategory(int idCate)
+        {
+            string keyCache = "";
+            switch (idCate)
+            {
+                case 1: keyCache = CacheKey.MEN_SEO; break;
+                case 2: keyCache = CacheKey.WOMEN_SEO; break;
+                case 3: keyCache = CacheKey.COUPLE_SEO; break;
+                case 4: keyCache = CacheKey.ACCESSORIES_SEO; break;
+            }
+            if (keyCache == "") return null;
+            CategoryVM cates = Cache.Get<CategoryVM>(_cache, keyCache);
+            if (cates == null)
+            {
+                CategoryModel cateModel = new CategoryModel();
+                cates = cateModel.GetCategoryVMByID(_context, idCate);
+                if (cates != null)
+                    Cache.Set(_cache, cates, keyCache);
+            }
+            return cates;
+        }
+
+        private List<WireVM> GetWires()
+        {
+            List<WireVM> wires = Cache.Get<List<WireVM>>(_cache, CacheKey.WIRE_INFO);
+            if (wires == null || wires.Count == 0)
+            {
+                TypeWireModel wireModel = new TypeWireModel();
+                wires = wireModel.GetWireVMs(_context);
+                if (wires != null)
+                    Cache.Set(_cache, wires, CacheKey.WIRE_INFO);
+            }
+            return wires;
+        }
+
     }
 }

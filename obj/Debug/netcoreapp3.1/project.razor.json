@@ -14402,13 +14402,18 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\Views\\Cart\\OrderStatus.cshtml",
-      "TargetPath": "Views\\Cart\\OrderStatus.cshtml",
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\Views\\Cart\\Confirm.cshtml",
+      "TargetPath": "Views\\Cart\\Confirm.cshtml",
       "FileKind": "mvc"
     },
     {
       "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\Views\\_ViewStart.cshtml",
       "TargetPath": "Views\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\Views\\Cart\\Status.cshtml",
+      "TargetPath": "Views\\Cart\\Status.cshtml",
       "FileKind": "mvc"
     },
     {
