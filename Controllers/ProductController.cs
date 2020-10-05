@@ -71,7 +71,7 @@ namespace aspcore_watchshop.Controllers
         }
 
         [ActionName("tim-kiem")]
-        public IActionResult FindProductByChart(string text)
+        public IActionResult FindProduct(string text)
         {
             ViewBag.PageCode = -2;
             ViewBag.Wires = GetWires();
@@ -102,7 +102,7 @@ namespace aspcore_watchshop.Controllers
         #endregion
         //====================== AJAX ======================//
         #region AJAX
-        public JsonResult ProductByCate(int pageCode, int numberItem)
+        public IActionResult GetProductByCate(int pageCode, int numberItem)
         {
             string keyCache = "";
             switch (pageCode)
@@ -115,7 +115,7 @@ namespace aspcore_watchshop.Controllers
                 case 4: keyCache = CacheKey.ACCESSORIES; break;
                 default: break;
             }
-            if (keyCache == "") return Json(null);
+            if (keyCache == "") return NotFound();
             //Get in Cache
             List<ProductVM> resqonse = Cache.Get<List<ProductVM>>(_cache, keyCache);
             if (resqonse == null || resqonse.Count == 0)
@@ -127,25 +127,23 @@ namespace aspcore_watchshop.Controllers
                     resqonse = _modelProduct.GetTopProductVMs(GetProducts());
                 else
                     resqonse = _modelProduct.GetProductVMs(_context, _modelProm.GetPromProductVMs(_context), pageCode);
-                if (resqonse == null) return Json(null);
+                if (resqonse == null) return NoContent();
                 // Save in Cache
                 Cache.Set(_cache, resqonse, keyCache);
             }
             return Json(numberItem != 0 ? resqonse.Take(numberItem) : resqonse);
         }
-
-        public JsonResult FindProduct()
+        public JsonResult GetProductResult()
         {
             if (!TempData.ContainsKey("result")) return Json(null);
             return Json(JsonSerializer.Deserialize<List<ProductVM>>(TempData["result"].ToString()));
         }
-
         public JsonResult GetProductsByIDs(string idString)
         {
             return Json(_modelProduct.GetProductVMsByIDs(GetProducts(), idString));
         }
         #endregion
-        //==================== GET DATA ===================//
+        //==================== PRIVATE ===================//
         private List<ProductVM> GetProducts()
         {
             return DataHelper.Products(_context, _cache, _modelProduct, _modelProm);
@@ -185,6 +183,5 @@ namespace aspcore_watchshop.Controllers
             }
             return wires;
         }
-
     }
 }

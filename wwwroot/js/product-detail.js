@@ -51,5 +51,5 @@ $(function () {
         addCart(this, true);
     });
     /*=======?exec======= */
-    reqListProducts("/Product/ProductByCate", -1, (data) => renderProducts(data, "#product-container-other"), 4);
+    reqListProducts("/Product/GetProductByCate", -1, (data) => renderProducts(data, "#product-container-other"), 4);
 });

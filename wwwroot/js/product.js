@@ -106,7 +106,7 @@ $(function () {
     });
     let code = getPageCode();
     scrollValue = code == -2 ? 100 : 525;
-    reqListProducts(code == -2 ? "/Product/FindProduct" : "/Product/ProductByCate", code, showData);
+    reqListProducts(code == -2 ? "/Product/GetProductResult" : "/Product/GetProductByCate", code, showData);
     UIDropDown();
     onSelectedItemDropdown(filterProduct);
 });

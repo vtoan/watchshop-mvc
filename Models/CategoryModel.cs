@@ -19,7 +19,7 @@ namespace aspcore_watchshop.Models
             List<Category> asset = null;
             using (CategoryDao db = new CategoryDao())
                 asset = db.GetList(context);
-            return Helper.LsObjectToLsVM<CategoryVM, Category>(asset);
+            return Helper.LsObjectMapperTo<CategoryVM, Category>(asset);
         }
 
         public CategoryVM GetCategoryVMByID(watchContext context, int idCate)
@@ -27,7 +27,7 @@ namespace aspcore_watchshop.Models
             Category asset = null;
             using (CategoryDao db = new CategoryDao())
                 asset = db.Get(context, idCate);
-            return Helper.ObjectToVM<CategoryVM, Category>(asset);
+            return Helper.ObjectMapperTo<CategoryVM, Category>(asset);
         }
     }
 

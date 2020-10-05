@@ -1,6 +1,12 @@
 ﻿@{
     ViewData["Title"]="Đặt hàng thành công";
 }
+@section scripts{
+    <script>
+        order.items = [];
+        updateViewItemCart();
+    </script>
+}
 <div class="container-fluid">
     <div class="banner-sm section">
         <p class="white mb-0">@LayoutData.NamePage</p>

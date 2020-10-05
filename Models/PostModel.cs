@@ -16,7 +16,7 @@ namespace aspcore_watchshop.Models
             Post asset;
             using (PostDao db = new PostDao())
                 asset = db.Get(ctext, id);
-            return Helper.ObjectToVM<PostVM, Post>(asset);
+            return Helper.ObjectMapperTo<PostVM, Post>(asset);
         }
     }
 

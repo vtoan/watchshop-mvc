@@ -7,6 +7,7 @@ namespace aspcore_watchshop.Entities
     {
         [Key]
         [ForeignKey("Product")]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ProductID { get; set; }
         public string Images { get; set; }
 

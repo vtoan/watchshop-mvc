@@ -59,8 +59,7 @@ namespace aspcore_watchshop.Controllers
         {
             if (!CheckOrderSubmit(items) || orderVM == null) return View(orderVM);
             var lsItems = JsonToList(items);
-            orderModel.AddOrderVM(_context, orderVM, lsItems, GetFees(), FindBillPromotion(ref lsItems));
-            return RedirectToAction("Status");
+            return orderModel.AddOrderVM(_context, orderVM, lsItems, GetFees(), FindBillPromotion(ref lsItems)) ? RedirectToAction("Status") : null;
         }
 
         public IActionResult Status()

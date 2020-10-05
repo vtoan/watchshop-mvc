@@ -12,27 +12,72 @@ namespace aspcore_watchshop.Models
 
     public interface IOrderModel
     {
-        void AddOrderVM(watchContext ctext, OrderVM orderVM, List<OrderDetailVM> items, List<FeeVM> fees, string promotion);
+        bool AddOrderVM(watchContext ctext, OrderVM orderVM, List<OrderDetailVM> items, List<FeeVM> fees, string promotion);
+        List<OrderVM> GetOrders(watchContext ctext, DateTime start, DateTime end);
+        OrderVM GetOrderByID(watchContext ctext, int id);
+        bool UpdateStatus(watchContext ctext, int id, int stt);
+        List<OrderDetailVM> GetOrderDetailVMs(watchContext ctext, int id);
+        List<OrderVM> FindOrders(watchContext ctext, int txt);
     }
 
     public class OrderModel : IOrderModel
     {
-        public void AddOrderVM(watchContext ctext, OrderVM orderVM, List<OrderDetailVM> items, List<FeeVM> fees, string promotion)
+        public bool AddOrderVM(watchContext ctext, OrderVM orderVM, List<OrderDetailVM> items, List<FeeVM> fees, string promotion)
         {
             orderVM.DateCreated = DateTime.Now;
             orderVM.Fees = JsonSerializer.Serialize(fees);
-            using (OrderDao db = new OrderDao())
+            using (OrderDao db = new OrderDao(ctext))
             {
-                Order order = Helper.ObjectToVM<Order, OrderVM>(orderVM);
-                order = db.Insert(ctext, order); // Add order into DB
-                if (order == null) return;
-                int orderID = order.ID;
+                Order order = Helper.ObjectMapperTo<Order, OrderVM>(orderVM);
+                int orderID = db.Insert(order); // Add order into DB
+                if (orderID == 0) return false;
                 items.ForEach(i => i.orderID = orderID);
-                db.Insert(ctext, Helper.LsObjectToLsVM<OrderDetail, OrderDetailVM>(items)); // Add orderdetail into DB
+                db.InsertDetail(Helper.LsObjectMapperTo<OrderDetail, OrderDetailVM>(items)); // Add orderdetail into DB
             }
-
+            return true;
         }
 
+        public List<OrderVM> FindOrders(watchContext ctext, int txt)
+        {
+            List<Order> asset = null;
+            using (OrderDao db = new OrderDao(ctext))
+                asset = db.Find(txt);
+            if (asset == null || asset.Count == 0) return null;
+            return Helper.LsObjectMapperTo<OrderVM, Order>(asset);
+        }
+
+        public OrderVM GetOrderByID(watchContext ctext, int id)
+        {
+            Order asset = null;
+            using (OrderDao db = new OrderDao(ctext))
+                asset = db.Get(id);
+            if (asset == null) return null;
+            return Helper.ObjectMapperTo<OrderVM, Order>(asset);
+        }
+
+        public List<OrderDetailVM> GetOrderDetailVMs(watchContext ctext, int id)
+        {
+            List<OrderDetail> asset = null;
+            using (OrderDao db = new OrderDao(ctext))
+                asset = db.GetDetails(id);
+            if (asset == null || asset.Count == 0) return null;
+            return Helper.LsObjectMapperTo<OrderDetailVM, OrderDetail>(asset);
+        }
+
+        public List<OrderVM> GetOrders(watchContext ctext, DateTime start, DateTime end)
+        {
+            List<Order> asset = null;
+            using (OrderDao db = new OrderDao(ctext))
+                asset = db.GetList(start, end);
+            if (asset == null || asset.Count == 0) return null;
+            return Helper.LsObjectMapperTo<OrderVM, Order>(asset);
+        }
+
+        public bool UpdateStatus(watchContext ctext, int id, int stt)
+        {
+            using (OrderDao db = new OrderDao(ctext))
+                return db.UpdateStatus(id, stt) == 0 ? false : true;
+        }
     }
 
     public class OrderVM

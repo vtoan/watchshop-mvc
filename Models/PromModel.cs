@@ -26,7 +26,7 @@ namespace aspcore_watchshop.Models
                 asset = db.GetList(context);
             if (asset == null) return null;
             //Convert result  
-            return Helper.LsObjectToLsVM<PromVM, Promotion>(asset);
+            return Helper.LsObjectMapperTo<PromVM, Promotion>(asset);
         }
 
         public List<PromProductVM> GetPromProductVMs(watchContext context)
@@ -36,7 +36,7 @@ namespace aspcore_watchshop.Models
             using (PromotionDao db = new PromotionDao())
                 asset = db.GetListPromProducts(context);
             //Convert result
-            return Helper.LsObjectToLsVM<PromProductVM, PromProduct>(asset);
+            return Helper.LsObjectMapperTo<PromProductVM, PromProduct>(asset);
         }
 
         public List<PromBillVM> GetPromBillVMs(watchContext ctext)
@@ -46,7 +46,7 @@ namespace aspcore_watchshop.Models
             using (PromotionDao db = new PromotionDao())
                 asset = db.GetListPromBills(ctext);
             //Convert result
-            return Helper.LsObjectToLsVM<PromBillVM, PromBill>(asset);
+            return Helper.LsObjectMapperTo<PromBillVM, PromBill>(asset);
         }
     }
     public class PromVM

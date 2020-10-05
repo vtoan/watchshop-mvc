@@ -10,14 +10,18 @@ namespace aspcore_watchshop.Models
 {
     public interface IProductModel
     {
-        List<ProductVM> GetProductVMs(watchContext context, List<PromProductVM> proms, int idCate = -1);
+        List<ProductVM> GetProductVMs(watchContext context, List<PromProductVM> proms, int idCate = -1); // Get product in  Client Page
+        List<ProductVM> GetALLProductVMs(watchContext context); // Get product in  Admin Page
         PropDetailVM GetProdDetailVM(watchContext context, int id);
+        bool Add(watchContext context, ProductVM product, PropDetailVM detail);
+        bool UpdateStatus(watchContext context, int id, bool stt);
+        bool Remove(watchContext context, int id);
+        bool Update(watchContext context, ProductVM product, PropDetailVM detail);
         //Handler
         List<ProductVM> GetProductVMsByIDs(List<ProductVM> products, string ids);
         List<ProductVM> GetProductVMsByChar(List<ProductVM> products, string character);
         List<ProductVM> GetTopProductVMs(List<ProductVM> products);
         List<ProductVM> GetPromProductVMs(List<ProductVM> products);
-        // Tuple<int, int> GetTotalPriceOf(List<ProductVM> products, List<Dictionary<string, int>> items);
         void GetProductInCarts(List<ProductVM> products, ref List<OrderDetailVM> items);
     }
     public class ProductModel : IProductModel
@@ -27,28 +31,75 @@ namespace aspcore_watchshop.Models
         {
             // Db
             List<Product> asset = null;
-            using (ProductDao db = new ProductDao())
-                asset = idCate == -1 ? db.GetListDeep(context)
-                    : db.GetListByCate(context, idCate);
+            using (ProductDao db = new ProductDao(context))
+                asset = idCate == -1 ? db.GetList()
+                    : db.GetListByCate(idCate);
             // Convert to ViewModel
             if (asset == null) return null;
-            List<ProductVM> result = Helper.LsObjectToLsVM<ProductVM, Product>(asset);
+            List<ProductVM> result = Helper.LsObjectMapperTo<ProductVM, Product>(asset);
             AddDiscount(ref result, proms);
             return result;
+        }
+
+        public List<ProductVM> GetALLProductVMs(watchContext context)
+        {
+            // Db
+            List<Product> asset = null;
+            using (ProductDao db = new ProductDao(context))
+                asset = db.GetListDeep();
+            // Convert to ViewModel
+            if (asset == null) return null;
+            return Helper.LsObjectMapperTo<ProductVM, Product>(asset); ;
         }
 
         public PropDetailVM GetProdDetailVM(watchContext context, int id)
         {
             // Db
             ProductDetail asset = null;
-            using (ProductDao db = new ProductDao())
-                asset = db.Get(context, id);
+            using (ProductDao db = new ProductDao(context))
+                asset = db.GetDetail(id);
             // Convert to ViewModel
             if (asset == null) return null;
-            PropDetailVM detailVM = Helper.ObjectToVM<PropDetailVM, ProductDetail>(asset);
-            return detailVM;
+            return Helper.ObjectMapperTo<PropDetailVM, ProductDetail>(asset);
         }
 
+        public bool Add(watchContext context, ProductVM product, PropDetailVM detail)
+        {
+            using (ProductDao db = new ProductDao(context))
+            {
+                Product p = Helper.ObjectMapperTo<Product, ProductVM>(product);
+                if (p == null) return false;
+                int prodId = db.Insert(p); // Insert to DB
+                if (prodId == 0) return false;
+                detail.ProductID = prodId;
+                ProductDetail pDetail = Helper.ObjectMapperTo<ProductDetail, PropDetailVM>(detail);
+                if (pDetail == null) return false;
+                db.InsertDetail(pDetail); // Insert to DB
+            }
+            //Update Cache
+            return true;
+        }
+
+        public bool UpdateStatus(watchContext context, int id, bool stt)
+        {
+            using (ProductDao db = new ProductDao(context))
+                return db.UpdateStatus(id, stt) == 1;
+        }
+
+        public bool Remove(watchContext context, int id)
+        {
+            using (ProductDao db = new ProductDao(context))
+            {
+                return db.Remove(id) == 1;
+            }
+        }
+
+        //==================================
+        public bool Update(watchContext context, ProductVM product, PropDetailVM detail)
+        {
+            return true;
+        }
+        //==================================
         //Handler List Product
         public List<ProductVM> GetProductVMsByIDs(List<ProductVM> products, string ids)
         {
@@ -78,27 +129,6 @@ namespace aspcore_watchshop.Models
             return products.Where(item => item.Discount != 0.0).ToList();
         }
 
-        // public Tuple<int, int> GetTotalPriceOf(List<ProductVM> products, List<Dictionary<string, int>> items)
-        // {
-        //     double total = 0;
-        //     int countItems = 0;
-        //     if (products != null || products.Count != 0 || items != null || items.Count != 0)
-        //     {
-        //         items.ForEach(item =>
-        //         {
-        //             ProductVM obj = products.Find(p => p.ID == item["id"]);
-        //             if (obj != null)
-        //             {
-        //                 int quantity = item["quantity"];
-        //                 countItems += quantity;
-        //                 total += (obj.Discount != 0 ? obj.Price * (1 - (obj.Discount / 100)) : obj.Price) * quantity;
-        //             }
-
-        //         });
-        //     }
-        //     return new Tuple<int, int>(Convert.ToInt32(total), countItems);
-        // }
-
         public void GetProductInCarts(List<ProductVM> products, ref List<OrderDetailVM> items)
         {
             if (products == null || products.Count == 0 || items == null || items.Count == 0)
@@ -113,7 +143,8 @@ namespace aspcore_watchshop.Models
                 }
             });
         }
-        //Match discount for products
+
+        //============== PRIVATE ====================
         private void AddDiscount(ref List<ProductVM> products, List<PromProductVM> promProds)
         {
             if (promProds == null || promProds.Count == 0) return;

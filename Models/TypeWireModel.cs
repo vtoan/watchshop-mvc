@@ -17,7 +17,7 @@ namespace aspcore_watchshop.Models
             List<TypeWire> asset = null;
             using (TypeWireDao db = new TypeWireDao())
                 asset = db.GetList(context);
-            return Helper.LsObjectToLsVM<WireVM, TypeWire>(asset);
+            return Helper.LsObjectMapperTo<WireVM, TypeWire>(asset);
         }
     }
 

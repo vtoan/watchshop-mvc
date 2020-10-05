@@ -77,6 +77,10 @@ namespace aspcore_watchshop
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                   name: "admin",
+                   pattern: "/Admin/{controller}/{action}",
+                   defaults: new { area = "Admin", controller = "Home", action = "Index" });
+                endpoints.MapControllerRoute(
                     name: "trang-chu",
                     pattern: "/",
                     defaults: new { controller = "Home", action = "Index" });

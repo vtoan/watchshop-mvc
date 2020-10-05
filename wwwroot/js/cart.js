@@ -58,9 +58,7 @@ $(function () {
             prom = parseInt(discount);
             promText = prom == discount ? cvtIntToMoney(discount) + " đ" : discount * 100 + " %";
             if (prom != discount) prom = Math.round(total * (1 - discount));
-            //cal fee;
-            let ship = $("span[order-fee]");
-            ship.text(cvtIntToMoney(ship.data("cost")));
+            showFee();
         } else {
             $("#" + promValue).text(0);
             promText = " đ";
@@ -162,6 +160,11 @@ $(function () {
     //===========?render-view ===========
     function showData(data) {
         renderCartItem(data);
+    }
+    //cal fee;
+    function showFee() {
+        let ship = $("span[order-fee]");
+        ship.text(cvtIntToMoney(ship.data("cost")));
     }
 
     function renderCartItem(items) {
@@ -346,12 +349,12 @@ $(function () {
             return;
         }
         $(this).append(`<input name='items' type='hidden' value='${JSON.stringify(order.items).toString()}'>`);
-        // order.items = [];
     });
     //========================== exec ===============================
     UIDropDown();
     reqProvince();
     getCodePage();
+    showFee();
     if (isExistOrders()) reqGetCartItems();
     else emptyCart();
 });

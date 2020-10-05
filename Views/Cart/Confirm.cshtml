@@ -44,7 +44,7 @@
                                     var value = Helper.ConvertValue(item.Cost);
                                     <tr>
                                         <td>@item.Name</td> 
-                                        <td><span id="@Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(item.Name));" order-fee data-cost="@value.Item2" >@value.Item2</span> @value.Item1</td> 
+                                        <td><span id="@Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(item.Name));" order-fee data-cost="@value.Item2" ></span> @value.Item1</td> 
                                     </tr>
                                 }
                             }

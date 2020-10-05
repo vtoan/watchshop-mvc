@@ -19,7 +19,7 @@ namespace aspcore_watchshop.Models
             List<Fee> asset = null;
             using (FeeDao db = new FeeDao())
                 asset = db.GetList(ctext);
-            return asset == null ? null : Helper.LsObjectToLsVM<FeeVM, Fee>(asset);
+            return asset == null ? null : Helper.LsObjectMapperTo<FeeVM, Fee>(asset);
         }
 
     }

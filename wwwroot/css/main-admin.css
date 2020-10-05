@@ -1,0 +1,182 @@
+:root {
+    --color-white: #fff;
+    --color-black: #111;
+    --color-red: #f5222d;
+    --color-empty: #fafafa;
+    --color-secondary: #d9d9d9;
+    --color-blue: #2196f3;
+}
+
+/*========== nav ==========*/
+#admin-container {
+    height: 100vh;
+    padding-top: 63px;
+}
+.admin-nav-container {
+    position: fixed;
+    left: 0;
+    width: 16.6%;
+}
+
+.admin-nav-container .nav-item {
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.admin-nav-container .nav-item:hover,
+.nav-item:hover {
+    color: var(--color-red);
+    transition: all 0.3s;
+}
+
+.admin-nav-container .nav-item:hover::after {
+    content: "";
+    width: 3px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    background-color: var(--color-red);
+    display: block;
+    transition: all 0.3s;
+}
+
+/*========== main ==========*/
+main {
+    background-color: whitesmoke;
+    margin: 0 -15px;
+    padding: 15px;
+}
+
+.card {
+    background: var(--color-white);
+    border-radius: 5px;
+    padding: 15px;
+}
+@media only screen and (min-width: 62em) {
+    .card {
+        padding: 15px 30px 30px 30px;
+    }
+}
+
+.card .card-header {
+    margin-bottom: 15px;
+}
+
+/* .card .card-content {} */
+
+/*========== tabel-data ==========*/
+.table-data th {
+    padding: 0.75em;
+    text-align: left;
+}
+
+.table-data p {
+    margin-bottom: 0;
+}
+
+.table-data thead tr {
+    border-bottom: 3px solid var(--color-black);
+}
+
+.table-data tbody tr {
+    cursor: pointer;
+    padding: 1em 0;
+    border-bottom: 1px solid whitesmoke;
+}
+
+/*========== switch ==========*/
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 25px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 17px;
+    width: 17px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+input:checked + .slider {
+    background-color: #2196f3;
+}
+
+input:checked + .slider:before {
+    left: 24px;
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 25px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/*========== ?search ==========*/
+.search-input {
+    padding: 1em 0;
+}
+
+/*========== ?gallay ==========*/
+#gallery {
+    width: 60%;
+    margin: 0 auto;
+}
+
+#gallery-nav-admin [class^="col-"] {
+    padding: 0.75em !important;
+}
+
+#gallery-nav-admin img {
+    transition: all 0.3s;
+}
+
+#gallery-nav-admin .img:hover img,
+#gallery-nav-admin .img.active img {
+    transform: scale(0.96);
+    box-shadow: 0 0 5px 1px #333333;
+}
+
+#gallery-nav-admin .gallery-item {
+    position: relative;
+}
+
+.gallery-item i {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    z-index: 1;
+    cursor: pointer;
+    border-radius: 25%;
+}

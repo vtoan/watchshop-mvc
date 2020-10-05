@@ -123,3 +123,4 @@ C:\Users\TOAN\Documents\Srouce\aspcore-watchshop\bin\Debug\netcoreapp3.1\AutoMap
 C:\Users\TOAN\Documents\Srouce\aspcore-watchshop\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\TOAN\Documents\Srouce\aspcore-watchshop\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Status.cshtml.g.cs
 C:\Users\TOAN\Documents\Srouce\aspcore-watchshop\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Confirm.cshtml.g.cs
+C:\Users\TOAN\Documents\Srouce\aspcore-watchshop\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Home\Index.cshtml.g.cs
