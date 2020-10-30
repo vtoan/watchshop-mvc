@@ -1,25 +1,31 @@
-using aspcore_watchshop.Entities;
+using aspcore_watchshop.EF;
+using aspcore_watchshop.ViewModels;
+
 namespace aspcore_watchshop.Models
 {
-    public static class LayoutData
+    public sealed class LayoutData
     {
-        public static string NamePage { get; set; }
-        public static string Title { get; set; }
-        public static string Description { get; set; }
-        public static string Image { get; set; }
-        public static string NameStore { get; set; }
-        public static string Logo { get; set; }
-        public static string Email { get; set; }
-        public static string Facebook { get; set; }
-        public static string Messenger { get; set; }
-        public static string Instargram { get; set; }
-        public static string Phone { get; set; }
-        public static string Address { get; set; }
-        public static string WorkTime { get; set; }
-        public static string StoreDescription { get; set; }
-        public static string URL { get; set; }
+        private static readonly LayoutData _instance = new LayoutData();
+        public static LayoutData Instance { get { return _instance; } }
+        private LayoutData() { }
 
-        public static void SetForInfo(Info data)
+        public string NamePage { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Image { get; set; }
+        public string NameStore { get; set; }
+        public string Logo { get; set; }
+        public string Email { get; set; }
+        public string Facebook { get; set; }
+        public string Messenger { get; set; }
+        public string Instargram { get; set; }
+        public string Phone { get; set; }
+        public string Address { get; set; }
+        public string WorkTime { get; set; }
+        public string StoreDescription { get; set; }
+        public string URL { get; set; }
+
+        public void SetForInfo(Info data)
         {
             if (data == null) return;
             NameStore = data.NameStore;
@@ -37,7 +43,7 @@ namespace aspcore_watchshop.Models
             StoreDescription = data.SeoDescription;
         }
 
-        public static void SetForCategory(CategoryVM data = null)
+        public void SetForCategory(CategoryVM data = null)
         {
             if (data == null)
                 NamePage = "Khuyễn mãi";
@@ -50,12 +56,18 @@ namespace aspcore_watchshop.Models
             }
         }
 
-        public static void SetForProduct(PropDetailVM data)
+        public void SetForProduct(ProdDetailVM data)
         {
             if (data == null) return;
             Title = data.SeoTitle;
             Description = data.SeoDescription;
             Image = data.SeoImage;
+        }
+
+        public void SetPageTitle(string page, string title = null)
+        {
+            NamePage = page;
+            Title = title == null ? page : title;
         }
     }
 }

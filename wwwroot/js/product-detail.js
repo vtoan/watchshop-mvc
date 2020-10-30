@@ -39,17 +39,51 @@ $(function () {
         });
         changeImage(1);
     }
-    Gallery("#gallery", "#gallery-nav");
     /*=======?attach-event======= */
     $(".buy-now").on("click", function () {
-        addCart(this, false);
+        let id = $(this).parents(".product").data("itemid");
+        if (!id) id = $(this).parents(".product-text").data("itemid");
+        if (typeof id == "undefined") window.location.href = "/error";
+        //add item
+        orderObj.addItem(id);
+        updateViewCount();
+        window.location.href = "/gio-hang";
     });
     $(".to-cart").on("click", function () {
-        addCart(this, true);
+        addCartEvent(this);
     });
     $("#product-container-other").on("click", ".add-cart", function () {
-        addCart(this, true);
+        addCartEvent(this);
     });
+
+    function showPriceProduct() {
+        let priceElm = $("span[data-price]");
+        let discountElm = $("del[data-discount]");
+        //
+        let priceVal = priceElm.data("price");
+        let discountVal = discountElm.data("discount");
+        //
+        if (priceVal) priceElm.text(cvtIntToMoney(calDiscount(priceVal, discountVal)) + " đ");
+        if (discountVal) discountElm.text(cvtIntToMoney(priceVal) + " đ");
+        else discountElm.hide();
+    }
+
+    function calDiscount(price, val) {
+        if (!price) return 0;
+        if (!val) return price;
+        return parseInt(val) == val ? price - val : price * (1 - val);
+    }
+
+    function hideCellEmpty() {
+        $(".table tr td:nth-child(2)").each(function (key, val) {
+            let elm = $(val);
+            if (elm.text() == "") elm.parent().hide();
+        });
+    }
     /*=======?exec======= */
+    showPriceProduct();
+    Gallery("#gallery", "#gallery-nav");
+    hideCellEmpty();
+
     reqListProducts("/Product/GetProductByCate", -1, (data) => renderProducts(data, "#product-container-other"), 4);
 });

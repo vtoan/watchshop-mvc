@@ -1,4 +1,4 @@
-var order;
+var orderObj = new Order();
 /*=======?request======= */
 function reqListProducts(urlString, pageCode, callBack, number) {
     return $.ajax({
@@ -18,29 +18,22 @@ $(document).ajaxComplete(function (event, xhr, opts) {
     console.log(event.type + " - " + opts.url + " - " + xhr.status);
 });
 /*=======?ui-event======= */
-function addCart(elm, popup) {
+let addCartEvent = function (elm) {
     let id = $(elm).parents(".product").data("itemid");
     if (!id) id = $(elm).parents(".product-text").data("itemid");
     if (typeof id == "undefined") window.location.href = "/error";
     //add item
-    addItemToCart(id);
-    updateViewItemCart();
-    if (!popup) return;
-    UIPopup("Thêm vào giỏ hàng thành công", "Xem Giỏ hàng", "Không", "/gio-hang");
-}
+    orderObj.addItem(id);
+    //
+    updateViewCount();
+    //
+    UIPopup("Thêm vào giỏ hàng thành công", "Xem Giỏ hàng", "Không", function () {
+        window.location.href = "/gio-hang";
+    });
+};
 
-function addItemToCart(id) {
-    let index = order.items.findIndex((item) => item.id == id);
-    if (index >= 0) order.items[index].quantity++;
-    else
-        order.items.push({
-            id: id,
-            quantity: 1,
-        });
-}
 /*=======?render product======= */
 function renderProducts(items, target) {
-    console.log("render " + window.scrollY);
     let container = $(target).empty();
     if (!items || items.length == 0)
         container
@@ -55,19 +48,21 @@ function renderProducts(items, target) {
 function crtProductElm(p) {
     let priceCurrent = p.price;
     let discount = Number(p.discount);
-    if (discount == 0) {
-        priceCurrent =
-            !parseInt(discount) == discount ? p.price - Math.round(p.price * p.discount) : p.price - discount;
+    let unitDiscount = "đ";
+    if (discount) {
+        if (parseInt(discount) == discount) priceCurrent = p.price - discount;
+        else {
+            priceCurrent == p.price - Math.round(p.price * p.discount);
+            discount = discount * 100;
+            unitDiscount = "%";
+        }
     }
-
     return `<div class="col-6 col-lg-3">
 				<div class="product ${discount == 0 ? "" : "sale"}" data-itemid=${p.id}>
                     <div class="product-img img-content">
-                        <span class="product-sale"> - ${cvtIntToMoney(discount)} ${
-        parseInt(discount) == discount ? "đ" : "%"
-    }</span>
+                        <span class="product-sale"> - ${cvtIntToMoney(discount)} ${unitDiscount}</span>
 						<div class="img">
-							<img src="/products/${p.image}" loading="lazy">
+							<img src="${p.image}" loading="lazy">
 						</div>
 						<a class="add-cart text-center d-none d-lg-block" href="#!">Add to Cart</a>
 					</div>
@@ -77,26 +72,58 @@ function crtProductElm(p) {
                             <p class="text-4 red bold d-block d-lg-inline-block m-0">
                             ${cvtIntToMoney(priceCurrent)} 
                             đ</p>
-							<del class="normal text-sub">${cvtIntToMoney(p.price)} đ</del>
+							<del class="normal">${cvtIntToMoney(p.price)} đ</del>
 						</div>
 					</a>
 				</div>
 			</div>`;
 }
 
-function updateViewItemCart() {
-    if (order.length == 0) $("#cart-items").text(0);
-    else $("#cart-items").text(order.items.reduce((t, item) => (t = t + item.quantity), 0));
+function updateViewCount() {
+    $("#cart-items").text(orderObj.getCount());
+}
+/*=======?cart client======= */
+function saveCookie() {
+    let dt = new Date(Date.now() + 30 * 86400000);
+    document.cookie = `basketshopping= ${JSON.stringify(
+        orderObj.getData()
+    )}; expires= ${dt.toString()}; samesite=strict; path=/; secure`;
+}
+function getCookie() {
+    let cookie = document.cookie;
+    let asset = cookie.split(";");
+    let cart;
+    for (let i = 0; i < asset.length; i++) {
+        let data = asset[i].split("=");
+        if (data[0].trimStart() == "basketshopping") {
+            cart = data[1];
+        }
+    }
+    if (cart) return JSON.parse(cart);
+    return {
+        items: [],
+    };
 }
 /*=======?exec======= */
 $(function () {
+    orderObj.setData(getCookie());
+    updateViewCount();
+
     visibleElement($("#menu"), $(".nav-mobile .btn-classic"), $(".nav-mobile"));
     visibleElement($("#search"), $(".searchbar .btn-classic"), $(".searchbar"));
     $("#search-sm").on("click", () => {
         $(".nav-mobile .btn-classic").click();
         $("#search").click();
     });
+    //
     $(".search-input input").on("keydown", function (e) {
-        if (e.keyCode == 13) $(this).parents("form").trigger("submit");
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            $(this).parents("form").trigger("submit");
+        }
     });
 });
+// cookie
+window.addEventListener("beforeunload", saveCookie);
+// orderObj.setData(getCookie());
+updateViewCount();

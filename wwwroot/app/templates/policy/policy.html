@@ -1,0 +1,154 @@
+<h3 class="page-title mt-4">Chính sách và phí</h3>
+<div class="card" >
+    <div class="card-header">
+        <div class="row align-items-center" style="border-bottom: 2px solid #595959">
+            <a class="px-lg-5 tab-item {{ tabId == 0 ? 'active' :'' }}" ng-click="onChangeTab(0)">Chính sách</a>
+            <a class="px-lg-5 tab-item {{ tabId == 1 ? 'active' :'' }}" ng-click="onChangeTab(1)">Phí đơn hàng</a>
+        </div>
+        <!--Tab containter-->
+        <div>
+            <loading ng-show="isLoading"></loading>
+            <div ng-hide="isLoading">
+                <p ng-show="ex.isError" class="text-center pt-5" ng-bind="ex.msgError"></p>
+                <div ng-hide="ex.isError">
+                    <!--Policy-->
+                    <div ng-hide ="tabId != 0" class="card">
+                        <div class="card-header"></div>
+                        <div class="card-content">
+                            <div  class="row align-items-center mb-3 pr-lg-5">
+                                <div class="col-lg-3">
+                                    <h3 class="">Thông tin chính sách</h3>
+                                </div>
+                                <div class="col-lg-3 pr-lg-4">
+                                    <div class="text-right">
+                                        <button class="btn btn-sm bg-blue white px-lg-4 mr-2" ng-click="onSave()"> {{ item.id ? "Lưu" : "Thêm"}} </button>
+                                        <button class="btn btn-sm bg-red white px-lg-4" ng-class="item.id ? '': 'muted'"  ng-click="onCancel()">Huỷ</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <div class="col-lg-6 pr-lg-5">
+                                    <div class="row mb-3">
+                                        <div class="col-5 col-lg-4">
+                                            <p>ID</p>
+                                        </div>
+                                        <div class="col-7 col-lg-8 text-right">
+                                            <p class="bold" ng-bind="'#' + (item.id ? item.id :'0')"></p>
+                                        </div>
+                                    </div>
+                                    <div class="control-input validate">
+                                        <label>Tên chính sách</label>
+                                        <input class="input-invalid" ng-model="item.policyContent" type="text" placeholder="Nhập tên phân loại" required />
+                                        <span><span class="error text-sub">Không được để trống</span></span>
+                                    </div>
+                                    <label>Icon</label> 
+                                    <div class="row mb-3 px-3 justify-content-center justify-content-lg-start" >
+                                        <div style="width: 180px;">
+                                            <div class="img-content">
+                                                <div class="img">
+                                                    <img src="{{item.icon.status >=0 ? item.icon.src :''  }}" width="180%" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pl-lg-5 mt-3 mt-lg-0">
+                                            <button class="btn btn-sm black mr-2" ng-click="onUploadImage()">Tải icon</button>
+                                            <button class="btn btn-sm red " ng-click="onRemoveImage()">Xoá icon</button>
+                                        </div>
+                                    </div>
+                                    <span class="red sub-text">* Sử dụng icon có định dạng '.svg' để hiển thị tốt nhất</span>
+                                    
+                                </div>
+                                <div class="col-lg-6">
+                                    <table class="table table-data mb-4">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Tên chính sách</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in data">
+                                                <td style="width: 100px;" scope="row">{{item.id}}</td>
+                                                <td ng-click="onShowDetail(item)">
+                                                    <div class="row align-content-center">
+                                                        <div class="pr-3">
+                                                            <img src="{{item.icon}}">
+                                                        </div>
+                                                        <p class="d-inline-block">{{item.policyContent}}</p>
+                                                    </div>  
+                                                </td>
+                                                <td class="text-right">
+                                                    <i ng-click="onRemove(item.id)" class="btn red big-icon icon las la-times"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>			           
+                        </div>
+                    </div>
+                    <!--Fee-->
+                    <div ng-hide ="tabId != 1" class="card">
+                        <div class="card-header"></div>
+                        <div class="card-content">
+                            <div class="row align-items-center mb-3 pr-lg-5">
+                                <div class="col-lg-3">
+                                    <h3 class="">Thông tin phí</h3>
+                                </div>
+                                <div class="col-lg-3 pr-lg-4">
+                                    <div class="text-right">
+                                        <button class="btn btn-sm bg-blue white px-lg-4 mr-2" ng-click="onSave()"> {{ item.id ? "Lưu" : "Thêm"}} </button>
+                                        <button class="btn btn-sm bg-red white px-lg-4" ng-class="item.id ? '': 'muted'"  ng-click="onCancel()">Huỷ</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 pr-lg-5">
+                                    <div class="row mb-3">
+                                        <div class="col-5 col-lg-4">
+                                            <p>ID</p>
+                                        </div>
+                                        <div class="col-7 col-lg-8 text-right">
+                                            <p class="bold" ng-bind="'#' + (item.id ? item.id :'0')"></p>
+                                        </div>
+                                    </div>
+                                    <div class="control-input validate">
+                                        <label>Tên loại phí</label>
+                                        <input class="input-invalid" ng-model="item.name" type="text" placeholder="Nhập tên loại dây" required />
+                                        <span><span class="error text-sub">Không được để trống</span></span>
+                                    </div>
+                                    <div class="control-input validate">
+                                        <label>Mức phí</label>
+                                        <input class="input-invalid" ng-model="item.cost" type="text" pattern="^[1-9]?(\d)+%?$" placeholder="Nhập tên loại dây" required />
+                                        <span><span class="error text-sub">Không được để trống</span></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">										
+                                    <table class="table table-data mb-4">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Tên loại dây</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in data">
+                                                <td style="width: 100px;" scope="row">{{item.id}}</td>
+                                                <td ng-click="onShowDetail(item)"><p>{{item.name}}</p></td>             
+                                                <td class="text-right">
+                                                    <i ng-click="onRemove(item.id)" class="btn red big-icon icon las la-times"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>	
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  

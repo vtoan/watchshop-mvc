@@ -1,0 +1,64 @@
+<!--List Promotion-->
+<h3 class="page-title mt-4">Danh sách khuyễn mãi</h3>
+<div class="card">
+    <div class="card-header">
+        <div class="row align-items-center">
+            <div class="col-12 col-lg-4">
+                <p class="pr-3">
+                    Đang chạy
+                    <span class="red"> {{ onApply }} </span>/<span> {{ promotions.length  }} </span>
+                    chương trình khuyến mãi
+                </p>
+            </div>
+            <div class="col-12 col-lg-4 mb-3">
+                <a style="width:180px" class="btn btn-sm bg-blue white px-lg-4 mr-3 mb-3 mb-lg-0" href="#!promotion-detail-product/0" >Thêm KM sản phẩm</a>
+                <a style="width:180px" class="btn btn-sm bg-blue white px-lg-4 mr-3" href="#!promotion-detail-bill/0">Thêm KM hoá đơn</a>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="search-input" >
+                    <input class="mb-3" type="search" ng-model="query" ng-change="onSearch(query)" placeholder="Tìm kiếm khuyến mãi ..." />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-content">
+        <loading ng-show="isLoading"></loading>
+        <div ng-hide="isLoading">
+            <p ng-show="ex.isError" class="text-center pt-5" ng-bind="ex.msgError"> </p>
+            <div ng-hide="ex.isError">
+                <table class="table table-data mb-4">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Tên chương trình</th>
+                            <th class="d-none d-lg-table-cell" scope="col">Loại</th>
+                            <th class="d-none d-lg-table-cell" scope="col">Thời gian</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in promotions | limitTo :itemLimit: beginPage" >
+                            <th scope="row"> {{ item.id}} </th>
+                            <td ng-click="onShowDetail(item.id, item.type)">
+                                <p> {{ item.name }} </p>
+                            </td>
+                            <td class="d-none d-lg-table-cell">
+                                <p> {{ typeProm[item.type] }} </p>
+                            </td>
+                            <td>
+                                <p>{{ item.fromDate  && item.toDate ?  (item.fromDate | date: "MM/dd/yyyy") + ' - ' +( item.toDate | date: "MM/dd/yyyy") : 'Luôn luôn' }}</p>
+                            </td>
+                            <td class="d-none d-lg-table-cell text-right">
+                                <label class="switch mb-0">
+                                    <input type="checkbox" ng-change="onChangeStatus(item.id)" ng-model="item.status" />
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>  
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination current="beginPage" pages="numberPage" limit="5"></pagination>
+            </div>     
+        </div>
+    </div>
+</div>

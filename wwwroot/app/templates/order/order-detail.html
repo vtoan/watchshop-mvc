@@ -1,0 +1,150 @@
+<h3 class="page-title mt-4">Thông tin đơn hàng</h3>
+<div class="card" ng-show="isLoading"><loading></loading></div>
+<div class="card" ng-hide="isLoading">
+    <p ng-show="ex.isError" class="text-center pt-5" ng-bind="ex.msgError"></p>
+    <div ng-hide="ex.isError">
+        <div class="card-header pt-2"></div>
+        <div class="card-content">
+                <div class="row">
+                    <div class="col-12 col-lg-6 order-lg-1">
+                        <div class="row align-items-center mb-3 text-right">
+                            <div class="col-12">
+                                <label class="pr-3 d-inline-block">Trạng thái</label>
+                                <div class="dropdown black bg-white ml-lg-auto d-inline-block">
+                                    <div class="select">
+                                        <span ng-class="statusColor[order.status]"> {{ statusOrder[order.status] }} </span>
+                                        <i class="black las la-angle-down"></i>
+                                    </div>
+                                    <input type="hidden" />
+                                    <ul class="dropdown-menu bg-white">
+                                    <li ng-repeat="status in statusOrder track by $index" ng-click="onChangeStatus($index)"
+                                        data-code="{{$index }}">{{ status }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-data mb-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th class="d-none d-lg-table-cell" scope="col"></th>
+                                    <th scope="col">Sản phẩm</th>
+                                    <th scope="col">SL</th>
+                                    <th scope="col">Thành tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in orderDetails">
+                                    <td>{{item.productId}}</td>
+                                    <td class="d-none d-lg-table-cell" ng-init="product = findProduct(item.productId) " >
+                                        <div class="img">
+                                            <img src="{{ getResources() + product.image }}" width="100" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p>{{ product.bandName }} {{ product.name }} {{ product.wireName }} {{ product.categoryName }} </p>
+                                        <span class="text-4 red bold" ng-init="priceCurr = getPriceCurr(item) " >{{ priceCurr | currency :'':0 }} đ</span>
+                                        <del ng-hide="!item.discount" class="normal text-sub">{{ item.price | currency :'':0 }} đ</del>
+                                    </td>
+                                    <td>{{ item.quantity }} </td>
+                                    <td>{{ priceCurr * item.quantity | currency :'':0 }} đ</td>
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-12 col-lg-6 order-lg-0 pr-lg-5">
+                        <div class="d-flex flex-column">
+                            <div class="row order-2 order-lg-0">
+                                <div class="col-5 col-lg-4">
+                                    <p class="bold">Mã đơn hàng</p>
+                                </div>
+                                <div class="col-7 col-lg-8">
+                                    <p># {{ order.id }}</p>
+                                </div>
+                                <div class="col-5 col-lg-4">
+                                    <p class="bold">Ngày đặt</p>
+                                </div>
+                                <div class="col-7 col-lg-8">
+                                    <p>{{ order.dateCreated |date:"MM/dd/yyyy 'lúc' h:mma"  }}</p>
+                                </div>
+                                <div class="col-5 col-lg-4">
+                                    <p class="bold">Tên khách hàng</p>
+                                </div>
+                                <div class="col-7 col-lg-8">
+                                    <p>{{ order.customerName }}</p>
+                                </div>
+                                <div class="col-5 col-lg-4">
+                                    <p class="bold">Email</p>
+                                </div>
+                                <div class="col-7 col-lg-8">
+                                    <p>{{ order.customerEmail }}</p>
+                                </div>
+                                <div class="col-5 col-lg-4">
+                                    <p class="bold">SĐT</p>
+                                </div>
+                                <div class="col-7 col-lg-8">
+                                    <p>{{ order.customerPhone }}</p>
+                                </div>
+                                <div class="col-5 col-lg-4">
+                                    <p class="bold">Tỉnh thành</p>
+                                </div>
+                                <div class="col-7 col-lg-8">
+                                    <p>{{ order.customerProvince }}</p>
+                                </div>
+                                <div class="col-5 col-lg-4">
+                                    <p class="bold">Địa chỉ</p>
+                                </div>
+                                <div class="col-7 col-lg-8">
+                                    <p>{{ order.customerAddress }}</p>
+                                </div>
+                                <div class="col-5 col-lg-4">
+                                    <p class="bold">Ghi chú</p>
+                                </div>
+                                <div class="col-7 col-lg-8">
+                                    <p>{{ order.customerNote }}</p>
+                                </div>
+                            </div>
+                            <hr class="my-4 d-inline-block bg-black order-1" style="width: 45%" />
+                            <div class="row order-0 order-lg-2">
+                                <div class="col-5 col-lg-4">
+                                    <p class="bold">Số sản phẩm</p>
+                                </div>
+                                <div class="col-7 col-lg-8">
+                                    <p> {{ totalItem }} </p>
+                                </div>
+                                <div class="col-5 col-lg-4">
+                                    <p class="bold">Tổng đơn hàng</p>
+                                </div>
+                                <div class="col-7 col-lg-8">
+                                    <p>{{ totalAmount |currency :"":0 }} đ</p>
+                                </div>
+                                <div class="col-5 col-lg-4">
+                                    <p class="bold">Giảm giá bill</p>
+                                </div>
+                                <div class="col-7 col-lg-8">
+                                    <p> - {{ parseToCost(order.promotion) }}</p>
+                                </div>
+                                <div class="col-12" ng-repeat="fe in fees">
+                                    <div class="row">
+                                        <div class="col-5 col-lg-4">
+                                            <p class="bold">{{ fe.name }} </p>
+                                        </div>
+                                        <div class="col-7 col-lg-8">
+                                            <p> {{ parseToCost(fe.cost) }} </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-5 col-lg-4">
+                                    <p class="bold">Thanh toán</p>
+                                </div>
+                                <div class="col-7 col-lg-8">
+                                    <p class="red bold">{{ getAmountPay() | currency:"":0 }} đ</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+        </div>
+    </div> 
+</div>

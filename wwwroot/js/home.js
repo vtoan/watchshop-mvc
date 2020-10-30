@@ -2,10 +2,10 @@ $(function () {
     "use strict";
     /*=======?attach-event======= */
     $("body").on("click", ".add-cart", function () {
-        addCart(this, true);
+        addCartEvent(this);
     });
     $(".to-cart").on("click", function () {
-        addCart(this, true);
+        addCartEvent(this);
     });
     /*=======?exec======= */
     reqListProducts("/Product/GetProductByCate", 0, (data) => renderProducts(data, "#product-container-discount"), 8);

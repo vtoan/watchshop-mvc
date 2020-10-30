@@ -1,0 +1,190 @@
+<!--Product Detail-->
+<h3 class="page-title mt-4">Chi tiết sản phẩm</h3>
+<div class="card" ng-show="isLoading"><loading ></loading></div>
+<div class="card" ng-hide="isLoading" >
+    <p ng-show="ex.isError" class="text-center pt-5" ng-bind="ex.msgError"></p>
+    <div ng-hide="ex.isError">
+        <div class="card-header">
+            <div class="row align-items-center py-3">
+                <div class="col-6">
+                    <p ng-hide ="!prod.id" class="mb-0 pr-3">Đã bán <span class="red">{{ prod.saleCount }}</span> sản phẩm</p>
+                </div>
+                <div class="col-6">
+                    <div class="text-right">
+                        <a class="btn btn-sm bg-blue white px-lg-4 mr-2" ng-click ="onSave()">{{ prod.id==0 ? 'Thêm' : 'Lưu' }}</a>
+                        <a class="btn btn-sm bg-red white px-lg-4" ng-click="onCannel()">{{ prod.id==0 ? 'Huỷ':'Xoá'  }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-content">
+            <form id="form" name="form">
+                <h3 class="mb-4">Thông tin sản phẩm</h3>
+                <div class="row">
+                    <div class="col-12 col-lg-6 order-lg-1">
+                        <div id="gallery">
+                            <div class="img-content mb-4">
+                                <div class="img">
+                                    <img src="{{prod.image}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="gallery-nav-admin" class="row m-lg-3">
+                            <div class="col-3 mb-4">
+                                <div class="img-content" ng-click="onAddImage()">
+                                    <div class="img">
+                                        <a class="btn border bg-img"
+                                            style="background-image: url(images/new-img.png);"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 mb-4" ng-repeat="imgObj in srcImages | filter:{status: '!-1'}">
+                                <div class="gallery-item">
+                                    <i class="red bg-white big-icon icon las la-times"
+                                        ng-click="onRemoveImage($event,imgObj.name)"></i>
+                                    <div class="img" ng-click="onChangeImage(imgObj.src)">
+                                        <img src="{{imgObj.src}}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 order-lg-0 pr-lg-5">
+                <div class="row align-items-center mb-4">
+                    <div class="col-6">
+                        <div class="middle-inline">
+                            <span class="pr-5 label mb-0">ID</span>
+                            <span class="bold">#{{ prod.id }}</span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="middle-inline text-right">
+                            <span class="pr-2 d-none d-lg-inline-block">Cho phép bán</span>
+                            <label class="switch mb-0">
+                                <input type="checkbox" ng-model="prod.isShow" />
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-input validate">
+                    <label>Tên sản phẩm</label>
+                    <input class="input-invalid" type="text" ng-model="prod.name" placeholder="Nhập tên sản phẩm" required/>
+                    <span><span class="error text-sub">Không được để trống</span></span>
+                </div>
+                <div class="control-input validate">
+                    <label>Giá bán</label>
+                    <input class="input-invalid" type="number" ng-model="prod.price" placeholder="Nhập giá bán" required />
+                    <span><span class="error text-sub">Không được để trống</span></span>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="control-input validate">
+                            <label>Phân loại</label>
+                            <div class="dropdown black bg-white ml-lg-auto mb-3">
+                                <div  class="select {{ !prod.categoryId ? 'input-invalid' : '' }} select-ouline" class="" >
+                                    <span
+                                        class="{{ prod.categoryId ? '' : 'placeholder'}}">{{ prod.categoryId ? prod.categoryName: "Chọn phân loại"}}</span>
+                                    <i class="black las la-angle-down"></i>
+                                </div>
+                                <input type="hidden" ng-hide required />
+                                <ul class="dropdown-menu bg-white">
+                                    <li ng-repeat="item in categorys" 
+                                        ng-click="prod.categoryId = item.id;prod.categoryName = item.name;"
+                                        data-code="{{item.id}}">
+                                        {{ item.name }}</li>
+                                </ul>
+                            </div>
+                            <span><span ng-hide="prod.categoryID !=0" class="error text-sub">Không được để
+                                    trống</span></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="control-input validate">
+                            <label>Loại dây</label>
+                            <div class="dropdown black bg-white ml-lg-auto mb-3">
+                                <div class="select {{ !prod.typeWireId ? 'input-invalid' : '' }} select-ouline">
+                                    <span
+                                        class="{{ prod.typeWireId ? '' : 'placeholder'}}">{{ prod.typeWireId ? prod.wireName: "Chọn loại dây"}}</span>
+                                    <i class="black las la-angle-down"></i>
+                                </div>
+                                <input type="hidden" required />
+                                <ul class="dropdown-menu bg-white">
+                                    <li ng-repeat="item in wires" 
+                                        ng-click="prod.typeWireId = item.id; prod.wireName = item.name;" 
+                                        data-code="{{item.id}}">
+                                        {{ item.name }}</li>
+                                </ul>
+                            </div>
+                            <span><span ng-hide="prod.typeWireID !=0" class="error text-sub">Không được để
+                                    trống</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-input validate">
+                    <label>Thương hiệu</label>
+                    <div class="dropdown black bg-white ml-lg-auto mb-3">
+                        <div class="select {{ !prod.bandId ? 'input-invalid' : '' }} select-ouline">
+                            <span
+                                class="{{ prod.bandId ? '' : 'placeholder'}}">{{ prod.bandId ? prod.bandName: "Chọn thương hiệu"}}</span>
+                            <i class="black las la-angle-down"></i>
+                        </div>
+                        <input type="hidden" required />
+                        <ul class="dropdown-menu bg-white">
+                            <li ng-repeat="item in bands" 
+                                ng-click="prod.bandId = item.id;prod.bandName = item.name;" 
+                                data-code="{{item.id}}">
+                                {{ item.name }}</li>
+                        </ul>
+                    </div>
+                    <span><span ng-hide="prod.bandID !=0" class="error text-sub">Không được để trống</span></span>
+                </div>
+                <!--Parameter-->
+                <p class="bold text-4">Thông số kỹ thuật</p>
+                <div class="control-input">
+                    <label>Loại kính</label>
+                    <input type="text" ng-model="prod.typeGlass" placeholder="Không" />
+                </div>
+                <div class="control-input">
+                    <label>Loại viềng</label>
+                    <input type="text" ng-model="prod.typeBorder" placeholder="Không" />
+                </div>
+                <div class="control-input">
+                    <label>Loại máy</label>
+                    <input type="text" ng-model="prod.typeMachine" placeholder="Không" />
+                </div>
+                <div class="control-input">
+                    <label>Kích thước</label>
+                    <input type="text" ng-model="prod.parameter" placeholder="Không" />
+                </div>
+                <div class="control-input">
+                    <label>Màu sắc</label>
+                    <input type="text" ng-model="prod.color" placeholder="Không" />
+                </div>
+                <div class="control-input">
+                    <label>Sản xuất</label>
+                    <input type="text" ng-model="prod.origin" placeholder="Không" />
+                </div>
+                <div class="control-input">
+                    <label>Chức năng</label>
+                    <input type="text" ng-model="prod.func" placeholder="Không" />
+                </div>
+                <div class="control-input">
+                    <label>Bảo hành</label>
+                    <input type="text" ng-model="prod.warranty" placeholder="Không" />
+                </div>
+                <!--Seo-->
+                <p class="bold text-4">SEO</p>
+                <div class="control-input">
+                    <label>Tiêu đề</label>
+                    <input type="text" ng-model="prod.seoTitle" placeholder="Không" />
+                </div>
+                <div class="control-input">
+                    <label>Mô tả</label>
+                    <textarea type="text" ng-model="prod.seoDescription" placeholder="Không" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

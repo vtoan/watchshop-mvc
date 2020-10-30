@@ -1,0 +1,32 @@
+<div class="admin-nav-container d-none d-lg-block">
+    <nav class="d-flex flex-column pt-3" ng-init="navId = 0">
+        <a class="nav-item my-2 middle-inline {{navId == 0 ? 'active' :''}}" ng-click="navId=0" href="#!/">
+            <i class="icon las la-chart-pie pr-2"></i>
+            <span>tổng quan</span>
+        </a>
+        <a class="nav-item my-2 middle-inline {{navId == 1 ? 'active' :''}}" ng-click="navId=1" href="#!/order">
+            <i class="icon las la-file-alt pr-2"></i>
+            <span>đơn hàng</span>
+        </a>
+        <a class="nav-item my-2 middle-inline {{navId == 2 ? 'active' :''}}" ng-click="navId=2" href="#!/product">
+            <i class="icon las la-box pr-2"></i>
+            <span>sản phẩm</span>
+        </a>
+        <a class="nav-item my-2 middle-inline {{navId == 3 ? 'active' :''}}" ng-click="navId=3" href="#!/category">
+            <i class="icon las la-stream pr-2"></i>
+            <span>phân loại</span>
+        </a>
+        <a class="nav-item my-2 middle-inline {{navId == 4 ? 'active' :''}}" ng-click="navId=4" href="#!/promotion">
+            <i class="icon las la-percent pr-2"></i>
+            <span>khuyến mãi</span></a>
+        <a class="nav-item my-2 middle-inline {{navId == 5 ? 'active' :''}}" ng-click="navId=5" href="#!/policy">
+            <i class="icon las la-balance-scale pr-2"></i>
+            <span>chính sách & phí</span></a>
+        <a class="nav-item my-2 middle-inline {{navId == 6 ? 'active' :''}}" ng-click="navId=6" href="#!/info">
+            <i class="icon las la-store pr-2"></i>
+            <span>thông tin cửa hàng</span></a>
+        <p class="text-center text-sub mb-0 p-4 bg-white pos-fixed-bottom">
+            &copy; Watch Shop, design by vtoan 2020
+        </p>
+    </nav>
+</div>

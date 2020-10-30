@@ -1,0 +1,24 @@
+﻿@{
+    var layoutData = LayoutData.Instance;
+}
+@section scripts{
+    <script>
+        orderObj.clear();
+        updateViewCount();
+    </script>
+}
+<div class="container-fluid">
+    <div class="banner-sm section">
+        <p class="white mb-0">@layoutData.NamePage</p>
+    </div>
+</div>
+<div class="container section">
+    <div class="img text-center mb-5">
+        <img src="~/images/thank.png" width="150">
+    </div>
+    <p class="text-center">Đặt hàng <span class="bold">THÀNH CÔNG, Mã đơn hàng #@ViewBag.OrderId</span> , cảm ơn bạn đã lựa chọn sản phẩm cửa hàng chúng tôi.</p>
+    <p class="text-center">Nhân viên sẽ gọi điện xác nhận đơn hàng của bạn trong thời gian sớm nhất.</p>
+    <a class="text-center link blue d-block mb-3" href="/" title="To Product"> TIẾP TỤC MUA SẮM </a>
+    <a class="text-center link blue d-block" href="/don-hang/trang-thai?idOrder=@ViewBag.OrderId" title="To Order Detail"> XEM THÔNG TIN ĐƠN HÀNG </a>
+</div>
+

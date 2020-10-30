@@ -1,130 +1,153 @@
-﻿using aspcore_watchshop.EF;
-using aspcore_watchshop.Hepler;
-using aspcore_watchshop.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using Microsoft.Extensions.Caching.Memory;
-using System.Text.Json;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
+using System.Collections.Generic;
+using System.Text.Json;
+using aspcore_watchshop.EF;
+using aspcore_watchshop.Hepler;
+using aspcore_watchshop.Interfaces;
+using aspcore_watchshop.Models;
+using aspcore_watchshop.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Extensions.Caching.Memory;
 
-namespace aspcore_watchshop.Controllers
-{
-    public class CartController : Controller
-    {
+namespace aspcore_watchshop.Controllers {
+    public class CartController : Controller {
         private watchContext _context = null;
-        private IProductModel _productModel = null;
         private IMemoryCache _cache = null;
         private IPromModel _promModel = null;
 
-        public CartController(watchContext ctext, IMemoryCache cache, IProductModel productModel, IPromModel promModel)
-        {
+        public CartController (
+            watchContext ctext,
+            IMemoryCache cache,
+            IPromModel promModel,
+            IPromBillModel promBillModel) {
             _context = ctext;
-            _productModel = productModel;
             _cache = cache;
             _promModel = promModel;
         }
 
-        public IActionResult Index()
-        {
-            LayoutData.NamePage = "Giỏ hàng";
-            LayoutData.Title = "Giỏ hàng";
-            ViewBag.PageCode = -1;
-            ViewBag.Fees = GetFees();
-            return View();
+        [HttpGet]
+        public IActionResult Index () {
+            LayoutData.Instance.SetPageTitle ("Giỏ hàng");
+            ViewBag.Fees = GetFees ();
+            return View ();
         }
 
-        public IActionResult Confirm(OrderVM orderVM, string items)
-        {
-            if (!ModelState.IsValid)
-            {
-                foreach (var field in ModelState)
-                {
-                    orderVM.GetType().GetProperty("CustomerProvince").SetValue(orderVM, "");
+        [HttpPost]
+        [ActionName ("xac-nhan-don-hang")]
+        public IActionResult Confirm (OrderVM orderVM, string items) {
+            if (!ModelState.IsValid) {
+                foreach (var field in ModelState) {
+                    orderVM.GetType ().GetProperty ("CustomerProvince").SetValue (orderVM, "");
                     // Remove values invalid
                     if (field.Value.ValidationState == ModelValidationState.Invalid)
-                        orderVM.GetType().GetProperty(field.Key).SetValue(orderVM, "");
+                        orderVM.GetType ().GetProperty (field.Key).SetValue (orderVM, "");
                 }
-                return View("Index", orderVM);
+                return View ("Index", orderVM);
             }
-            if (!CheckOrderSubmit(items)) return View(orderVM);
+            if (!CheckOrderSubmit (items)) return View ("Index", orderVM);
             //
-            LayoutData.NamePage = "Xác nhận đơn hàng";
-            LayoutData.Title = "Xác nhận đơn hàng";
-            ViewBag.Fees = GetFees();
-            return View(orderVM);
+            LayoutData.Instance.SetPageTitle ("Xác nhận đơn hàng");
+            ViewBag.Fees = GetFees ();
+            return View ("Confirm", orderVM);
         }
 
-        public IActionResult Submit([FromServices] IOrderModel orderModel, OrderVM orderVM, string items)
-        {
-            if (!CheckOrderSubmit(items) || orderVM == null) return View(orderVM);
-            var lsItems = JsonToList(items);
-            return orderModel.AddOrderVM(_context, orderVM, lsItems, GetFees(), FindBillPromotion(ref lsItems)) ? RedirectToAction("Status") : null;
+        [HttpPost]
+        [ActionName ("dat-hang")]
+        public IActionResult Submit (
+            [FromServices] IOrderModel orderModel, [FromServices] IOrderDetailModel orderDetailModel, [FromServices] IProductModel productModel,
+            OrderVM orderVM,
+            string items) {
+            if (!ModelState.IsValid || !CheckOrderSubmit (items)) return View ("Confirm", orderVM);
+            var helper = DataHelper.Instance;
+            // Add Order
+            var lsItems = helper.ParserJsonTo<List<OrderDetailVM>> (items);
+            // Calculator total items in cart
+            productModel.GetProductInCarts (DataHelper.Instance.Products (_context, _cache, productModel, _promModel), ref lsItems);
+            orderVM.DateCreated = DateTime.Now;
+            orderVM.Fees = helper.ParserObjToJson (GetFees ());
+            orderVM.Promotion = FindBillPromotion (lsItems).ToString ();
+            var result = orderModel.AddModel (_context, orderVM, lsItems);
+            if (result != 0) {
+                LayoutData.Instance.SetPageTitle ("Đặt hàng thành công");
+                ViewBag.OrderId = result;
+                return View ("CheckoutSuccess");
+            }
+            return StatusCode (500);
         }
 
-        public IActionResult Status()
-        {
-            LayoutData.NamePage = "Đặt hàng thành công";
-            LayoutData.Title = "Thành công";
-            return View();
+        [HttpGet]
+        [ActionName ("kiem-tra")]
+        public IActionResult StatusOrder () {
+            return View ("StatusOrder");
+        }
+
+        [HttpGet, HttpPost]
+        [ActionName ("trang-thai")]
+        public IActionResult StatusOrder ([FromServices] IOrderModel orderModel, string idOrder) {
+            LayoutData.Instance.SetPageTitle ("Thông tin đơn hàng");
+            int id;
+            OrderVM orderResult = null;
+            if (Int32.TryParse (idOrder, out id)) orderResult = orderModel.GetVM (_context, id);
+            if (id == 0 || orderResult == null) {
+                ViewBag.Message = "Không tìm thấy đơn hàng ' " + idOrder + " '";
+                return View ("StatusOrder");
+            }
+            ViewBag.Status = true;
+            return View ("Confirm", orderResult);
         }
 
         //================ AJAX ================
-        public JsonResult GetBillPromotion(string items)
-        {
-            var lsItems = JsonToList(items);
-            return Json(FindBillPromotion(ref lsItems));
+        [HttpGet]
+        public JsonResult GetBillPromotion () {
+            var result = _promModel.GetListVMBills (_context);
+            return Json (result);
+        }
+
+        [HttpGet]
+        public JsonResult GetOrderItems ([FromServices] IOrderDetailModel orderDetailModel, int id) {
+            if (id <= 0) return Json (null);
+            var result = orderDetailModel.GetListVMs (_context, id);
+            var s = DataHelper.Instance.ParserObjToJson (result);
+            return Json (s);
         }
 
         //================ Helper ================
-        private string FindBillPromotion(ref List<OrderDetailVM> lsItems)
-        {
-            string response = "";
-            var promBills = _promModel.GetPromBillVMs(_context);
-            if (promBills == null || promBills.Count == 0) return response;
-            // Determine Totol, Quantity item
+        private double FindBillPromotion (List<OrderDetailVM> lsItems) {
             int total = 0;
             int quantity = 0;
-            foreach (var i in lsItems)
-            {
-                quantity += (int)i.quantity;
-                total += i.price * i.quantity;
+            var proms = _promModel.GetListVMBills (_context);
+            if (proms == null || proms.Count == 0) return 0;
+            // Determine Totol, Quantity item 
+            foreach (var i in lsItems) {
+                quantity += (int) i.Quantity;
+                total += i.Price * i.Quantity;
             };
             // Check Promtion
-            foreach (var prom in promBills)
-            {
-                if (quantity >= prom.ConditionItem || total >= prom.ConditionAmount)
-                {
-                    response = prom.Discount != 0 ? prom.Discount.ToString() : prom.ItemFree;
-                    break;
+            foreach (var prom in proms) {
+                if (prom is PromBillVM) {
+                    var promBill = (PromBillVM) prom;
+                    if ((promBill.ConditionAmount != null && total >= promBill.ConditionAmount) ||
+                        (promBill.ConditionItem != null && quantity >= promBill.ConditionItem)) {
+                        return prom.Discount;
+                    }
                 }
             }
-            return response;
+            return 0;
         }
 
-        private List<OrderDetailVM> JsonToList(string items)
-        {
-            var listItems = JsonSerializer.Deserialize<List<OrderDetailVM>>(items);
-            // Calculator total items in cart
-            _productModel.GetProductInCarts(DataHelper.Products(_context, _cache, _productModel, _promModel), ref listItems);
-            return listItems;
-        }
-
-        private bool CheckOrderSubmit(string items)
-        {
-            if (items == "" || items == "[]") return false;
+        private bool CheckOrderSubmit (string items) {
+            if (items == null || items == "" || items == "[]") return false;
             return true;
         }
 
-        private List<FeeVM> GetFees()
-        {
-            List<FeeVM> feeVMs = Cache.Get<List<FeeVM>>(_cache, CacheKey.FEES);
-            if (feeVMs == null || feeVMs.Count == 0)
-            {
-                FeeModel feeModel = new FeeModel();
-                feeVMs = feeModel.GetFeeVMs(_context);
+        private List<FeeVM> GetFees () {
+            List<FeeVM> feeVMs = CacheHelper.Get<List<FeeVM>> (_cache, Changed.FEE);
+            if (feeVMs == null || feeVMs.Count == 0) {
+                FeeModel feeModel = new FeeModel ();
+                feeVMs = feeModel.GetListVMs (_context);
                 if (feeVMs != null)
-                    Cache.Set(_cache, feeVMs, CacheKey.FEES);
+                    CacheHelper.Set (_cache, feeVMs, Changed.FEE);
             }
             return feeVMs;
         }

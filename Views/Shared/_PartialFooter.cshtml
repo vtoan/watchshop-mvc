@@ -1,3 +1,6 @@
+@{
+    var layoutData = LayoutData.Instance;
+}
 <footer>
     <!--Policy-->
     <div class="container policy mb-2">
@@ -5,7 +8,24 @@
             <div class="col-12 col-lg-6 pb-4">
                 <div class="policy-item border-black">
                     <span class="policy-icon">
-                        <svg height="30" width="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M309 390H27c-15 0-27-12-27-27V95c0-15 12-27 27-27h256c15 0 26 12 26 27v295z" fill="#ffd15c"/><path d="M505 218l-69-69c-4-4-10-7-17-7H309v248h175c15 0 28-12 28-27V235c0-8-2-13-7-17z" fill="#f3705a"/><path d="M0 343v20c0 15 12 26 27 26h457c15 0 28-12 28-27v-20H0v1z" fill="#344a5e"/><g fill="#415a6b"><path d="M476 272v-33l-61-62h-69v95z"/><circle cx="130.1" cy="377.6" r="66.1"/></g><circle cx="130.1" cy="377.6" r="32" fill="#e8eae9"/><circle cx="398.9" cy="377.6" r="66.1" fill="#415a6b"/><circle cx="398.9" cy="377.6" r="32" fill="#e8eae9"/><g fill="#f7b64c"><path d="M67 113c-13 0-23 11-23 24v137c0 13 10 24 23 24s24-11 24-24V137c-1-13-11-24-24-24zM154 113c-13 0-24 11-24 24v137c0 13 11 24 24 24 12 0 23-11 23-24V137c-1-13-11-24-23-24zM240 113c-13 0-23 11-23 24v137c0 13 10 24 23 24s23-11 23-24V137c-1-13-10-24-23-24z"/></g></svg>
+                        <svg height="30" width="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M309 390H27c-15 0-27-12-27-27V95c0-15 12-27 27-27h256c15 0 26 12 26 27v295z"
+                            fill="#ffd15c" />
+                            <path d="M505 218l-69-69c-4-4-10-7-17-7H309v248h175c15 0 28-12 28-27V235c0-8-2-13-7-17z"
+                            fill="#f3705a" />
+                            <path d="M0 343v20c0 15 12 26 27 26h457c15 0 28-12 28-27v-20H0v1z" fill="#344a5e" />
+                            <g fill="#415a6b">
+                                <path d="M476 272v-33l-61-62h-69v95z" />
+                                <circle cx="130.1" cy="377.6" r="66.1" />
+                            </g>
+                            <circle cx="130.1" cy="377.6" r="32" fill="#e8eae9" />
+                            <circle cx="398.9" cy="377.6" r="66.1" fill="#415a6b" />
+                            <circle cx="398.9" cy="377.6" r="32" fill="#e8eae9" />
+                            <g fill="#f7b64c">
+                                <path
+                                d="M67 113c-13 0-23 11-23 24v137c0 13 10 24 23 24s24-11 24-24V137c-1-13-11-24-24-24zM154 113c-13 0-24 11-24 24v137c0 13 11 24 24 24 12 0 23-11 23-24V137c-1-13-11-24-23-24zM240 113c-13 0-23 11-23 24v137c0 13 10 24 23 24s23-11 23-24V137c-1-13-10-24-23-24z" />
+                            </g>
+                        </svg>
                     </span>
                     <div class="bold">
                         <h5> Vận chuyển miễn phí toàn quốc </h5>
@@ -16,13 +36,36 @@
             <div class="col-12 col-lg-6 pb-4">
                 <div class="policy-item border-black">
                     <span class="policy-icon">
-                        <svg height="30" width="30" viewBox="0 0 512 512"  xmlns="http://www.w3.org/2000/svg"><path d="M256 0c-66 0-120 55-120 121l30 30h180l30-30C376 55 322 0 256 0z" fill="#5b5555"/><path d="M376 121C376 55 322 0 256 0v151h90z" fill="#463f3f"/><path d="M196 211h-90v-90h60l30 26z" fill="#f73"/><path d="M406 211h-90v-69l30-21h60z" fill="#e64d2e"/><path d="M484 512h-93l-30-30H151l-30 30H28l26-158c6-30 29-55 60-61l49-10 93 87 93-87 49 10c31 6 54 31 60 61z" fill="#f73"/><path d="M484 512h-93l-30-30H256V370l93-87 49 10c31 6 54 31 60 61z" fill="#e64d2e"/><path d="M316 277l-60 45-60-45-33 6 93 117 93-117z" fill="#5b5555"/><path d="M316 277l-60 45v78l93-117z" fill="#463f3f"/><path d="M313 276c-7-1-12-7-12-15v-13h-90v13c0 8-5 14-12 15l-3 1 60 75 60-75z" fill="#ffbfab"/><path d="M313 276c-7-1-12-7-12-15v-13h-45v104l60-75z" fill="#f89580"/><path d="M346 121h-45a76 76 0 01-60-30 75 75 0 01-60 30h-15v60a90 90 0 00175 30l-25-15 30-15z" fill="#ffe1ba"/><path d="M341 211l-25-15 30-15v-60h-45c-17 0-32-6-45-15v165c39 0 72-25 85-60z" fill="#ffbfab"/><path d="M256 181v30h85c3-9 5-19 5-30z" fill="#463f3f"/><path d="M256 361H121v151h270V361z" fill="#f0f7ff"/><path d="M256 361h135v151H256z" fill="#dfe7f4"/><path d="M256 421h-15v30h30v-30z" fill="#766e6e"/><path d="M256 421h15v30h-15z" fill="#5b5555"/></svg>
+                        <svg height="30" width="30" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M256 0c-66 0-120 55-120 121l30 30h180l30-30C376 55 322 0 256 0z" fill="#5b5555" />
+                            <path d="M376 121C376 55 322 0 256 0v151h90z" fill="#463f3f" />
+                            <path d="M196 211h-90v-90h60l30 26z" fill="#f73" />
+                            <path d="M406 211h-90v-69l30-21h60z" fill="#e64d2e" />
+                            <path
+                            d="M484 512h-93l-30-30H151l-30 30H28l26-158c6-30 29-55 60-61l49-10 93 87 93-87 49 10c31 6 54 31 60 61z"
+                            fill="#f73" />
+                            <path d="M484 512h-93l-30-30H256V370l93-87 49 10c31 6 54 31 60 61z" fill="#e64d2e" />
+                            <path d="M316 277l-60 45-60-45-33 6 93 117 93-117z" fill="#5b5555" />
+                            <path d="M316 277l-60 45v78l93-117z" fill="#463f3f" />
+                            <path d="M313 276c-7-1-12-7-12-15v-13h-90v13c0 8-5 14-12 15l-3 1 60 75 60-75z"
+                            fill="#ffbfab" />
+                            <path d="M313 276c-7-1-12-7-12-15v-13h-45v104l60-75z" fill="#f89580" />
+                            <path
+                            d="M346 121h-45a76 76 0 01-60-30 75 75 0 01-60 30h-15v60a90 90 0 00175 30l-25-15 30-15z"
+                            fill="#ffe1ba" />
+                            <path d="M341 211l-25-15 30-15v-60h-45c-17 0-32-6-45-15v165c39 0 72-25 85-60z"
+                            fill="#ffbfab" />
+                            <path d="M256 181v30h85c3-9 5-19 5-30z" fill="#463f3f" />
+                            <path d="M256 361H121v151h270V361z" fill="#f0f7ff" />
+                            <path d="M256 361h135v151H256z" fill="#dfe7f4" />
+                            <path d="M256 421h-15v30h30v-30z" fill="#766e6e" />
+                            <path d="M256 421h15v30h-15z" fill="#5b5555" /></svg>
                     </span>
                     <div class="policy-text bold">
-                        <h5> Hỗ Trợ (@LayoutData.WorkTime) </h5>
-                        <p class="text-sub mb-0">@LayoutData.Phone</p>
+                        <h5> Hỗ Trợ (@layoutData.WorkTime) </h5>
+                        <p class="text-sub mb-0">@layoutData.Phone</p>
                     </div>
-                </div>  
+                </div>
             </div>
         </div>
     </div>
@@ -31,44 +74,52 @@
         <div class="row">
             <div class="col-12 col-lg-4 mb-3">
                 <h4 class="mb-3">Thông tin cửa hàng</h4>
-                <p class="pr-5">@LayoutData.StoreDescription</p>
+                <p class="pr-5">@layoutData.StoreDescription</p>
             </div>
             <div class="col-12 col-lg-2 mb-3">
                 <h4 class="mb-3">Liên kế Website</h4>
+                <a class="d-block mb-3" href="/don-hang/kiem-tra" title="Kiểm trạng thái đơn hàng">Kiểm trạng
+                    thái đơn
+                    hàng</a>
                 <a class="d-block mb-3" href="/khuyen-mai" title="Khuyễn mãi">Khuyễn mãi</a>
                 <a class="d-block mb-3" href="/dong-ho-nam" title="Đồng hồ nam">Đồng hồ nam</a>
                 <a class="d-block mb-3" href="/dong-ho-nu" title="Đồng hồ nữ">Đồng hồ nữ</a>
-                <a class="d-block mb-3" href="/dong-ho-doi" title="Đồng hồ đôi" >Đồng hồ đôi</a>
+                <a class="d-block mb-3" href="/dong-ho-doi" title="Đồng hồ đôi">Đồng hồ đôi</a>
                 <a class="d-block mb-3" href="/phu-kien" title="Phụ kiện">Phụ kiện</a>
             </div>
             <div class="col-12 col-lg-3 mb-3">
                 <h4 class="mb-3">Thông tin liên hệ</h4>
                 <p class="middle-inline">
                     <i class="big-icon las la-envelope pr-1"></i>
-                    <span id="email">@LayoutData.Email</span>                
+                    <span id="email">@layoutData.Email</span>
                 </p>
                 <p class="middle-inline">
                     <i class="big-icon las la-phone-volume pr-1"></i>
-                    <span id="phone">@LayoutData.Phone</span>                
+                    <span id="phone">@layoutData.Phone</span>
                 </p>
                 <p class="middle-inline">
                     <i class="big-icon lab la-facebook-square pr-1"></i>
-                    <a id="fb" href="#" title="Facebook">@LayoutData.Facebook</a>                
+                    <a id="fb" href="#" title="Facebook">@layoutData.Facebook</a>
                 </p>
                 <p class="middle-inline">
                     <i class="big-icon lab la-instagram pr-1"></i>
-                    <a id="location" href="#" title="Instargram">@LayoutData.Instargram</a>                
+                    <a id="location" href="#" title="Instargram">@layoutData.Instargram</a>
                 </p>
                 <p class="middle-inline">
                     <i class="big-icon las la-map-marked"></i>
-                    <span id="location">@LayoutData.Address</span>                
+                    <span id="location">@layoutData.Address</span>
                 </p>
             </div>
             <div class="col-12 col-lg-3 mb-3">
                 <h4 class="mb-3">Fanpage</h4>
-                <div class="fb-page" data-href="@LayoutData.Facebook" data-tabs="timeline" data-width="" data-height="280" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="@LayoutData.Facebook" class="fb-xfbml-parse-ignore"><a href="@LayoutData.Facebook">Homer House</a></blockquote></div>
+                <div class="fb-page" data-href="@layoutData.Facebook" data-tabs="timeline" data-width=""
+                data-height="280" data-small-header="false" data-adapt-container-width="true"
+                data-hide-cover="false" data-show-facepile="true">
+                    <blockquote cite="@layoutData.Facebook" class="fb-xfbml-parse-ignore"><a
+                        href="@layoutData.Facebook">Homer House</a></blockquote>
+                </div>
             </div>
         </div>
-        <p class="text-center text-sub mb-0">&copy; Copyright, Watch Shop by vtoandev, @DateTime.Now.Year</p>    
+        <p class="text-center text-sub mb-0">&copy; Copyright, Watch Shop by vtoan, @DateTime.Now.Year</p>
     </div>
 </footer>

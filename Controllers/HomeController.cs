@@ -1,22 +1,18 @@
-﻿using System.Net;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 
-namespace aspcore_watchshop.Controllers
-{
-    public class HomeController : Controller
-    {
-        public IActionResult Index()
-        {
-            return View();
+namespace aspcore_watchshop.Controllers {
+    public class HomeController : Controller {
+        [ResponseCache (Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Index () {
+            return View ();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error(int statusCode)
-        {
+        [ResponseCache (Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error (int statusCode) {
             ViewBag.StatusCode = statusCode;
-            ViewBag.Error = ReasonPhrases.GetReasonPhrase(statusCode);
-            return View();
+            ViewBag.Error = ReasonPhrases.GetReasonPhrase (statusCode);
+            return View ();
         }
     }
 }

@@ -1,4 +1,4 @@
-<header class="container-fluid" >
+<header class="container-fluid">
     <div class="row align-items-center">
         <!--Nav Mobile-->
         <div class="col-3 d-lg-none">
@@ -6,16 +6,16 @@
         </div>
         <!--Title-->
         <div class="col-6 col-lg-2 text-center text-lg-left">
-            <h1 class="py-3 text-3"><a  href="/" title="Trang chủ">@LayoutData.NameStore</a></h1>
+            <h1 class="py-3 text-3"><a href="/" title="Trang chủ">@LayoutData.Instance.NameStore</a></h1>
         </div>
         <!--Nav Desktop-->
         <div class="col-6 d-none col-lg-8 d-lg-block">
             <nav class="nav-container">
-                <a class="nav-item anim-center" href="/khuyen-mai" title="Khuyến mãi" >khuyến mãi</a>
-                <a class="nav-item anim-center" href="/dong-ho-nam" title="Đồng hồ nam" >nam</a>
-                <a class="nav-item anim-center" href="/dong-ho-nu" title="Đồng hồ nữ" >nữ</a>
-                <a class="nav-item anim-center" href="/dong-ho-doi" title="Đồng hồ đôi" >cặp đôi</a>
-                <a class="nav-item anim-center" href="/phu-kien" title="Phụ kiện" >phụ kiện</a>
+                <a class="nav-item anim-center" href="/khuyen-mai" title="Khuyến mãi">khuyến mãi</a>
+                <a class="nav-item anim-center" href="/dong-ho-nam" title="Đồng hồ nam">nam</a>
+                <a class="nav-item anim-center" href="/dong-ho-nu" title="Đồng hồ nữ">nữ</a>
+                <a class="nav-item anim-center" href="/dong-ho-doi" title="Đồng hồ đôi">cặp đôi</a>
+                <a class="nav-item anim-center" href="/phu-kien" title="Phụ kiện">phụ kiện</a>
             </nav>
         </div>
         <!--Nav Icon-->
@@ -35,23 +35,25 @@
     </div>
     <!--Side Menu mobile-->
     <div class="nav-mobile d-lg-none">
-        <nav  class="nav-container flex-column bg-white">
+        <nav class="nav-container flex-column bg-white">
             <a class="nav-item-sm" href="/" title="Trang chủ">trang chủ</a>
-            <a id="search-sm"  class="nav-item-sm" href="#!" title="Tìm kiếm">tìm kiếm</a>
+            <a id="search-sm" class="nav-item-sm" href="#!" title="Tìm kiếm">tìm kiếm</a>
             <a class="nav-item-sm" href="/khuyen-mai" title="Khuyến mãi">khuyến mãi</a>
             <a class="nav-item-sm" href="/dong-ho-nam" title="Đồng hồ nam">nam</a>
             <a class="nav-item-sm" href="/dong-ho-nu" title="Đồng hồ nữ">nữ</a>
             <a class="nav-item-sm" href="/dong-ho-doi" title="Đồng hồ đôi">cặp đôi</a>
             <a class="nav-item-sm" href="/phu-kien" title="Phụ kiện">phụ kiện</a>
+            <a class="nav-item-sm" href="/don-hang/kiem-tra" title="Kiểm trạng thái đơn hàng">Kiểm trạng thái đơn
+                hàng</a>
             <i class="btn-classic red big-icon icon las la-times"></i>
         </nav>
         <span class="overlay bg-black"></span>
     </div>
     <!--Search Bar-->
-    <form action="/tim-kiem" method="post">
+    <form action="/tim-kiem" method="get">
         <div class="searchbar d-block bg-white">
             <div class="search-input">
-                <input type="text" name="text" placeholder="Tìm kiếm sản phẩm ...">   
+                <input type="text" name="text" placeholder="Tìm kiếm sản phẩm ...">
                 <i class="btn-classic red big-icon las la-times"></i>
             </div>
         </div>

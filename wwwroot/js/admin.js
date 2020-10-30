@@ -1,17 +1,17 @@
-function onClickItem(callBack) {
-    $(".table-data tbody [item-nav]").on("click", function () {
-        if (callBack) callBack($(this).parent().attr("item-id"));
+$(function () {
+    //Navigatte
+    visibleElement($("#menu"), $(".nav-mobile .btn-classic"), $(".nav-mobile"));
+    $(".nav-mobile .nav-item").on("click", function () {
+        $(".nav-mobile .btn-classic").trigger("click");
     });
-}
-
-function onChangePropItem(callBack) {
-    $(".table-data tbody [item-act]").on("change", function () {
-        if (callBack) callBack($(this).parents("tr").attr("item-id"), $(this).prop("checked"));
+    //Search
+    visibleElement($("#search"), $(".searchbar .btn-classic"), $(".searchbar"));
+    $("#search-sm").on("click", () => {
+        $(".nav-mobile .btn-classic").click();
+        $("#search").click();
     });
-}
-
-/*=======?exec======= */
-onClickItem((id) => console.log("Nav item," + id));
-onChangePropItem((id, val) => console.log("Change item," + id + " - " + val));
-UIDropDown();
-onSelectedItemDropdown((id) => console.log(id));
+    $(".search-input input").on("keydown", function (e) {
+        if (e.keyCode == 13) $(this).parents("form").trigger("submit");
+        e.preventDefault();
+    });
+});

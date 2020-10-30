@@ -1,5 +1,5 @@
 {
-  "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\aspcore-watchshop.csproj",
+  "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\aspcore-watchshop.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "3.0",
@@ -14392,68 +14392,168 @@
   "RootNamespace": "aspcore_watchshop",
   "Documents": [
     {
-      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\Views\\Shared\\_Layout.cshtml",
-      "TargetPath": "Views\\Shared\\_Layout.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\Views\\Home\\Index.cshtml",
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Views\\Home\\Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\Views\\Cart\\Confirm.cshtml",
-      "TargetPath": "Views\\Cart\\Confirm.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\Views\\_ViewStart.cshtml",
-      "TargetPath": "Views\\_ViewStart.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\Areas\\Admin\\Views\\Home\\Index.cshtml",
-      "TargetPath": "Areas\\Admin\\Views\\Home\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\Views\\Cart\\Status.cshtml",
-      "TargetPath": "Views\\Cart\\Status.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\Views\\Shared\\_PartialFooter.cshtml",
-      "TargetPath": "Views\\Shared\\_PartialFooter.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\Views\\Product\\Index.cshtml",
-      "TargetPath": "Views\\Product\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\Views\\_ViewImports.cshtml",
-      "TargetPath": "Views\\_ViewImports.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\Views\\Shared\\Error.cshtml",
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Views\\Shared\\Error.cshtml",
       "TargetPath": "Views\\Shared\\Error.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\Views\\Cart\\Index.cshtml",
-      "TargetPath": "Views\\Cart\\Index.cshtml",
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Views\\Shared\\_LoginPartial.cshtml",
+      "TargetPath": "Views\\Shared\\_LoginPartial.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\Views\\Shared\\_PartialHeader.cshtml",
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Views\\Shared\\_PartialHeader.cshtml",
       "TargetPath": "Views\\Shared\\_PartialHeader.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\Views\\Product\\Detail.cshtml",
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Areas\\Identity\\Pages\\Account\\Manage\\ChangePassword.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\Manage\\ChangePassword.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Areas\\Identity\\Pages\\Account\\ForgotPassword.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\ForgotPassword.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\Login.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Views\\Shared\\_Layout.cshtml",
+      "TargetPath": "Views\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Areas\\Admin\\Views\\Home\\Index.cshtml",
+      "TargetPath": "Areas\\Admin\\Views\\Home\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Areas\\Identity\\Pages\\Account\\RegisterConfirmation.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\RegisterConfirmation.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Views\\Product\\Detail.cshtml",
       "TargetPath": "Views\\Product\\Detail.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Areas\\Identity\\Pages\\Account\\_StatusMessage.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\_StatusMessage.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Areas\\Identity\\Pages\\Account\\ResetPasswordConfirmation.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\ResetPasswordConfirmation.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Areas\\Identity\\Pages\\Account\\ConfirmEmailChange.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\ConfirmEmailChange.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Views\\Cart\\Index.cshtml",
+      "TargetPath": "Views\\Cart\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Views\\_ViewImports.cshtml",
+      "TargetPath": "Views\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Areas\\Identity\\Pages\\Account\\Manage\\_ViewImports.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\Manage\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Areas\\Identity\\Pages\\_Layout.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Views\\Shared\\_PartialFooter.cshtml",
+      "TargetPath": "Views\\Shared\\_PartialFooter.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Views\\Cart\\StatusOrder.cshtml",
+      "TargetPath": "Views\\Cart\\StatusOrder.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Views\\Cart\\Confirm.cshtml",
+      "TargetPath": "Views\\Cart\\Confirm.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Areas\\Identity\\Pages\\_ViewStart.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Views\\Product\\Index.cshtml",
+      "TargetPath": "Views\\Product\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Views\\_ViewStart.cshtml",
+      "TargetPath": "Views\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Areas\\Identity\\Pages\\Account\\ConfirmEmail.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\ConfirmEmail.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Areas\\Identity\\Pages\\Account\\_ViewImports.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\Register.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Areas\\Identity\\Pages\\Account\\ResetPassword.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\ResetPassword.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Areas\\Identity\\Pages\\_ViewImports.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Areas\\Identity\\Pages\\Account\\ForgotPasswordConfirmation.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\ForgotPasswordConfirmation.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Views\\Cart\\CheckoutSuccess.cshtml",
+      "TargetPath": "Views\\Cart\\CheckoutSuccess.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\Areas\\Identity\\Pages\\Error.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Error.cshtml",
       "FileKind": "mvc"
     }
   ],

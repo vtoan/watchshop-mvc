@@ -1,0 +1,26 @@
+@page
+@model LoginModel
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+<div class="d-flex justify-content-center">
+    <form id="account" method="post" style="width: 350px;">
+        <h4>Đăng nhập</h4>
+        <hr class="mb-3" />
+        <div class="mb-3">
+            <label asp-for="Input.Email"></label>
+            <input asp-for="Input.Email" class="form-control" />
+            @* <span asp-validation-for="Input.Email" class="text-danger"></span> *@
+        </div>
+        <div class="mb-4">
+            <label asp-for="Input.Password"></label>
+            <input asp-for="Input.Password" class="form-control" />
+            @* <span asp-validation-for="Input.Password" class="text-danger"></span> *@
+        </div>
+        <button type="submit" class="btn btn-lg mb-3" style="width: 100%">Log in</button>
+        @* <p><a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+        </p> *@
+        @* <p><a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a></p> *@
+        <div asp-validation-summary="All" class="red"></div>
+    </form>
+</div>

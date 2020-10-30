@@ -1,7 +1,8 @@
 $(function () {
     $.ajax({
-        url: "/Admin/Order/Detail?id=12",
-        method: "GET",
+        url: "/Admin/Promotion/AddForProduct",
+        data: { name: "Helelo" },
+        method: "POST",
         dataType: "JSON",
     })
         .done((response) => {

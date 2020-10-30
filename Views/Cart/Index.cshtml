@@ -1,13 +1,18 @@
 ﻿@using aspcore_watchshop.Hepler
-@model OrderVM
+@model aspcore_watchshop.ViewModels.OrderVM
+@{
+    aspcore_watchshop.ViewModels.OrderVM obj = Model == null ? new aspcore_watchshop.ViewModels.OrderVM(): Model;
+    var layoutData = LayoutData.Instance;
+}
 @section scripts{
     <script src="~/js/cart.js"></script>   
+    <script src="~/js/cart-form.js"></script>   
 }
-<span id="page" data-code="@ViewBag.PageCode" ></span>
+<span id="page" data-code="-1" ></span>
 <!--Banner small-->
 <div class="container-fluid">
     <div class="banner-sm section">
-        <p class="white m-0">@LayoutData.NamePage</p>
+        <p class="white m-0">@layoutData.NamePage</p>
     </div>
 </div>
 <!--Cart-->
@@ -41,10 +46,9 @@
                             </tr>
                             @if(ViewBag.Fees != null ){
                                 foreach(var item in ViewBag.Fees){
-                                    var value = Helper.ConvertValue(item.Cost);
                                     <tr>
                                         <td>@item.Name</td> 
-                                        <td><span id="@Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(item.Name));" order-fee data-cost="@value.Item2" ></span> @value.Item1</td> 
+                                        <td><span order-fee data-cost="@item.Cost" ></span></td> 
                                     </tr>
                                 }
                             }
@@ -58,10 +62,8 @@
                 <!--Form-->
                 <div class="col-12 col-lg-6 order-lg-0">
                     <h3 class="mb-4">Thông tin giao hàng</h3>
-                    @{
-                        OrderVM obj = Model == null ? new OrderVM(): Model;
-                    }
-                    <form action="/Cart/Confirm" id="form-confirm" method="POST">
+                    
+                    <form action="don-hang/xac-nhan-don-hang" id="form-confirm" method="POST">
                         <div class="control-input validate">
                             <label>Họ tên người nhận</label>
                             <input asp-for="@Model.CustomerName" value="@obj.CustomerName" class="mb-3"  type="text" required>
@@ -80,17 +82,17 @@
                         <div class="control-input validate local" >
                             <label>Địa chỉ giao hàng</label>
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-lg-6">
                                     <div local-province class="dropdown dropdown-ouline black bg-white ml-lg-auto mb-3">
                                         <div class="select select-ouline">
-                                            <span class="placeholder">Tỉnh/TP</span>
+                                            <span class="placeholder">Chọn Tỉnh/TP</span>
                                             <i class="black las la-angle-down"></i>
                                         </div>
                                         <input type="hidden" asp-for="@Model.CustomerProvince" value="@obj.CustomerProvince" required>
                                         <ul class="dropdown-menu bg-white"></ul>
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-lg-6">
                                     <div local-district class="dropdown dropdown-ouline black bg-white ml-lg-auto mb-3">
                                         <div class="select select-ouline">
                                             <span class="placeholder">Quận/Huyện</span>

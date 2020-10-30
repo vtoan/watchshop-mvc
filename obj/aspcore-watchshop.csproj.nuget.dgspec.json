@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\aspcore-watchshop.csproj": {}
+    "C:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\aspcore-watchshop.csproj": {}
   },
   "projects": {
-    "C:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\aspcore-watchshop.csproj": {
+    "C:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\aspcore-watchshop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\aspcore-watchshop.csproj",
+        "projectUniqueName": "C:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\aspcore-watchshop.csproj",
         "projectName": "aspcore-watchshop",
-        "projectPath": "C:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\aspcore-watchshop.csproj",
+        "projectPath": "C:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\aspcore-watchshop.csproj",
         "packagesPath": "C:\\Users\\TOAN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\TOAN\\Documents\\Srouce\\aspcore-watchshop\\obj\\",
+        "outputPath": "C:\\Users\\TOAN\\Documents\\Srouce\\watchShop-project\\aspcore-watchshop\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -45,9 +45,17 @@
               "target": "Package",
               "version": "[8.0.1, )"
             },
-            "Microsoft.AspNetCore.Rewrite": {
+            "MailKit": {
               "target": "Package",
-              "version": "[2.2.0, )"
+              "version": "[2.9.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[3.1.8, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -59,9 +67,19 @@
               "target": "Package",
               "version": "[3.1.8, )"
             },
-            "Newtonsoft.Json": {
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[12.0.3, )"
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[2.9.2, )"
             }
           },
           "imports": [

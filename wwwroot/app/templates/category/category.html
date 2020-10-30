@@ -1,0 +1,202 @@
+<h3 class="page-title mt-4">Danh mục</h3>
+<div class="card" >
+    <div class="card-header">
+        <div class="row align-items-center" style="border-bottom: 2px solid #595959">
+            <a class="px-lg-5 tab-item {{ tabId == 0 ? 'active' :'' }}" ng-click="onChangeTab(0)">Phân loại</a>
+            <a class="px-lg-5 tab-item {{ tabId == 1 ? 'active' :'' }}" ng-click="onChangeTab(1)">Loại dây</a>
+            <a class="px-lg-5 tab-item {{ tabId == 2 ? 'active' :'' }}" ng-click="onChangeTab(2)">Thương hiệu</a>
+        </div>
+        <!--Tab containter-->
+        <div>
+            <loading ng-show="isLoading"></loading>
+            <div ng-hide="isLoading">
+                <p ng-show="ex.isError" class="text-center pt-5" ng-bind="ex.msgError"></p>
+                <div ng-hide="ex.isError">
+                    <!--Category-->
+                    <div ng-hide ="tabId != 0" class="card">
+                        <div class="card-header"></div>
+                        <div class="card-content">
+                            <div  class="row align-items-center mb-3 pr-lg-5">
+                                <div class="col-lg-3">
+                                    <h3 class="">Thông tin phân loại</h3>
+                                </div>
+                                <div class="col-lg-3 pr-lg-4">
+                                    <div class="text-right">
+                                        <button class="btn btn-sm bg-blue white px-lg-4 mr-2" ng-class="item.id ? '': 'muted'" ng-click="onSave()">Lưu</button>
+                                        <button class="btn btn-sm bg-red white px-lg-4" ng-class="item.id ? '': 'muted'"  ng-click="onCancel()">Huỷ</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <div class="col-lg-6 pr-lg-5" >
+                                    <p class="pt-5 text-center" ng-hide="item.id">Chọn một phân loại sản phẩm</p>
+                                    <div ng-hide="!item.id">
+                                        <div class="row mb-3">
+                                            <div class="col-5 col-lg-4">
+                                                <p>Tên phân loại</p>
+                                            </div>
+                                            <div class="col-7 col-lg-8 text-right">
+                                                <p class="bold" ng-bind="item.name"></p>
+                                            </div>
+                                        </div>       
+                                         <!--Seo-->
+                                        <p class="bold text-4">SEO</p>  
+                                        <label>Hình ảnh SEO</label>           
+                                        <div class="row mb-3 px-3 justify-content-center justify-content-lg-start" >
+                                            <div style="width: 300px;">
+                                                <div class="img-content">
+                                                    <div class="img">
+                                                        <img src="{{item.seoImage.status >=0 ? item.seoImage.src :''  }}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="pl-lg-5 mt-3 mt-lg-0">
+                                                <button class="btn btn-sm black mr-2" ng-click="onUploadImage()">Tải ảnh</button>
+                                                <button class="btn btn-sm red " ng-click="onRemoveImage()">Xoá ảnh</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class=" control-input">
+                                            <label>Tiêu đề</label>
+                                            <input type="text" ng-model="item.seoTitle" placeholder="Không" />
+                                        </div>
+                                        <div class=" control-input">
+                                            <label>Mô tả</label>
+                                            <textarea type="text" ng-model="item.seoDescription" placeholder="Không" ></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-lg-6">
+                                    <table class="table table-data mb-4">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Tên phân loại</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in data">
+                                                <td style="width: 100px;" scope="row">{{item.id}}</td>
+                                                <td ng-click="onShowDetail(item)"><p>{{item.name}}</p></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>			           
+                        </div>
+                    </div>
+                    <!--Wire-->
+                    <div ng-hide ="tabId != 1" class="card">
+                        <div class="card-header"></div>
+                        <div class="card-content">
+                            <div class="row align-items-center mb-3 pr-lg-5">
+                                <div class="col-3">
+                                    <h3 class="">Thông tin loại dây</h3>
+                                </div>
+                                <div class="col-lg-3 pr-lg-4">
+                                    <div class="text-right">
+                                        <button class="btn btn-sm bg-blue white px-lg-4 mr-2" ng-click="onSave()"> {{ item.id ? "Lưu" : "Thêm"}} </button>
+                                        <button class="btn btn-sm bg-red white px-lg-4" ng-class="item.id ? '': 'muted'"  ng-click="onCancel()">Huỷ</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 pr-lg-5">
+                                    <div class="row mb-3">
+                                        <div class="col-5 col-lg-4">
+                                            <p>ID</p>
+                                        </div>
+                                        <div class="col-7 col-lg-8 text-right">
+                                            <p class="bold" ng-bind="'#' + (item.id ? item.id :'0')"></p>
+                                        </div>
+                                    </div>
+                                    <div class="control-input validate">
+                                        <label>Tên loại dây</label>
+                                        <input class="input-invalid" ng-model="item.name" type="text" placeholder="Nhập tên loại dây" required />
+                                        <span><span class="error text-sub">Không được để trống</span></span>
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-lg-6">										
+                                    <table class="table table-data mb-4">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Tên loại dây</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in data">
+                                                <td style="width: 100px;" scope="row">{{item.id}}</td>
+                                                <td ng-click="onShowDetail(item)"><p>{{item.name}}</p></td>             
+                                                <td class="text-right">
+                                                    <i ng-click="onRemove(item.id)" class="btn red big-icon icon las la-times"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>	
+                        </div>
+                    </div>
+                    <!--Band-->
+                    <div ng-hide ="tabId != 2" class="card">
+                        <div class="card-header"></div>
+                        <div class="card-content">
+                            <div class="row align-items-center mb-3 pr-lg-5">
+                                <div class="col-3">
+                                    <h3 class="">Thông tin thương hiệu</h3>
+                                </div>
+                                <div class="col-lg-3 pr-lg-4">
+                                    <div class="text-right">
+                                        <button class="btn btn-sm bg-blue white px-lg-4 mr-2" ng-click="onSave()"> {{ item.id ? "Lưu" : "Thêm"}} </button>
+                                        <button class="btn btn-sm bg-red white px-lg-4" ng-class="item.id ? '': 'muted'"  ng-click="onCancel()">Huỷ</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 pr-lg-5">
+                                    <div class="row mb-3">
+                                        <div class="col-5 col-lg-4">
+                                            <p>ID</p>
+                                        </div>
+                                        <div class="col-7 col-lg-8 text-right">
+                                            <p class="bold" ng-bind="'#' + (item.id ? item.id :'0')"></p>
+                                        </div>
+                                    </div>
+                                    <div class="control-input validate">
+                                        <label>Tên thương hiệu dây</label>
+                                        <input class="input-invalid" ng-model="item.name" type="text" placeholder="Nhập tên thương hiệu" required />
+                                        <span><span class="error text-sub">Không được để trống</span></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">										
+                                    <table class="table table-data mb-4">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Tên thương hiệu</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in data">
+                                                <td style="width: 100px;" scope="row">{{item.id}}</td>
+                                                <td ng-click="onShowDetail(item)"><p>{{item.name}}</p></td>             
+                                                <td class="text-right">
+                                                    <i ng-click="onRemove(item.id)" class="btn red big-icon icon las la-times"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>	
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  

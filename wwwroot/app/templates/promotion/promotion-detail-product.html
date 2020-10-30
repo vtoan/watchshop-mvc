@@ -1,0 +1,110 @@
+<!--Promotion Detail-->
+<h3 class="page-title mt-4">Khuyến mãi cho sản phẩm</h3>
+<div class="card" ng-show="isLoading"><loading ></loading></div>
+<div class="card" ng-hide="isLoading">
+    <p ng-show="ex.isError" class="text-center pt-5" ng-bind="ex.msgError"></p>
+    <div ng-hide="ex.isError">
+        <div class="card-header">
+            <div class="row align-items-center py-3">
+                <div class="col-6">
+                    <div class="d-flex align-items-center">
+                        <span class="pr-3 d-inline-block">Trạng thái</span>
+                        <label class="switch mb-0">
+                            <input  type="checkbox" ng-model="prom.status" />
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="text-right">
+                        <button class="btn btn-sm bg-blue white px-lg-4 mr-2"  ng-click ="onSave()">{{::isCreate ? 'Thêm' : 'Lưu' }}</button>
+                        <button class="btn btn-sm bg-red white px-lg-4" ng-click="onCannel()">{{::isCreate? 'Huỷ':'Xoá'  }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-content">
+            <form id="form">
+                <h3 class="mb-4">Thông tin chương trình</h3>
+                <div class="row">
+                    <div class="col-12 col-lg-6 pr-lg-5">
+                        <div class="row mb-3">
+                            <div class="col-5 col-lg-4">
+                                <p>Loại chương trình</p>
+                            </div>
+                            <div class="col-7 col-lg-8 text-right">
+                                <p class="bold">Trên sản phẩm</p>
+                            </div>
+                        </div>
+                        <div class="control-input validate">
+                            <label>Tên chương trình</label>
+                            <input class="input-invalid" type="text" ng-model="prom.name" placeholder="Nhập tên chương trình" required />
+                            <span><span class="error text-sub">Không được để trống</span></span>
+                        </div>
+                        <div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="control-input">
+                                        <label>Từ ngày</label>
+                                        <input type="date" ng-model="prom.fromDate" placeholder="Chọn ngày bắt đầu" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="control-input">
+                                        <label>Đến ngày</label>
+                                        <input type="date" ng-model="prom.toDate" placeholder="Chọn ngày kết thúc" />
+                                    </div>
+                                </div>
+                            </div>
+                            <p >Để trống ngày bắt đầu/kết thúc nếu luôn áp dụng khuyến mãi này</p>
+                        </div>                                
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="row align-items-md-start">
+                            <div class="col-12  mb-3">
+                                <div class="control-input validate">
+                                    <label>Mức giảm giá</label>
+                                    <input class="input-invalid" type="text" pattern="[0-9]+%?$" ng-model="prom.discount" placeholder="Nhập mức giảm giá, nếu theo phần trăm (thêm ở cuối % )" required />
+                                    <span><span class="error text-sub">Không được để trống, chữ cái và ký tự (trừ ký tự %)</span></span>
+                                </div> 
+                            </div>
+                            <div class="col-12 validate mb-3">												
+                                <input class="mr-3" style="width:auto" type="radio" name="product" ng-model="group" value="0" />
+                                <label>Theo phân loại</label>
+                                <div class="dropdown black bg-white ml-lg-auto mb-3 {{ !group || group == 1  ? 'muted' : '' }}"  >
+                                    <div class="select {{ !prom.categoryId && group==0  ? 'input-invalid' : '' }} select-ouline" >
+                                        <span
+                                            class="{{ prom.categoryId ? '' : 'placeholder'}}">{{ prom.categoryId ? prom.categoryName: "Chọn phân loại"}}</span>
+                                        <i class="black las la-angle-down"></i>
+                                    </div>
+                                    <input type="hidden" ng-hide required />
+                                    <ul class="dropdown-menu bg-white">
+                                        <li ng-repeat="item in categories" ng-click="prom.categoryId = item.id; prom.categoryName = item.name" 
+                                            >{{ item.name }}</li>
+                                    </ul>
+                                </div>      										
+                            </div>
+                            <div class="col-12 validate mb-3">
+                                <input class="mr-3" style="width:auto" type="radio" name="product" ng-model="group" value="1"  />
+                                <label>Theo thương hiệu</label>
+                                <div class="dropdown black bg-white ml-lg-auto mb-3 {{ !group || group == 0 ? 'muted' : '' }}" ">
+                                    <div  class="select {{ !prom.bandId && group == 1 ? 'input-invalid' : '' }} select-ouline" class="" >
+                                        <span
+                                            class="{{ promDetail.bandId ? '' : 'placeholder'}}">{{ prom.bandId ? prom.bandName: "Chọn thương hiệu"}}</span>
+                                        <i class="black las la-angle-down"></i>
+                                    </div>
+                                    <input type="hidden" ng-hide required />
+                                    <ul class="dropdown-menu bg-white">
+                                        <li ng-repeat="item in bands" ng-click="prom.bandId = item.id; prom.bandName = item.name" 
+                                           >{{ item.name }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p class="blue pr-3 ml-auto" style="cursor: pointer;" ng-click="onRemoveSelect()">Bỏ chọn</p>
+                        </div>
+                    </div>                 
+                </div>
+            </form>
+        </div>
+    </div>  
+</div>

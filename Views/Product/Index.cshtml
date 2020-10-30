@@ -1,6 +1,6 @@
 ﻿@{
     var banner= "banner-lg";
-    var namePage =@LayoutData.NamePage;
+    var namePage =LayoutData.Instance.NamePage;
     if(ViewBag.PageCode ==-2)
     {
         banner ="banner-sm";
@@ -9,6 +9,7 @@
 }
 
 @section scripts{
+    <script src="~/js/pagination.js"></script> 
     <script src="~/js/product.js"></script> 
 }
 <span id="page" data-code=@ViewBag.PageCode></span>
@@ -46,7 +47,7 @@
                     <li data-code="0">Tất cả</li>  
                     @foreach (var item in ViewBag.Wires)
                     {
-                        <li data-code="@item.ID">@item.Name</li>
+                        <li data-code="@item.Id">@item.Name</li>
                     }  
                 </ul> 
                 

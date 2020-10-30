@@ -1,36 +1,5 @@
-var Pagination = function (_config) {
-    let container = $(_config.container);
-    this.pages = 0;
-    this.init = function (len) {
-        container.empty().hide();
-        if (len == 0) return;
-        pages = Math.ceil(len / _config.itemPages);
-        for (let i = 0; i < pages; i++) container.append(`<span class="btn page-item" data-index=${i}>${i + 1}</span>`);
-        //attach-event
-        container.on("click", "span", function () {
-            let elm = $(this);
-            elm.parent().find(".muted").removeClass("muted");
-            elm.addClass("muted");
-            _config.onPageChange(Number(elm.data("index")));
-        });
-        //call func show first page
-        this.showPageFirst();
-    };
-
-    this.showPageFirst = function () {
-        $(".page-item:first-child").trigger("click");
-    };
-
-    this.hidden = function () {
-        container.hide();
-    };
-
-    this.show = function () {
-        container.show();
-    };
-};
-
 $(function () {
+    let code = 0;
     let products = [];
     let temp = [];
     let scrollValue = 0;
@@ -40,18 +9,26 @@ $(function () {
         itemPages: itemPages,
         onPageChange: showDataOnPage,
     });
+    let dropDown = {};
+    // define event
+    let orderbyEvent = function () {
+        let elm = $(this);
+        elm.parent().find(".nav-item.active").removeClass("active");
+        elm.addClass("active");
+        orderbyProduct(Number(elm.data("index")));
+    };
     /*=======?handler======= */
     function showDataOnPage(index) {
+        UILoader("#product-container");
         window.scrollTo({
             top: scrollValue,
             behavior: "smooth",
         });
         setTimeout(function () {
-            UILoader("#product-container");
             if (index == pageObj.pages - 1) renderProducts(products.slice(index * itemPages), "#product-container");
             else renderProducts(products.slice(index * itemPages, (index + 1) * itemPages), "#product-container");
             pageObj.show();
-        }, 400);
+        }, 300);
     }
     //get code
     function getPageCode() {
@@ -62,7 +39,10 @@ $(function () {
     }
     //show data
     function showData(data) {
-        if (!data) renderProducts(null, "#product-container");
+        if (!data || data.length == 0) {
+            renderProducts(null, "#product-container");
+            return;
+        }
         products = data;
         pageObj.init(products.length);
     }
@@ -94,19 +74,26 @@ $(function () {
         }
         pageObj.showPageFirst();
     }
-    //========== ?exce ==========
+    //========== ?exec ==========
     $("#product-container").on("click", ".add-cart", function () {
-        addCart(this, true);
+        addCartEvent(this);
     });
-    $("#orderby > a").on("click", function () {
-        let elm = $(this);
-        elm.parent().find(".nav-item.active").removeClass("active");
-        elm.addClass("active");
-        orderbyProduct(Number(elm.data("index")));
-    });
-    let code = getPageCode();
-    scrollValue = code == -2 ? 100 : 525;
+    $("#orderby > a").on("click", orderbyEvent);
+    //
+    code = getPageCode();
+    if (screen.width > 1024) scrollValue = code == -2 ? 100 : 525;
+    else scrollValue = code == -2 ? 100 : 145;
     reqListProducts(code == -2 ? "/Product/GetProductResult" : "/Product/GetProductByCate", code, showData);
-    UIDropDown();
-    onSelectedItemDropdown(filterProduct);
+    dropDown = new UIDropDown(function (idx) {
+        filterProduct(idx);
+    });
+    dropDown.attach();
+    //========== ?destroy ==========
+    $("#product-container").on("unload", function () {
+        dropDown.detach();
+        $("#product-container").off("click", ".add-cart", function () {
+            addCartEvent(this);
+        });
+        $("#orderby > a").off("click", orderbyEvent);
+    });
 });

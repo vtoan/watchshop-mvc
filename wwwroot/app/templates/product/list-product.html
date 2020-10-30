@@ -1,0 +1,97 @@
+<!--List Product-->
+<h3 class="page-title mt-4">Danh sách sản phẩm</h3>
+<div class="card">
+    <div class="card-header">
+        <div class="row align-items-center">
+            <div class="col-12 col-lg-4">
+                <p class="pr-3">
+                    Đang bán
+                    <span class="red">{{ onShelf }}</span>/<span>{{ warehouse }}</span>
+                    sản phẩm
+                </p>
+            </div>
+            <div class="col-12 col-lg-4 mb-3">
+                <a class="btn btn-sm bg-blue white px-lg-4 mr-5" href="#!/product-detail/0" >Thêm</a>
+                <button class="btn btn-sm black px-lg-4 mr-2" ng-click ="onExport()">Export</button>
+                <button class="d-none btn btn-sm black px-lg-4 mr-2" ng-click="onImport()">Import</button>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="search-input" >
+                    <input class="mb-3" type="text" ng-model="query" ng-change="onSearch(query)" placeholder="Tìm kiếm sản phẩm ..." />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-content" >
+        <loading ng-show="isLoading"></loading>
+        <div ng-hide="isLoading">
+            <p ng-show="ex.isError" class="text-center pt-5" ng-bind="ex.msgError"> </p>
+            <div ng-hide="ex.isError">
+                <table class="table table-data mb-4">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Sản phẩm</th>
+                            <th class="d-none d-lg-table-cell" scope="col">Phân loại</th>
+                            <th class="d-none d-lg-table-cell" scope="col">Loại dây</th>
+                            <th scope="col">Giá bán</th>
+                            <th scope="col">Đã bán</th>
+                            <th class="d-none d-lg-table-cell text-center" scope="col">Khuyễn mãi</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in products | limitTo: itemLimit : beginPage">
+                            <th scope="row" style="width: 40px;">{{ item.id }}</th>
+                            <td>
+                                <div class="d-flex py-2" ng-click="onShowDetail(item.id)">
+                                    <div class="img pr-2 d-none d-lg-block">
+                                        <img src="{{ item.image }}" width="60" />
+                                    </div>
+                                    <p class="va-top"> {{ item.bandName }} {{ item.name }}</p>
+                                </div>
+                            </td>
+                            <td class="d-none d-lg-table-cell">
+                                <p>{{ item.categoryName }}</p>
+                            </td>
+                            <td class="d-none d-lg-table-cell">
+                                <p>{{ item.wireName }}</p>
+                            </td>
+                            <td style="width: 120px;">
+                                <p>{{ item.price | currency :'':0 }} đ</p>
+                            </td>
+                            <td style="width: 70px;">
+                                <p>{{ item.saleCount }}</p>
+                            </td>
+                            <td class="d-none d-lg-table-cell text-right">
+                                <div class="dropdown black bg-white ml-lg-auto mb-0">
+                                    <div class="select">
+                                        <span >{{ item.discount ?  item.discount: 'Không'}}  </span>
+                                        <i class="black las la-angle-down"></i>
+                                    </div>
+                                    <input type="hidden" />
+                                    <ul class="dropdown-menu bg-white">
+                                        <li ng-click="onRemoveProm(item)">Không</li>
+                                        <li ng-repeat="prom in promotions" ng-click="onChangeProm(item, prom)"
+                                            data-code="">{{ prom.name }}</li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td class="d-none d-lg-table-cell text-right">
+                                <div class="d-flex justify-content-around align-items-center">
+                                    <a href="#!/post/{{item.id}}" class="link blue">Bài viết</a>
+                                    <label class="switch mb-0">
+                                        <input type="checkbox" ng-change="onChangeStatus(item.id)" ng-model="item.isShow" />
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination current="beginPage" pages="numberPage" limit="5"></pagination>
+            </div>
+        </div>
+    </div>
+</div>

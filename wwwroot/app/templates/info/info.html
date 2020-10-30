@@ -1,0 +1,104 @@
+<!--Product Detail-->
+<h3 class="page-title mt-4">Thông tin cửa hàng</h3>
+<div class="card" ng-show="isLoading"><loading ></loading></div>
+<div class="card" ng-hide="isLoading" >
+    <p ng-show="ex.isError" class="text-center pt-5" ng-bind="ex.msgError"></p>
+    <div ng-hide="ex.isError">
+        <div class="card-header">
+            <div class="row align-items-center justify-content-end py-3">
+                <div class="text-right pr-3">
+                    <a class="btn btn-sm bg-blue white px-lg-4 mr-2" ng-click ="onSave()">Lưu</a>
+                    <a class="btn btn-sm bg-red white px-lg-4" ng-click="onCancel()">Huỷ</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-content">
+            <div class="row" > 
+                <div class="col-lg-6 pr-lg-5">
+                    <div class="control-input validate">
+                        <label>Logo</label>           
+                        <div class="row mb-3 px-3 justify-content-center justify-content-lg-start" >
+                            <div style="width: 300px;">
+                                <div class="img-content">
+                                    <div class="img">
+                                        <img src="{{item.logo.status >=0 ? item.logo.src :''  }}" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pl-lg-5 mt-3 mt-lg-0">
+                                <button class="btn btn-sm black mr-2" ng-click="onUploadIcon()">Tải logo</button>
+                                <button class="btn btn-sm red " ng-click="onRemoveIcon()">Xoá logo</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="control-input validate">
+                        <label>Tên cửa hàng</label>
+                        <input class="input-invalid" type="text" ng-model="item.nameStore" placeholder="Nhập tên sản phẩm" required/>
+                        <span><span class="error text-sub">Không được để trống</span></span>
+                    </div>
+                    <div class="control-input validate">
+                        <label>Thời gian làm việc</label>
+                        <input class="input-invalid" type="text" ng-model="item.workTime" placeholder="Nhập tên sản phẩm" required/>
+                        <span><span class="error text-sub">Không được để trống</span></span>
+                    </div>
+                    <div class="control-input validate">
+                        <label>Số điện thoại</label>
+                        <input class="input-invalid" type="tel" ng-model="item.phone" placeholder="Nhập tên sản phẩm" required/>
+                        <span><span class="error text-sub">Không được để trống</span></span>
+                    </div>
+                    <div class="control-input">
+                        <label>Địa chỉ cửa hàng</label>
+                        <textarea class="input-invalid" rows="3" ng-model="item.address" placeholder="Nhập tên sản phẩm"></textarea>
+                    </div>
+                </div>
+                <div class="control-input  col-lg-6 pr-lg-5">
+                    <label>Email</label>
+                    <input class="input-invalid" type="email" ng-model="item.email" placeholder="Nhập tên sản phẩm"/>
+                </div>
+                <div class="control-input  col-lg-6 ">
+                    <label>Link facebook</label>
+                    <input class="input-invalid" type="text" ng-model="item.facebook" placeholder="Nhập tên sản phẩm"/>
+                </div>
+                <div class="control-input col-lg-6 pr-lg-5">
+                    <label>Link messenger</label>
+                    <input class="input-invalid" type="text" ng-model="item.messenger" placeholder="Nhập tên sản phẩm"/>
+                </div>
+                <div class="control-input  col-lg-6">
+                    <label>Link instargram</label>
+                    <input class="input-invalid" type="text" ng-model="item.instargram" placeholder="Nhập tên sản phẩm" />
+                </div>
+            </div>
+            <p class="bold text-4">SEO</p>  
+            <div class="row">
+                <div class="col-lg-6 pr-lg-5">
+                    <label>Hình ảnh</label>           
+                    <div class="row mb-3 px-3 justify-content-center justify-content-lg-start" >
+                        <div style="width: 300px;">
+                            <div class="img-content">
+                                <div class="img">
+                                    <img src="{{item.seoImage.status >=0 ? item.seoImage.src :''  }}" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pl-lg-5 mt-3 mt-lg-0">
+                            <button class="btn btn-sm black mr-2" ng-click="onUploadImage()">Tải ảnh</button>
+                            <button class="btn btn-sm red " ng-click="onRemoveImage()">Xoá ảnh</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="control-input ">
+                        <label>Tiêu đề</label>
+                        <input class="input-invalid" type="text" ng-model="item.seoTitle" placeholder="Nhập tên sản phẩm"/>
+                    </div>
+                    <div class="control-input ">
+                        <label>Mô tả</label>
+                        <textarea class="input-invalid" rows="3" ng-model="item.seoDescription" placeholder="Nhập tên sản phẩm" ></textarea>
+                    </div>
+                </div>
+            </div>   
+        </div>
+    </div>
+</div>

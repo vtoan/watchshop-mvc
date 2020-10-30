@@ -1,0 +1,85 @@
+<h3 class="page-title mt-4">Danh sách đơn hàng</h3>
+<div class="card">
+    <div class="card-header">
+        <div class="row align-items-center">
+            <div class="col-5 col-lg-3">
+                <p class="pr-3">
+                    Số đơn hàng <span class="red"> {{ orders.length }} </span>
+                </p>
+            </div>
+            <div class="col-7 col-lg-2 mb-3 text-right">
+                <button class="d-none btn btn-sm black px-lg-4 mr-2" ng-click="onExport()"">Export</button>
+                <button class=" d-none btn btn-sm black px-lg-4" ng-click="onImport()">Import</button>
+            </div>
+            <div class="col-12 col-lg-3">
+                <div class="d-flex align-items-center">
+                    <div class="dropdown black bg-white ml-lg-auto mb-3" style="width: 100%">
+                        <div id="date-range" class="select select-ouline" style="min-width: 315px;">
+                            <span class="placeholder mr-1">Từ </span><span class="startDate"></span>
+                            <span class="mx-3">-</span>
+                            <span class="placeholder mr-1">Đến </span><span class="endDate"></span>
+                            <i class="black las la-angle-down"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="search-input">
+                    <input class="mb-3" type="text" ng-model="query" ng-change="onSearch(query)" ng-keydown="onFind($event,query)" placeholder="Nhập SĐT hoặc mã dơn hàng." />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-content">
+        <loading ng-show="isLoading"></loading>
+        <div ng-hide="isLoading">
+            <p ng-show="ex.isError" class="text-center pt-5" ng-bind="ex.msgError"> Không có sản phẩm nào </p>
+            <div ng-hide="ex.isError">
+                <table class="table table-data mb-4">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Khách hàng</th>
+                            <th scope="col">SĐT</th>
+                            <th class="d-none d-lg-table-cell" scope="col">Tỉnh/TP</th>
+                            <th class="d-none d-lg-table-cell" scope="col">Ngày đặt</th>
+                            <th class="d-none d-lg-table-cell"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in orders | limitTo: itemLimit : beginPage">
+                            <th scope="row" style="width: 40px;">{{ item.id }}</th>
+                            <td ng-click="onShowDetail(item.id)">
+                                <p>{{ item.customerName }}</p>
+                                <p class="text-sub d-none d-lg-table-cell">{{ item.customerEmail }}</p>
+                            </td>
+                            <td>
+                                <p>{{item.customerPhone}}</p>
+                            </td>
+                            <td class="d-none d-lg-table-cell">
+                                <p>{{ item.customerProvince }}</p>
+                            </td>
+                            <td class="d-none d-lg-table-cell">
+                                <p>{{item.dateCreated |date:"MM/dd/yyyy 'lúc' h:mma" }}</p>
+                            </td>
+                            <td class="d-none d-lg-table-cell text-right">
+                                <div class="dropdown black bg-white ml-lg-auto mb-0">
+                                    <div class="select">
+                                        <span class="{{statusColor[item.status]}}"> {{ statusOrder[item.status] }} </span>
+                                        <i class="black las la-angle-down"></i>
+                                    </div>
+                                    <input type="hidden" />
+                                    <ul class="dropdown-menu bg-white">
+                                        <li ng-repeat="status in statusOrder track by $index" ng-click="onChangeStatus(item.id, $index)"
+                                            data-code="{{$index }}">{{ status }}</li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination current="beginPage" pages="numberPage" limit="itemLimit"></pagination>
+            </div>
+        </div>
+    </div>
+</div>
